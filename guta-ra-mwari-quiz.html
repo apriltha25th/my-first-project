@@ -3,25 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f6f1">
-  <title>Guta raMwari | Study & Quiz</title>
+  <meta name="theme-color" content="#d9cda9">
+  <title>Guta RaMwari |online
+   Study & Quiz</title>
   <style>
     :root {
       color-scheme: light;
-      --ink: #17251f;
-      --muted: #718078;
-      --line: #e6ebe5;
-      --paper: #f5f6f1;
-      --white: #fff;
-      --green: #215c43;
-      --green-dark: #173f30;
-      --green-soft: #e8f1e9;
-      --gold: #c38c3e;
-      --gold-soft: #f6efdf;
-      --blue-soft: #e9eff4;
-      --red: #ae5446;
-      --red-soft: #f8e9e5;
-      --shadow: 0 12px 32px #1f332408;
+      --ink: #191715;
+      --muted: #685f55;
+      --line: #e2dbc9;
+      --paper: #d9cda9;
+      --white: #fffefb;
+      --black: #171412;
+      --accent-red: #a51f2d;
+      --khaki-dark: #b9a779;
+      --khaki-soft: #efe5ca;
+      --red: #a51f2d;
+      --red-soft: #f6e6e6;
+      --correct-green: #26753e;
+      --correct-green-soft: #e7f2e8;
+      --shadow: 0 12px 32px #241b1710;
       font-family: "Segoe UI", Arial, sans-serif;
     }
     * { box-sizing: border-box; }
@@ -35,20 +36,21 @@
     .brand { display: flex; align-items: center; gap: 11px; padding: 0 10px 32px; }
     .brand-mark {
       display: grid; place-items: center; width: 39px; height: 39px; color: #fff;
-      border-radius: 13px; background: var(--green); font: 700 17px Georgia, serif;
+      border-radius: 13px; background: var(--accent-red); font: 700 17px Georgia, serif;
     }
     .brand-name { font: 700 15px Georgia, serif; letter-spacing: -.2px; }
     .brand-sub { margin-top: 3px; color: #879189; font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; }
     .nav-label { padding: 0 11px 9px; color: #9aa39d; font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
     .nav { display: grid; gap: 4px; }
+    .nav-hidden { display: none !important; }
     .nav button {
       display: flex; align-items: center; gap: 11px; width: 100%; padding: 10px 11px;
       border: 0; border-radius: 9px; background: transparent; color: #657168; text-align: left; font-size: 12px;
     }
-    .nav button:hover { background: #f5f7f4; }
-    .nav button.active { background: var(--green-soft); color: var(--green); font-weight: 700; }
+    .nav button:hover { background: #f6f0e3; }
+    .nav button.active { background: var(--red-soft); color: var(--accent-red); font-weight: 700; }
     .nav-icon { display: grid; place-items: center; width: 19px; font-size: 15px; }
-    .side-note { margin-top: auto; padding: 14px; border: 1px solid #e6ece5; border-radius: 12px; background: #f4f7f2; }
+    .side-note { margin-top: auto; padding: 14px; border: 1px solid #e2dbc9; border-radius: 12px; background: #f3eddc; }
     .side-note strong { display: block; margin-bottom: 5px; font: 700 11px Georgia, serif; }
     .side-note p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
     .side-foot { padding: 14px 10px 0; color: #98a199; font-size: 9px; }
@@ -60,13 +62,15 @@
     .crumb { color: #98a199; font-size: 11px; }
     .crumb strong { color: var(--ink); font-weight: 600; }
     .top-actions { display: flex; align-items: center; gap: 10px; }
-    .source-pill { display: flex; align-items: center; gap: 7px; color: var(--green); font-size: 10px; font-weight: 700; }
-    .source-dot { width: 7px; height: 7px; border-radius: 50%; background: #5a9b6a; box-shadow: 0 0 0 3px #5a9b6a1c; }
+    .source-pill { display: flex; align-items: center; gap: 7px; color: var(--accent-red); font-size: 10px; font-weight: 700; }
+    .source-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 3px #a51f2d1c; }
+    .language-picker { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 9px; }
+    .language-picker select { min-height: 31px; padding: 0 22px 0 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); color: var(--ink); font: inherit; font-size: 9px; }
     .avatar { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: #e9dfcf; color: #72583a; font-size: 10px; font-weight: 700; }
     .content { width: min(1160px, 100%); margin: 0 auto; padding: 30px 34px 54px; }
     .view { display: none; }
     .view.active { display: block; }
-    .eyebrow { margin-bottom: 9px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: 1.35px; text-transform: uppercase; }
+    .eyebrow { margin-bottom: 9px; color: var(--accent-red); font-size: 9px; font-weight: 700; letter-spacing: 1.35px; text-transform: uppercase; }
     h1, h2, h3, p { margin-top: 0; }
     h1 { margin-bottom: 7px; font: 700 27px Georgia, serif; letter-spacing: -.65px; }
     h2 { margin-bottom: 7px; font: 700 19px Georgia, serif; letter-spacing: -.3px; }
@@ -76,73 +80,153 @@
     .welcome p { margin-bottom: 0; }
     .button {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px;
-      padding: 0 15px; border: 1px solid transparent; border-radius: 9px; background: var(--green);
+      padding: 0 15px; border: 1px solid transparent; border-radius: 9px; background: var(--accent-red);
       color: #fff; font-size: 11px; font-weight: 700; transition: .18s ease;
     }
-    .button:hover { transform: translateY(-1px); background: var(--green-dark); box-shadow: 0 5px 12px #173f3024; }
-    .button:disabled { cursor: not-allowed; transform: none; background: #aebbb1; box-shadow: none; }
+    .button:hover { transform: translateY(-1px); background: var(--black); box-shadow: 0 5px 12px #17141224; }
+    .button:disabled { cursor: not-allowed; transform: none; background: #9a9389; box-shadow: none; }
     .button.secondary { border-color: var(--line); background: #fff; color: var(--ink); }
-    .button.secondary:hover { background: #f7f8f5; box-shadow: none; }
+    .button.secondary:hover { background: #f5f0e4; box-shadow: none; }
     .hero {
       position: relative; overflow: hidden; display: grid; grid-template-columns: 1.35fr .65fr; gap: 20px;
       min-height: 224px; margin-bottom: 17px; padding: 28px 30px; border-radius: 17px;
-      background: linear-gradient(120deg, #1c4936 0%, #245f45 70%, #356f4b 100%); color: #fff;
+      background: linear-gradient(120deg, #68141e 0%, #9b1d2a 70%, #b72b38 100%); color: #fff;
     }
     .hero:after { position: absolute; right: 4%; top: -115px; width: 290px; height: 290px; border: 1px solid #ffffff20; border-radius: 50%; content: ""; }
     .hero:before { position: absolute; right: 11%; top: -61px; width: 180px; height: 180px; border: 1px solid #ffffff20; border-radius: 50%; content: ""; }
     .hero-copy { position: relative; z-index: 1; align-self: center; max-width: 500px; }
-    .hero .eyebrow { color: #d9c28f; }
+    .hero .eyebrow { color: #eee0b9; }
     .hero h2 { max-width: 440px; margin-bottom: 9px; font-size: 25px; line-height: 1.16; }
-    .hero p { max-width: 440px; margin-bottom: 16px; color: #d7e4da; font-size: 11px; line-height: 1.6; }
-    .hero .button { background: #fff; color: var(--green-dark); }
-    .hero .button:hover { background: #f5f3e9; }
+    .hero p { max-width: 440px; margin-bottom: 16px; color: #f7e9e9; font-size: 11px; line-height: 1.6; }
+    .hero .button { background: #fffefb; color: var(--black); }
+    .hero .button:hover { background: #efe5ca; }
     .hero-art { position: relative; z-index: 1; display: grid; place-items: center; }
-    .seal { display: grid; place-items: center; width: 145px; height: 145px; border: 1px solid #ffffff54; border-radius: 50%; color: #efd9a8; font: 54px Georgia, serif; box-shadow: 0 0 0 15px #ffffff08, 0 0 0 31px #ffffff05; }
-    .seal span { position: absolute; margin-top: 101px; color: #f4e7ca; font: 700 8px "Segoe UI", Arial, sans-serif; letter-spacing: 1.5px; }
+    .seal { display: grid; place-items: center; width: 145px; height: 145px; border: 1px solid #ffffff54; border-radius: 50%; color: #efe5ca; font: 54px Georgia, serif; box-shadow: 0 0 0 15px #ffffff08, 0 0 0 31px #ffffff05; }
+    .seal span { position: absolute; margin-top: 101px; color: #fff7e8; font: 700 8px "Segoe UI", Arial, sans-serif; letter-spacing: 1.5px; }
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 23px; }
     .stat, .panel, .source-card { border: 1px solid var(--line); border-radius: 12px; background: var(--white); box-shadow: var(--shadow); }
     .stat { display: flex; align-items: center; gap: 11px; padding: 13px 15px; }
-    .stat-icon { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; background: var(--green-soft); color: var(--green); font-size: 15px; }
-    .stat:nth-child(2) .stat-icon { background: var(--gold-soft); color: #9b702d; }
-    .stat:nth-child(3) .stat-icon { background: var(--blue-soft); color: #557794; }
-    .stat:nth-child(4) .stat-icon { background: #f5ece7; color: #9f6951; }
+    .stat-icon { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; background: var(--red-soft); color: var(--accent-red); font-size: 15px; }
+    .stat:nth-child(2) .stat-icon { background: var(--khaki-soft); color: #5d5038; }
+    .stat:nth-child(3) .stat-icon { background: var(--khaki-soft); color: #5d5038; }
+    .stat:nth-child(4) .stat-icon { background: #eee4ca; color: #574b36; }
     .stat-label { color: var(--muted); font-size: 9px; }
     .stat-value { margin-top: 2px; font: 700 19px Georgia, serif; }
     .section-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin: 25px 0 12px; }
     .section-head h2 { margin: 0; font-size: 17px; }
-    .text-button { padding: 5px 0; border: 0; background: none; color: var(--green); font-size: 10px; font-weight: 700; }
+    .text-button { padding: 5px 0; border: 0; background: none; color: var(--accent-red); font-size: 10px; font-weight: 700; }
     .source-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .landing-heading { margin: 22px 0 22px; }
+    .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .role-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 22px; }
+    .role-card h2 { margin: 0; }
+    .role-card p { max-width: 430px; margin: 0 0 8px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .role-icon { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 2px; border-radius: 11px; background: var(--red-soft); color: var(--accent-red); font-size: 17px; }
+    .role-icon.admin { background: var(--khaki-soft); color: #725c31; }
+    .learner-dashboard-heading { margin-bottom: 16px; }
+    .learner-dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(230px, .85fr); gap: 14px; align-items: start; }
+    .learner-quiz-column, .learner-other-actions { display: grid; gap: 12px; }
+    .learner-action { display: flex; align-items: center; gap: 13px; width: 100%; min-height: 76px; padding: 15px 18px; color: var(--ink); text-align: left; transition: transform .16s ease, box-shadow .16s ease; }
+    .learner-action:hover { transform: translateY(-2px); box-shadow: 0 15px 30px #1f33240d; }
+    .learner-action strong { font: 700 17px Georgia, serif; }
+    .learner-action .role-icon { flex: 0 0 38px; margin: 0; }
+    .learner-action-arrow { margin-left: auto; color: var(--accent-red); font-size: 19px; }
+    .landing-secondary-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
     .source-card { padding: 16px; transition: .16s ease; }
     .source-card:hover { transform: translateY(-2px); box-shadow: 0 15px 30px #1f33240d; }
     .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .book-mark { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 10px; background: var(--green-soft); color: var(--green); font: 700 14px Georgia, serif; }
-    .source-card:nth-child(2) .book-mark { background: var(--gold-soft); color: #9a6d2c; }
-    .source-card:nth-child(3) .book-mark { background: var(--blue-soft); color: #557794; }
+    .book-mark { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 10px; background: var(--red-soft); color: var(--accent-red); font: 700 14px Georgia, serif; }
+    .source-card:nth-child(2) .book-mark { background: var(--khaki-soft); color: #5d5038; }
+    .source-card:nth-child(3) .book-mark { background: var(--khaki-soft); color: #5d5038; }
     .lang { padding: 5px 7px; border-radius: 20px; background: #f3f5f2; color: #7b867e; font-size: 8px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
     .source-card p { min-height: 34px; margin-bottom: 11px; color: var(--muted); font-size: 10px; line-height: 1.55; }
     .tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 14px; }
     .tag { padding: 5px 7px; border-radius: 20px; background: #f4f5f2; color: #77827a; font-size: 8px; }
-    .card-link { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 0 0; border: 0; border-top: 1px solid #edf0ec; background: none; color: var(--green); text-align: left; font-size: 10px; font-weight: 700; }
+    .card-link { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 0 0; border: 0; border-top: 1px solid var(--line); background: none; color: var(--accent-red); text-align: left; font-size: 10px; font-weight: 700; }
     .study-row { display: grid; grid-template-columns: 1.35fr .65fr; gap: 12px; margin-top: 17px; }
     .panel { padding: 18px; }
     .daily { display: flex; align-items: center; gap: 15px; }
-    .daily-icon { display: grid; place-items: center; flex: 0 0 45px; width: 45px; height: 45px; border-radius: 13px; background: var(--gold-soft); color: #966b2b; font-size: 19px; }
+    .daily-icon { display: grid; place-items: center; flex: 0 0 45px; width: 45px; height: 45px; border-radius: 13px; background: var(--khaki-soft); color: #5d5038; font-size: 19px; }
     .daily-copy { flex: 1; }
     .daily-copy p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .daily-challenge { align-items: flex-start; }
+    .daily-header { display: flex; align-items: center; justify-content: space-between; gap: 9px; margin-bottom: 5px; }
+    .daily-header h3 { margin: 0; }
+    .daily-streak { flex: 0 0 auto; padding: 5px 8px; border-radius: 20px; background: var(--khaki-soft); color: #655330; font-size: 9px; font-weight: 700; }
+    .daily-question-meta { margin: 2px 0 7px; color: var(--muted); font-size: 9px; }
+    .daily-question-text { margin: 0 0 9px; color: var(--ink); font: 700 13px Georgia, serif; line-height: 1.4; }
+    .daily-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .daily-choice { padding: 7px 8px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); text-align: left; font-size: 9px; line-height: 1.35; }
+    .daily-choice:hover:not(:disabled) { border-color: var(--khaki-dark); background: #faf7ee; }
+    .daily-choice.correct { border-color: var(--correct-green); background: var(--correct-green-soft); color: #184329; }
+    .daily-choice.incorrect { border-color: var(--red); background: var(--red-soft); }
+    .daily-choice:disabled { cursor: default; }
+    .daily-feedback { margin-top: 9px; padding: 9px 10px; border-radius: 8px; background: #f3eddc; color: #463f36; font-size: 9px; line-height: 1.5; }
+    .daily-feedback.correct { background: var(--correct-green-soft); }
+    .daily-feedback strong { display: block; margin-bottom: 3px; }
+    .daily-feedback-ref { display: block; margin-top: 4px; font-weight: 700; }
+    .daily-badge-earned { margin-top: 7px; color: #81652e; font-size: 9px; font-weight: 700; }
+    .untimed-row { margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+    .untimed-row label { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 10px; font-weight: 700; }
+    .untimed-row input { accent-color: var(--correct-green); }
+    .untimed-row p { margin: 5px 0 0 22px; color: var(--muted); font-size: 9px; line-height: 1.45; }
+    .untimed-notice { margin: -4px 0 15px; color: var(--muted); font-size: 10px; font-weight: 700; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .badge-chip { padding: 8px 10px; border: 1px solid #d9c99d; border-radius: 8px; background: #f8f2df; color: #66552f; font-size: 9px; }
+    .badge-chip.locked { border-color: var(--line); background: #f7f7f5; color: #999; }
+    .leaderboard-note { margin: 4px 0 12px; color: var(--muted); font-size: 9px; line-height: 1.5; }
+    .username-form { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 15px; }
+    .username-form input { flex: 1 1 180px; min-height: 37px; padding: 0 10px; border: 1px solid var(--line); border-radius: 7px; font: inherit; font-size: 10px; }
+    .leaderboard-list { display: grid; gap: 6px; }
+    .leaderboard-row { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 7px; background: #f7f7f5; font-size: 10px; }
+    .leaderboard-rank { color: #9b7a42; font-weight: 700; }
+    .leaderboard-score { color: var(--muted); font-size: 9px; }
     .progress-panel .meter { height: 6px; margin: 13px 0 7px; overflow: hidden; border-radius: 10px; background: #edf0ec; }
-    .progress-panel .meter span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--green); transition: width .25s ease; }
+    .progress-panel .meter span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent-red); transition: width .25s ease; }
     .meter-label { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; }
-    .source-note { margin: 16px 0 0; padding: 10px 12px; border-left: 3px solid #d4b677; border-radius: 0 8px 8px 0; background: #faf8f1; color: #797366; font-size: 9px; line-height: 1.6; }
+    .source-note { margin: 16px 0 0; padding: 10px 12px; border-left: 3px solid #b9a779; border-radius: 0 8px 8px 0; background: #f3eddc; color: #655d51; font-size: 9px; line-height: 1.6; }
     .page-heading { margin-bottom: 21px; }
     .library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
     .library-card { padding: 20px; }
     .library-card .source-card p { min-height: auto; }
+    .resource-stack { display: grid; gap: 19px; margin-bottom: 20px; }
+    .resource-auth-card { padding: 20px; }
+    .resource-auth-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+    .resource-auth-top h2 { margin-bottom: 6px; font-size: 16px; }
+    .resource-auth-top p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+    .resource-auth-identity { max-width: 100%; color: var(--muted); font-size: 9px; overflow-wrap: anywhere; }
+    .resource-form { display: grid; gap: 11px; margin-top: 15px; }
+    .resource-form-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    .resource-field { display: grid; gap: 5px; color: #5b544a; font-size: 9px; font-weight: 700; }
+    .resource-field input, .resource-field textarea { width: 100%; min-height: 38px; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; font-weight: 400; }
+    .resource-field textarea { min-height: 92px; resize: vertical; line-height: 1.5; }
+    .resource-field input:focus, .resource-field textarea:focus { border-color: var(--khaki-dark); box-shadow: 0 0 0 3px #b9a77920; }
+    .resource-wide { grid-column: 1 / -1; }
+    .resource-status { margin: 13px 0 0; padding: 10px 11px; border-radius: 8px; background: #f3eddc; color: #51483b; font-size: 10px; line-height: 1.5; }
+    .resource-status.error { background: #fbefed; color: #8b2d2c; }
+    .resource-status.success { background: var(--correct-green-soft); color: #20552d; }
+    .resource-updates { display: grid; gap: 12px; }
+    .resource-update-card { overflow: hidden; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); box-shadow: var(--shadow); }
+    .resource-update-card h3 { margin-bottom: 7px; font-size: 16px; }
+    .resource-update-description { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .resource-update-meta { margin: 0 0 9px; color: #92978e; font-size: 9px; }
+    .resource-video { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 13px; border: 0; border-radius: 9px; background: #171412; }
+    .resource-video-link { display: inline-flex; margin-top: 12px; color: var(--accent-red); font-size: 10px; font-weight: 700; text-decoration: none; }
+    .resource-video-link:hover { text-decoration: underline; }
+    .resource-empty { padding: 17px 19px; border: 1px solid var(--line); border-radius: 10px; background: #fffefa; color: var(--muted); font-size: 10px; line-height: 1.6; }
+    .resource-materials-heading { margin-top: 25px; }
+    .admin-update-management { margin: 22px 0 18px; }
+    .admin-update-list { display: grid; gap: 10px; }
+    .admin-update-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); }
+    .admin-update-item h3 { margin-bottom: 5px; font-size: 13px; }
+    .admin-update-item p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .admin-entry-actions { display: flex; flex-wrap: wrap; gap: 7px; }
     .list-title { margin: 17px 0 8px; color: #8b958d; font-size: 9px; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; }
     .topic-list { display: flex; flex-wrap: wrap; gap: 7px; }
     .topic-chip { padding: 7px 9px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: #5f6d63; font-size: 9px; }
-    .topic-chip:hover { border-color: #c9d9cc; color: var(--green); }
+    .topic-chip:hover { border-color: var(--khaki-dark); color: var(--accent-red); }
     .lesson-search { width: 100%; max-width: 420px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; }
-    .lesson-search:focus { border-color: #88a992; box-shadow: 0 0 0 3px #215c4310; }
+    .lesson-search:focus { border-color: var(--red); box-shadow: 0 0 0 3px #a51f2d12; }
     .lesson-summary { margin: 9px 0 10px; color: var(--muted); font-size: 9px; }
     .lesson-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px 15px; max-height: 420px; overflow: auto; padding-right: 4px; }
     .lesson-row { display: flex; align-items: start; gap: 9px; padding: 8px 0; border-bottom: 1px solid #eff1ed; color: #536158; font-size: 9px; line-height: 1.45; }
@@ -151,10 +235,28 @@
     .quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
     .quiz-progress-label { color: var(--muted); font-size: 10px; }
     .quiz-progress { height: 5px; margin-bottom: 17px; overflow: hidden; border-radius: 9px; background: #e8ece7; }
-    .quiz-progress span { display: block; height: 100%; border-radius: inherit; background: var(--green); transition: width .2s ease; }
+    .quiz-progress span { display: block; height: 100%; border-radius: inherit; background: var(--accent-red); transition: width .2s ease; }
+    .timer-row { display: flex; align-items: center; gap: 11px; margin: -5px 0 17px; }
+    .timer-text { min-width: 94px; color: #655d51; font-size: 9px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .timer-track { flex: 1; height: 5px; overflow: hidden; border-radius: 8px; background: #e6decd; }
+    .timer-track span { display: block; width: 100%; height: 100%; border-radius: inherit; background: var(--khaki-dark); transition: width .3s linear, background .2s ease; }
+    .timer-row.urgent .timer-text { color: var(--red); }
+    .timer-row.urgent .timer-track span { background: var(--red); }
+    .quiz-setup { max-width: 560px; margin: 8px auto; padding: 27px; }
+    .setup-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin: 20px 0 13px; }
+    .setup-field { display: grid; gap: 6px; color: #59645b; font-size: 10px; font-weight: 700; }
+    .setup-field select { width: 100%; min-height: 41px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 11px; }
+    .setup-field select:focus { outline: 2px solid #a51f2d35; border-color: var(--red); }
+    .setup-hint, .setup-streak, .level-outcome { color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .setup-streak { padding: 11px 12px; border-radius: 8px; background: #f7f3e9; }
+    .setup-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 17px; }
+    .level-progress-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .level-progress-item { padding: 11px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: 10px; }
+    .level-progress-item strong { display: block; margin-bottom: 4px; color: var(--ink); }
+    .level-progress-item span { color: var(--muted); }
     .quiz-card { padding: 25px; }
     .question-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
-    .question-meta span { padding: 5px 8px; border-radius: 20px; background: var(--green-soft); color: var(--green); font-size: 8px; font-weight: 700; }
+    .question-meta span { padding: 5px 8px; border-radius: 20px; background: var(--red-soft); color: var(--accent-red); font-size: 8px; font-weight: 700; }
     .question-meta span:last-child { background: #f4f5f2; color: #78847b; font-weight: 500; }
     .question-text { margin-bottom: 18px; font: 700 20px Georgia, serif; line-height: 1.35; }
     .choices { display: grid; gap: 8px; }
@@ -162,37 +264,58 @@
       display: flex; align-items: center; gap: 11px; width: 100%; min-height: 44px; padding: 9px 12px;
       border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #38473e; text-align: left; font-size: 11px; line-height: 1.45;
     }
-    .choice:hover { border-color: #b5c9bb; background: #fbfcfa; }
-    .choice.selected { border-color: #5f8a6d; background: #eff6f0; color: var(--green-dark); }
-    .choice.correct { border-color: #6ea17b; background: #e8f4ea; color: #205a35; }
-    .choice.incorrect { border-color: #cc8576; background: var(--red-soft); color: #873f35; }
+    .choice:hover { border-color: #b9a779; background: #faf7ee; }
+    .choice.selected { border-color: var(--red); background: var(--red-soft); color: var(--black); }
+    .choice.correct { border-color: var(--correct-green); background: var(--correct-green-soft); color: #184329; }
+    .choice.incorrect { border-color: var(--red); background: var(--red-soft); color: var(--black); }
     .choice-letter { display: grid; place-items: center; flex: 0 0 23px; width: 23px; height: 23px; border: 1px solid #e7ebe6; border-radius: 7px; color: #7b897f; font-size: 9px; font-weight: 700; }
-    .choice.correct .choice-letter { border-color: #a4c5aa; color: #205a35; }
-    .choice.incorrect .choice-letter { border-color: #e0aca2; color: #873f35; }
-    .feedback { display: none; margin-top: 13px; padding: 12px 13px; border-radius: 9px; background: #f3f6f1; color: #536258; font-size: 10px; line-height: 1.55; }
+    .choice.correct .choice-letter { border-color: #8ab995; color: var(--correct-green); }
+    .choice.incorrect .choice-letter { border-color: #d99ca2; color: var(--red); }
+    .feedback { display: none; margin-top: 13px; padding: 12px 13px; border-radius: 9px; background: #f3eddc; color: #463f36; font-size: 10px; line-height: 1.55; }
     .feedback.show { display: block; }
-    .feedback strong { display: block; margin-bottom: 4px; color: var(--green); font-size: 11px; }
+    .feedback strong { display: block; margin-bottom: 4px; color: var(--accent-red); font-size: 11px; }
+    .feedback.correct { background: var(--correct-green-soft); }
+    .feedback.correct strong { color: var(--correct-green); }
+    .feedback.correct .feedback-ref { color: var(--correct-green); }
     .feedback.wrong { background: #fbf1ee; }
     .feedback.wrong strong { color: var(--red); }
-    .feedback-ref { display: inline-block; margin-top: 6px; color: var(--green); font-weight: 700; }
+    .feedback-ref { display: inline-block; margin-top: 6px; color: var(--accent-red); font-weight: 700; }
     .quiz-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 17px; }
     .quiz-hint { color: #929b94; font-size: 9px; }
     .result-card { padding: 30px; text-align: center; }
-    .result-score { display: grid; place-items: center; width: 104px; height: 104px; margin: 0 auto 15px; border: 8px solid var(--green-soft); border-radius: 50%; color: var(--green); font: 700 25px Georgia, serif; }
+    .result-score { display: grid; place-items: center; width: 104px; height: 104px; margin: 0 auto 15px; border: 8px solid var(--red-soft); border-radius: 50%; color: var(--accent-red); font: 700 25px Georgia, serif; }
     .result-card p { max-width: 450px; margin: 0 auto 18px; color: var(--muted); font-size: 11px; line-height: 1.6; }
     .result-details { display: flex; justify-content: center; gap: 24px; margin: 18px 0 22px; color: var(--muted); font-size: 9px; }
     .result-details strong { display: block; margin-bottom: 3px; color: var(--ink); font: 700 17px Georgia, serif; }
     .progress-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
     .progress-big { display: flex; align-items: center; gap: 17px; }
-    .progress-circle { display: grid; place-items: center; flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(var(--green) var(--progress-angle, 0deg), #edf0ec 0); color: var(--green-dark); font: 700 15px Georgia, serif; }
+    .progress-circle { display: grid; place-items: center; flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(var(--accent-red) var(--progress-angle, 0deg), #e6decd 0); color: var(--black); font: 700 15px Georgia, serif; }
     .progress-circle span { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: #fff; }
     .progress-big p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
     .history-list { display: grid; gap: 8px; margin-top: 12px; }
     .history-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #edf0ec; font-size: 10px; }
     .history-item span { color: var(--muted); }
-    .history-score { color: var(--green); font-weight: 700; }
+    .history-score { color: var(--accent-red); font-weight: 700; }
     .empty { padding: 16px 0; color: var(--muted); font-size: 10px; }
-    .toast { position: fixed; right: 22px; bottom: 20px; z-index: 10; padding: 11px 14px; transform: translateY(12px); border-radius: 9px; background: var(--green-dark); color: #fff; opacity: 0; pointer-events: none; font-size: 10px; transition: .2s ease; }
+    .about-banner { padding: 28px; border-radius: 15px; background: var(--black); color: #fff; }
+    .about-banner .eyebrow { color: #e7d8b3; }
+    .about-banner h2 { max-width: 560px; margin-bottom: 9px; font-size: 24px; }
+    .about-banner p { max-width: 660px; margin-bottom: 0; color: #e7e1d6; font-size: 11px; line-height: 1.7; }
+    .about-grid, .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 13px; }
+    .about-item { padding: 17px; }
+    .about-number { margin-bottom: 13px; color: var(--red); font: 700 22px Georgia, serif; }
+    .about-item p, .contact-card p { margin-bottom: 0; color: var(--muted); font-size: 10px; line-height: 1.65; }
+    .contact-grid { grid-template-columns: .8fr 1.2fr; align-items: start; }
+    .contact-card { padding: 19px; }
+    .contact-form { display: grid; gap: 11px; margin-top: 14px; }
+    .contact-form label { display: grid; gap: 5px; color: #5b544a; font-size: 9px; font-weight: 700; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px #a51f2d12; }
+    .contact-form textarea { min-height: 100px; resize: vertical; }
+    .form-note { margin: 2px 0 0; color: #7b7265; font-size: 9px; line-height: 1.55; }
+    .contact-status { display: none; padding: 10px 11px; border-radius: 8px; background: #efe5ca; color: var(--black); font-size: 9px; line-height: 1.5; }
+    .contact-status.show { display: block; }
+    .toast { position: fixed; right: 22px; bottom: 20px; z-index: 10; padding: 11px 14px; transform: translateY(12px); border-radius: 9px; background: var(--black); color: #fff; opacity: 0; pointer-events: none; font-size: 10px; transition: .2s ease; }
     .toast.show { transform: translateY(0); opacity: 1; }
     @media (max-width: 900px) {
       .sidebar { width: 205px; }
@@ -223,11 +346,21 @@
       .stats { gap: 8px; }
       .stat { padding: 11px; }
       .source-grid, .library-grid, .study-row, .progress-layout { grid-template-columns: 1fr; }
+      .role-grid, .learner-dashboard-grid { grid-template-columns: 1fr; }
+      .landing-heading { margin-top: 4px; }
+      .resource-auth-top { flex-direction: column; }
+      .resource-form-fields { grid-template-columns: 1fr; }
+      .resource-wide { grid-column: auto; }
+      .admin-update-item { grid-template-columns: 1fr; }
       .lesson-results { grid-template-columns: 1fr; max-height: 360px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-banner { padding: 22px; }
       .source-card p { min-height: 0; }
       .daily { flex-wrap: wrap; }
-      .daily .button { margin-left: 60px; }
+      .daily-choices { grid-template-columns: 1fr; }
       .quiz-card { padding: 18px 14px; }
+      .quiz-setup { padding: 20px 15px; }
+      .setup-controls, .level-progress-list { grid-template-columns: 1fr; }
       .question-text { font-size: 18px; }
       .quiz-actions { align-items: stretch; flex-direction: column; }
       .quiz-actions .button { width: 100%; }
@@ -239,101 +372,100 @@
     <aside class="sidebar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">G</div>
-        <div><div class="brand-name">Guta raMwari</div><div class="brand-sub">Study &amp; quiz</div></div>
+        <div><div class="brand-name">Guta RaMwari</div><div class="brand-sub">Study &amp; quiz</div></div>
       </div>
-      <div class="nav-label">Learning space</div>
-      <nav class="nav" aria-label="Main navigation">
-        <button class="active" data-view="home"><span class="nav-icon">⌂</span>Overview</button>
+      <div class="nav-label">Guta RaMwari</div>
+      <nav class="nav" id="publicNav" aria-label="Main navigation">
+        <button class="active" data-view="home"><span class="nav-icon">⌂</span>Home</button>
+        <button data-view="about"><span class="nav-icon">ⓘ</span>About</button>
+        <button data-view="contact"><span class="nav-icon">✉</span>Contact</button>
+      </nav>
+      <nav class="nav nav-hidden" id="learnerNav" aria-label="Learning menu">
+        <button data-view="learner-home"><span class="nav-icon">⌂</span>Learning dashboard</button>
         <button data-view="quiz"><span class="nav-icon">✳</span>Take a quiz</button>
-        <button data-view="library"><span class="nav-icon">▤</span>Source library</button>
+        <button data-view="library"><span class="nav-icon">▤</span>Resources</button>
         <button data-view="progress"><span class="nav-icon">◷</span>My progress</button>
+        <button data-view="home"><span class="nav-icon">↶</span>Main site</button>
       </nav>
       <div class="side-note">
         <strong>Study with the source</strong>
         <p>Every answer points back to a book section or hymn so learners can read more.</p>
       </div>
-      <div class="side-foot">A learning space for Guta raMwari</div>
+      <div class="side-foot">A learning space for Guta RaMwari</div>
     </aside>
 
     <main class="main">
       <header class="topbar">
-        <div class="crumb">Learning space <span aria-hidden="true"> / </span> <strong id="crumbName">Overview</strong></div>
-        <div class="top-actions"><div class="source-pill"><span class="source-dot"></span>Sources attached</div><div class="avatar" aria-label="Learner">GR</div></div>
+        <div class="crumb">Learning space <span aria-hidden="true"> / </span> <strong id="crumbName">Home</strong></div>
+        <div class="top-actions"><div class="source-pill"><span class="source-dot"></span>Sources attached</div><label class="language-picker"><span>Language</span><select id="languageSelect" aria-label="Choose your language"><option value="en">English</option><option value="sn">Shona</option><option value="nd">Ndebele</option></select></label><div class="avatar" aria-label="Learner">GR</div></div>
       </header>
 
       <div class="content">
         <section class="view active" id="view-home">
-          <div class="welcome">
-            <div><div class="eyebrow">Guta raMwari learning space</div><h1>Learn at your own pace.</h1><p class="subtext">Explore teachings, reflect on the hymns, and grow one question at a time.</p></div>
-            <button class="button" data-start="all">Start a 5-question quiz <span aria-hidden="true">→</span></button>
+          <div class="page-heading landing-heading">
+            <div class="eyebrow">Guta RaMwari</div>
+            <h1>Welcome to Guta RaMwari</h1>
+            <p class="subtext">Choose how you would like to use the learning platform.</p>
           </div>
-          <div class="hero">
-            <div class="hero-copy">
-              <div class="eyebrow">A thoughtful place to study</div>
-              <h2>Build understanding through the books you shared.</h2>
-              <p>Practice with questions grounded in the handbook, the Shona combined volume, and the Ndebele hymn book. Each answer includes its source.</p>
-              <button class="button" data-start="all">Begin learning <span aria-hidden="true">→</span></button>
-            </div>
-            <div class="hero-art" aria-hidden="true"><div class="seal">✧<span>LEARN · REFLECT</span></div></div>
-          </div>
-
-          <div class="stats">
-            <div class="stat"><div class="stat-icon">✳</div><div><div class="stat-label">Practice questions</div><div class="stat-value">20</div></div></div>
-            <div class="stat"><div class="stat-icon">▤</div><div><div class="stat-label">Source books</div><div class="stat-value">3</div></div></div>
-            <div class="stat"><div class="stat-icon">⌁</div><div><div class="stat-label">Numbered teachings</div><div class="stat-value">670</div></div></div>
-            <div class="stat"><div class="stat-icon">◷</div><div><div class="stat-label">Quizzes completed</div><div class="stat-value" id="quizCount">0</div></div></div>
-          </div>
-
-          <div class="section-head"><h2>Explore the source books</h2><button class="text-button" data-view="library">View source library →</button></div>
-          <div class="source-grid">
-            <article class="source-card">
-              <div class="card-top"><div class="book-mark">H</div><span class="lang">English</span></div>
-              <h3>GRM Handbook</h3>
-              <p>Guidance on worship, conduct, community life, and important dates.</p>
-              <div class="tags"><span class="tag">Commandments</span><span class="tag">Worship</span><span class="tag">Dates</span></div>
-              <button class="card-link" data-start="handbook">Practice handbook questions <span>→</span></button>
+          <div class="role-grid">
+            <article class="panel role-card">
+              <div class="role-icon">✳</div><div class="eyebrow">For learners</div>
+              <h2>Other user</h2>
+              <p>Take quizzes, read resources, and follow your learning progress.</p>
+              <button class="button" data-enter-role="learner-home">Continue as other user <span aria-hidden="true">→</span></button>
             </article>
-            <article class="source-card">
-              <div class="card-top"><div class="book-mark">C</div><span class="lang">Shona</span></div>
-              <h3>Combined Volume</h3>
-              <p>Six volumes with 670 numbered teachings, including the account of entering the Guta.</p>
-              <div class="tags"><span class="tag">History</span><span class="tag">Teachings</span><span class="tag">Community</span></div>
-              <button class="card-link" data-start="combined">Practice combined-volume questions <span>→</span></button>
-            </article>
-            <article class="source-card">
-              <div class="card-top"><div class="book-mark">♫</div><span class="lang">Ndebele</span></div>
-              <h3>Guta Ra Mwari Hymn Book</h3>
-              <p>Hymns and prayers with original-language titles retained in the quiz.</p>
-              <div class="tags"><span class="tag">Hymns</span><span class="tag">Fellowship</span><span class="tag">Prayer</span></div>
-              <button class="card-link" data-start="hymns">Practice hymn questions <span>→</span></button>
+            <article class="panel role-card">
+              <div class="role-icon admin">✎</div><div class="eyebrow">For authorized leaders</div>
+              <h2>Admin</h2>
+              <p>Sign in to publish, edit, and remove community updates.</p>
+              <button class="button" data-enter-role="admin">Admin sign in <span aria-hidden="true">→</span></button>
             </article>
           </div>
+          <div class="landing-secondary-links">
+            <button class="button secondary" data-view="about">About Guta RaMwari</button>
+            <button class="button secondary" data-view="contact">Contact</button>
+          </div>
+        </section>
 
-          <div class="study-row">
-            <div class="panel daily">
-              <div class="daily-icon">✧</div><div class="daily-copy"><h3>Today’s study</h3><p>Try five questions drawn from all three source books. You’ll see the reference after each answer.</p></div>
-              <button class="button" data-start="all">Start practice</button>
+        <section class="view" id="view-learner-home">
+          <div class="page-heading learner-dashboard-heading">
+            <div class="eyebrow">Learning dashboard</div>
+            <h1>Your learning space</h1>
+          </div>
+          <div class="learner-dashboard-grid">
+            <div class="learner-quiz-column">
+              <button class="panel learner-action" data-view="quiz"><span class="role-icon">✳</span><strong>Take a quiz</strong><span class="learner-action-arrow" aria-hidden="true">→</span></button>
+              <div class="panel daily daily-challenge">
+                <div class="daily-icon" aria-hidden="true">✧</div>
+                <div class="daily-copy"><div class="daily-header"><h3 id="dailyQuestionTitle">Daily question</h3><span class="daily-streak" id="dailyStreak"></span></div><div id="dailyQuestionContent" aria-live="polite"></div></div>
+              </div>
             </div>
-            <div class="panel progress-panel">
-              <h3>Your learning progress</h3><div class="meter"><span id="homeMeter"></span></div>
-              <div class="meter-label"><span id="homeProgressText">No quizzes yet</span><span id="homeAccuracy">0% accuracy</span></div>
+            <div class="learner-other-actions">
+              <button class="panel learner-action" data-view="library"><span class="role-icon">▤</span><strong>Resources</strong><span class="learner-action-arrow" aria-hidden="true">→</span></button>
+              <button class="panel learner-action" data-view="progress"><span class="role-icon">◷</span><strong>My progress</strong><span class="learner-action-arrow" aria-hidden="true">→</span></button>
             </div>
           </div>
-          <p class="source-note">Starter questions are in English, with Shona and Ndebele source titles preserved. The English wording is a study aid; the cited book remains the source.</p>
         </section>
 
         <section class="view" id="view-quiz">
-          <div class="page-heading"><div class="eyebrow">Practice</div><h1 id="quizHeading">Take a quiz</h1><p class="subtext">Choose an answer, check it, then read the source note.</p></div>
+          <div class="page-heading"><div class="eyebrow">Practice</div><h1 id="quizHeading">Take a quiz</h1><p class="subtext">Choose a book or theme, then select a difficulty.</p></div>
           <div class="quiz-wrap">
             <div id="quizBody" class="panel quiz-card">
               <div class="empty">Choose a source from the library or start a practice quiz from the overview.</div>
-              <button class="button" data-start="all">Start a 5-question quiz</button>
+              <button class="button" data-start="all">Choose a quiz category</button>
             </div>
           </div>
         </section>
 
         <section class="view" id="view-library">
-          <div class="page-heading"><div class="eyebrow">Your materials</div><h1>Source library</h1><p class="subtext">Browse the books and topic areas used to build this starter quiz.</p></div>
+          <div class="page-heading"><div class="eyebrow">Community learning</div><h1>Resources</h1><p class="subtext">Updates shared by Guta RaMwari leaders, alongside the books and topics used in the quiz.</p></div>
+          <div class="resource-stack">
+            <section class="resource-feed-section">
+              <div class="section-head"><h2>Leader updates</h2></div>
+              <div id="resourceUpdatesPanel" aria-live="polite"></div>
+            </section>
+          </div>
+          <div class="section-head resource-materials-heading"><h2>Study materials</h2></div>
           <div class="library-grid">
             <article class="panel library-card">
               <div class="card-top"><div class="book-mark">H</div><span class="lang">English · handbook</span></div>
@@ -391,6 +523,59 @@
               <div class="section-head" style="margin:0 0 7px"><h2>Recent quizzes</h2><button class="text-button" id="clearProgress">Clear my progress</button></div>
               <div class="history-list" id="historyList"><div class="empty">No quizzes completed yet. Start a short practice session when you’re ready.</div></div>
             </div>
+            <div class="panel" style="grid-column:1/-1">
+              <div class="eyebrow">Difficulty levels</div><h2 style="margin:5px 0 14px">Progress by category</h2>
+              <div class="level-progress-list" id="levelProgressList"></div>
+            </div>
+            <div class="panel" style="grid-column:1/-1" id="socialProgressPanel"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-admin">
+          <div class="page-heading"><div class="eyebrow">Admin area</div><h1>Manage community updates</h1><p class="subtext">Sign in with an authorized leader account to publish or manage your updates.</p></div>
+          <div id="adminAuthPanel" aria-live="polite"></div>
+          <section class="admin-update-management">
+            <div class="section-head"><h2>Your updates</h2></div>
+            <div id="adminUpdatesPanel" aria-live="polite"></div>
+          </section>
+          <button class="button secondary" data-view="home">Return to main site</button>
+        </section>
+
+        <section class="view" id="view-about">
+          <div class="page-heading"><div class="eyebrow">About this project</div><h1>A place to learn and reflect.</h1><p class="subtext">Study Guta RaMwari materials through short, source-linked quizzes.</p></div>
+          <div class="about-banner">
+            <div class="eyebrow">Our purpose</div>
+            <h2>Make the books easier to study, one topic at a time.</h2>
+            <p>This learning space brings together the GRM Handbook, the Shona Combined Volume, and the Ndebele Hymn Book. Questions point back to a section, page, or hymn so learners can revisit the original context.</p>
+          </div>
+          <div class="about-grid">
+            <article class="panel about-item"><div class="about-number">01</div><h3>Learn from the sources</h3><p>The platform keeps the book titles and original-language teaching titles visible alongside English study questions.</p></article>
+            <article class="panel about-item"><div class="about-number">02</div><h3>Practice with context</h3><p>After each answer, learners see a short explanation and a reference to the source material.</p></article>
+            <article class="panel about-item"><div class="about-number">03</div><h3>Build at your own pace</h3><p>Quiz progress is saved in this browser so learners can return to their study on this device.</p></article>
+          </div>
+          <p class="source-note">The Combined Volume contents index lists 670 numbered teaching titles. The current quiz set is a starter selection and will grow as more chapters are reviewed.</p>
+        </section>
+
+        <section class="view" id="view-contact">
+          <div class="page-heading"><div class="eyebrow">Get in touch</div><h1>Contact</h1><p class="subtext">Questions about the learning platform or the study materials?</p></div>
+          <div class="contact-grid">
+            <article class="panel contact-card">
+              <div class="eyebrow">Official contact</div><h2>Speak with your congregation</h2>
+              <p>For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.</p>
+              <div class="source-note">Official email, phone, and branch details have not been provided yet. Add approved contact details here before sharing the site publicly.</div>
+            </article>
+            <article class="panel contact-card">
+              <div class="eyebrow">Message preview</div><h2>Send a note</h2>
+              <p>This form is a preview and does not send or store messages yet.</p>
+              <form class="contact-form" id="contactForm">
+                <label>Your name<input name="name" autocomplete="name" required placeholder="Name"></label>
+                <label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+                <label>Message<textarea name="message" required placeholder="How can we help?"></textarea></label>
+                <button class="button" type="submit">Preview message</button>
+                <div class="contact-status" id="contactStatus" role="status" aria-live="polite">This preview is not connected to a delivery service. Add an approved contact destination to enable sending.</div>
+                <p class="form-note">Nothing is transmitted when you submit this preview form.</p>
+              </form>
+            </article>
           </div>
         </section>
       </div>
@@ -398,17 +583,18 @@
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="guta-teaching-index.js"></script>
   <script>
     const questions = [
-      { id: 'h1', source: 'handbook', category: 'Foundations', prompt: 'What does the Handbook say its role is?', choices: ['A guide for members, subsidiary to the Standing Orders and Constitution', 'A replacement for the Constitution', 'A hymn collection only', 'A record of one congregation’s attendance'], answer: 0, explanation: 'The preamble describes the Handbook as a guide for members and says it is subsidiary to the Standing Orders and the Guta raMwari Constitution.', reference: 'GRM Handbook · Preamble · p. 6' },
+      { id: 'h1', source: 'handbook', category: 'Foundations', prompt: 'What does the Handbook say its role is?', choices: ['A guide for members, subsidiary to the Standing Orders and Constitution', 'A replacement for the Constitution', 'A hymn collection only', 'A record of one congregation’s attendance'], answer: 0, explanation: 'The preamble describes the Handbook as a guide for members and says it is subsidiary to the Standing Orders and the Guta RaMwari Constitution.', reference: 'GRM Handbook · Preamble · p. 6' },
       { id: 'h2', source: 'handbook', category: 'Admission', prompt: 'According to the Handbook, who forgives sin?', choices: ['An Elder', 'Only God', 'A hymn leader', 'The congregation'], answer: 1, explanation: 'The confession section states that only God forgives sin.', reference: 'GRM Handbook · Admission · p. 6' },
       { id: 'h3', source: 'handbook', category: 'Admission', prompt: 'Which hymn does the Handbook list for new members?', choices: ['Hymn 2', 'Hymn 5', 'Hymn 8', 'Hymn 9'], answer: 2, explanation: 'The admission section names Hymn 8 as the hymn for new members.', reference: 'GRM Handbook · Admission · p. 6' },
       { id: 'h4', source: 'handbook', category: 'Attendance', prompt: 'What does the Handbook call a three-month period without worship attendance or contact with the congregation?', choices: ['A leave of absence', 'Backsliding', 'A transfer', 'A new admission'], answer: 1, explanation: 'The attendance section says that three months without attending or contacting the congregation is regarded as backsliding.', reference: 'GRM Handbook · Attendance §3.4 · p. 8' },
       { id: 'h5', source: 'handbook', category: 'Commandments', prompt: 'What does Commandment 4.9 say members should do when praying?', choices: ['Pray directly to God', 'Pray only through a hymn leader', 'Avoid asking for help', 'Pray to ancestral spirits'], answer: 0, explanation: 'Commandment 4.9 says to pray directly to God and ask the Creator to do His will over problems.', reference: 'GRM Handbook · Commandments §4.9 · p. 9' },
       { id: 'h6', source: 'handbook', category: 'Commandments', prompt: 'Which responsibility for children appears in the Handbook’s commandments?', choices: ['Children should lead every service', 'Children shall go to school', 'Children should choose a uniform at age five', 'Children should not attend worship'], answer: 1, explanation: 'Commandment 4.4 says that children shall go to school.', reference: 'GRM Handbook · Commandments §4.4 · p. 9' },
       { id: 'h7', source: 'handbook', category: 'Commandments', prompt: 'Which of these is listed as a commandment?', choices: ['Love one another', 'Compete for leadership', 'Avoid helping family', 'Keep teachings private'], answer: 0, explanation: 'The Handbook lists “love one another” as Commandment 4.21.', reference: 'GRM Handbook · Commandments §4.21 · p. 9' },
-      { id: 'h8', source: 'handbook', category: 'Worship', prompt: 'What is the Tuesday evening service theme in the Handbook?', choices: ['The Day Dedicated to Youth', 'The Day of the Guta raMwari Leaders Meeting', 'Janet’s Service', 'The Harvest'], answer: 1, explanation: 'The Tuesday evening service is assigned the theme of the Guta raMwari leaders meeting.', reference: 'GRM Handbook · Daily Worship Services · p. 10' },
+      { id: 'h8', source: 'handbook', category: 'Worship', prompt: 'What is the Tuesday evening service theme in the Handbook?', choices: ['The Day Dedicated to Youth', 'The Day of the Guta RaMwari Leaders Meeting', 'Janet’s Service', 'The Harvest'], answer: 1, explanation: 'The Tuesday evening service is assigned the theme of the Guta RaMwari leaders meeting.', reference: 'GRM Handbook · Daily Worship Services · p. 10' },
       { id: 'h9', source: 'handbook', category: 'Worship', prompt: 'Which day is dedicated to the youth, boys and girls, with God’s guidance?', choices: ['Monday', 'Tuesday', 'Wednesday', 'Saturday'], answer: 2, explanation: 'The Handbook assigns this theme to Wednesday.', reference: 'GRM Handbook · Daily Worship Services · p. 10' },
       { id: 'h10', source: 'handbook', category: 'Dates', prompt: 'Which date does the Handbook identify as the Day of Incarnation?', choices: ['1 January', '31 January', '3 February', '25 December'], answer: 1, explanation: 'The important-dates table lists the Day of Incarnation on 31 January, marked 31/01/61.', reference: 'GRM Handbook · Important Dates · p. 46' },
       { id: 'h11', source: 'handbook', category: 'Dates', prompt: 'On which date does the Handbook list The Promise?', choices: ['31 January', '3 February', '6 December', '25 December'], answer: 1, explanation: 'The important-dates table lists The Promise on 3 February.', reference: 'GRM Handbook · Important Dates · p. 46' },
@@ -423,8 +609,1007 @@
       { id: 'm3', source: 'hymns', category: 'Hymns', prompt: 'What does Hymn 6 emphasize about God’s ways and commandments?', choices: ['Learning and keeping them', 'Keeping them secret', 'Replacing them with new customs', 'Discussing them only at festivals'], answer: 0, explanation: 'Hymn 6 includes a verse about loving and keeping God’s ways and commandments.', reference: 'Guta Ra Mwari Hymn Book · Hymn 6' }
     ];
 
-    const sourceNames = { all: 'All sources', handbook: 'GRM Handbook', combined: 'Combined Volume', hymns: 'Hymn Book' };
-    const viewNames = { home: 'Overview', quiz: 'Take a quiz', library: 'Source library', progress: 'My progress' };
+    // Keep the canonical name "Guta RaMwari" and all personal and place names unchanged in every locale.
+    const questionTranslations = {
+      sn: {
+        h1: { category: "Nheyo", prompt: "Bhuku reHandbook rinoti basa raro nderei?", choices: ["Kutungamirira nhengo, riri pasi peStanding Orders neBumbiro reGuta RaMwari", "Kutsiva Bumbiro", "Kuva bhuku renziyo chete", "Kunyora kupinda kwemungano imwe"], explanation: "Nhanganyaya inoti Handbook inhungamiro yenhengo uye iri pasi peStanding Orders neBumbiro reGuta RaMwari." },
+        h2: { category: "Kugamuchirwa", prompt: "Maererano neHandbook, ndiani anoregerera zvivi?", choices: ["Mukuru", "Mwari chete", "Mutungamiri werwiyo", "Ungano"], explanation: "Chikamu chekureurura chinoti Mwari chete ndiye anoregerera zvivi." },
+        h3: { category: "Kugamuchirwa", prompt: "Ndeipi rwiyo runotaurwa neHandbook kuti rwuririrwe nhengo itsva?", choices: ["Rwiyo 2", "Rwiyo 5", "Rwiyo 8", "Rwiyo 9"], explanation: "Chikamu chekugamuchirwa chinotaura kuti Rwiyo 8 nderenhengo itsva." },
+        h4: { category: "Kupinda", prompt: "Bhuku rinoti kusapinda kunamata kana kusataura neungano kwemwedzi mitatu kunonzi chii?", choices: ["Nguva yokumbozorora", "Kutsauka", "Kutamira kune rimwe bazi", "Kugamuchirwa patsva"], explanation: "Chikamu chekupinda chinoti kusapinda kana kusataura neungano kwemwedzi mitatu kunoonekwa sekutsauka." },
+        h5: { category: "Mirayiro", prompt: "Murayiro 4.9 unoti nhengo dzinofanira kuita sei padzinonyengetera?", choices: ["Kunyengetera kuna Mwari zvakananga", "Kunyengetera chete nomutungamiri werwiyo", "Kusakumbira rubatsiro", "Kunyengetera kumidzimu yemadzitateguru"], explanation: "Murayiro 4.9 unoti nyengeterai kuna Mwari zvakananga, muchikumbira Musiki kuti aite kuda kwake pamusoro pematambudziko." },
+        h6: { category: "Mirayiro", prompt: "Nderipi basa revana rinotaurwa mumirayiro yeHandbook?", choices: ["Vana vatungamire musangano wose", "Vana vaende kuchikoro", "Vana vasarudze yunifomu pazera remakore mashanu", "Vana vasapinda kunamata"], explanation: "Murayiro 4.4 unoti vana vanofanira kuenda kuchikoro." },
+        h7: { category: "Mirayiro", prompt: "Ndechipi chiri pakati pemirayiro yeHandbook?", choices: ["Dananai", "Makwikwi ehutungamiri", "Musabatsira mhuri", "Chengetai dzidziso dzenyu dzakavanzika"], explanation: "Handbook inonyora kuti “dananai” muMurayiro 4.21." },
+        h8: { category: "Kunamata", prompt: "Musoro wemusangano wemanheru weChipiri muHandbook ndeupi?", choices: ["Zuva rakatsaurirwa vechidiki", "Zuva reMusangano weVatungamiri veGuta RaMwari", "Musangano waJanet", "Kukohwa"], explanation: "Musangano wemanheru weChipiri wakapiwa musoro weMusangano weVatungamiri veGuta RaMwari." },
+        h9: { category: "Kunamata", prompt: "Nderipi zuva rakatsaurirwa vechidiki, vakomana nevasikana, vachitungamirirwa naMwari?", choices: ["Muvhuro", "Chipiri", "Chitatu", "Mugovera"], explanation: "Handbook inopa Chitatu musoro uyu." },
+        h10: { category: "Mazuva", prompt: "Handbook inoti Zuva reKuzvarwa kweChimiro nderipi?", choices: ["1 Ndira", "31 Ndira", "3 Kukadzi", "25 Zvita"], explanation: "Tafura yemazuva anokosha inonyora Zuva reKuzvarwa kweChimiro musi wa31 Ndira (31/01/61)." },
+        h11: { category: "Mazuva", prompt: "Handbook inonyora Chivimbiso musi upi?", choices: ["31 Ndira", "3 Kukadzi", "6 Zvita", "25 Zvita"], explanation: "Tafura yemazuva anokosha inonyora Chivimbiso musi wa3 Kukadzi." },
+        h12: { category: "Mazuva", prompt: "Ibasa ripi rekurangarira rakanyorwa musi wa6 Zvita?", choices: ["Kuenda kweFirst Host of God", "Kuenda kweSecond Host of God", "Zuva reKuzvarwa kweChimiro", "Musangano weGore Idzva"], explanation: "Tafura inobatanidza 6 Zvita nemusangano wekurangarira kuenda kweSecond Host of God." },
+        h13: { category: "Mazuva", prompt: "Ibasa ripi rekurangarira rakanyorwa musi wa25 Zvita?", choices: ["Kuenda kweFirst Host of God", "Kuenda kweSecond Host of God", "Chivimbiso", "Zuva reKuzvarwa kweChimiro"], explanation: "Tafura inobatanidza 25 Zvita nemusangano wekurangarira kuenda kweFirst Host of God." },
+        c1: { category: "Nhoroondo", prompt: "Munhoroondo yokutanga, Taxwell Tayali anoti mhuri yake yakapinda muGuta riini?", choices: ["3 Kurume 1955", "31 Ndira 1961", "3 Kukadzi 1961", "25 Zvita 1958"], explanation: "Nhoroondo “Kupinda MuGuta” inoti Taxwell Tayali, mudzimai wake Laizah, nemwana wavo ane mwedzi mitatu vakapinda musi weChitatu, 3 Kurume 1955." },
+        c2: { category: "Nhoroondo", prompt: "Febi aiva nemakore mangani pakapinda mhuri muGuta, maererano nenhoroondo?", choices: ["Mavhiki matatu", "Mwedzi mitatu", "Gore rimwe", "Makore maviri"], explanation: "Nhoroondo yokutanga inoti Febi aiva nemwedzi mitatu panguva iyoyo." },
+        c3: { category: "Nhoroondo", prompt: "Nhoroondo inoti chii chakaitika mushure mokuvaka Ngarava muna 1957?", choices: ["Musiki akauya kuBulawayo muna 1958", "Boka rakatamira kuBotswana", "Bhuku renziyo rakadhindwa", "Kukohwa kutsva kwakaitwa"], explanation: "Nhoroondo inoti Ngarava yakavakwa muna 1957 paine chishuwo chokukumbira Musiki kuti ashanyire; akauya kuBulawayo muna 1958." },
+        c4: { category: "Nhoroondo", prompt: "Musoro wenhoroondo inovhura Combined Volume, Vhoriyamu 1, ndeupi?", choices: ["Mwari", "Kupinda MuGuta", "Chivimbiso", "Rusando Rwa Janeti"], explanation: "Zviri mukati zvinotanga na“Chivimbiso – Kupinda Guta”; nhoroondo inovhura ine musoro unoti “Kupinda MuGuta.”" },
+        m1: { category: "Nziyo", prompt: "Nderipi zita reRwiyo 2 muBhuku reNziyo rechiNdebele?", choices: ["Thixo Sihlangene", "Singabazalwane", "Wazesul’ Izono Thixo", "Guta Ra Mwari Khaya Lami"], explanation: "Rwiyo 2 runonzi “Singabazalwane.” Ndima dzarwo dzinosimbisa kudanana, kubatana, uye kuwirirana." },
+        m2: { category: "Nziyo", prompt: "Nderipi zita rerwiyo rinoratidza Guta RaMwari se“musha wangu”?", choices: ["Mina Mntwana WaKho Thixo", "Thixo Sihlangene", "Guta Ra Mwari Khaya Lami", "Bazali Labantwana"], explanation: "Zita reRwiyo 4 ndi“Guta Ra Mwari Khaya Lami.”" },
+        m3: { category: "Nziyo", prompt: "Rwiyo 6 runosimbisa chii pamusoro penzira nemirayiro yaMwari?", choices: ["Kuidzidza nekuichengeta", "Kuivanza", "Kuitsiva netsika itsva", "Kungoikurukura pamhemberero"], explanation: "Rwiyo 6 rune ndima inotaura nezvekuda nokuchengeta nzira nemirayiro yaMwari." }
+      },
+      nd: {
+        h1: { category: "Izisekelo", prompt: "IHandbook ithi umsebenzi wayo ngowani?", choices: ["Ukuqondisa amalunga, ingaphansi kweStanding Orders leMthethosisekelo weGuta RaMwari", "Ukuthatha indawo yoMthethosisekelo", "Ukuba yincwadi yamahubo kuphela", "Ukugcina uhlu lokungena kwebandla elilodwa"], explanation: "Isandulelo sithi iHandbook iyisiqondiso samalunga njalo ingaphansi kweStanding Orders loMthethosisekelo weGuta RaMwari." },
+        h2: { category: "Ukwamukelwa", prompt: "NgokweHandbook, ngubani othethelela izono?", choices: ["Umdala", "NguNkulunkulu kuphela", "Umkhokheli wehubo", "Ibandla"], explanation: "Isigaba sokuvuma izono sithi nguNkulunkulu kuphela othethelela izono." },
+        h3: { category: "Ukwamukelwa", prompt: "Yiliphi ihubo eliqanjwe yiHandbook elokwamukela amalunga amatsha?", choices: ["Ihubo 2", "Ihubo 5", "Ihubo 8", "Ihubo 9"], explanation: "Isigaba sokwamukelwa siqamba iHubo 8 njengelamalunga amatsha." },
+        h4: { category: "Ukuya emihlanganweni", prompt: "IHandbook ithi ukungayi ekukhonzeni loba ukungakhulumisani lebandla okwezinyanga ezintathu kubizwa ngokuthini?", choices: ["Ikhefu", "Ukubuyela emuva", "Ukuthuthela kwelinye igatsha", "Ukwamukelwa kutsha"], explanation: "Isigaba sokuya emihlanganweni sithi ukungayi loba ukungakhulumisani lebandla okwezinyanga ezintathu kuthathwa njengokubuyela emuva." },
+        h5: { category: "Imilayo", prompt: "Umlayo 4.9 uthi amalunga kumele enzeni nxa ekhuleka?", choices: ["Khuleka kuNkulunkulu ngokuqondile", "Khuleka ngomkhokheli wehubo kuphela", "Ungaceli uncedo", "Khuleka emadlozini"], explanation: "Umlayo 4.9 uthi khulekani kuNkulunkulu ngokuqondile, licele uMdali ukuthi enze intando Yakhe ngezinkinga zenu." },
+        h6: { category: "Imilayo", prompt: "Yiwuphi umthwalo wabantwana okhona emilayweni yeHandbook?", choices: ["Abantwana kumele bahole yonke imihlangano", "Abantwana kumele baye esikolo", "Abantwana kumele bakhethe iyunifomu beseleminyaka emihlanu", "Abantwana akumelanga baye ekukhonzeni"], explanation: "Umlayo 4.4 uthi abantwana kumele baye esikolo." },
+        h7: { category: "Imilayo", prompt: "Yikuphi okungomunye wemilayo yeHandbook?", choices: ["Thandanani", "Banga ngobukhokheli", "Lingancedi imuli", "Fihla izifundiso"], explanation: "IHandbook ibala ukuthi “thandanani” kuMlayo 4.21." },
+        h8: { category: "Ukukhonza", prompt: "Yiwuphi umcijo womhlangano wangoLwesibili kusihlwa kuHandbook?", choices: ["Ilanga eliqondene lentsha", "Ilanga loMhlangano wabakhokheli beGuta RaMwari", "Umhlangano kaJanet", "Isivuno"], explanation: "Umhlangano wangoLwesibili kusihlwa ulomcijo woMhlangano wabakhokheli beGuta RaMwari." },
+        h9: { category: "Ukukhonza", prompt: "Lilanga bani eliqondene lentsha, abafana lamantombazana, ngaphansi kwesiqondiso sikaNkulunkulu?", choices: ["UMvulo", "ULwesibili", "ULwesithathu", "UMgqibelo"], explanation: "IHandbook iqondisa uLwesithathu kulo mcijo." },
+        h10: { category: "Amalanga", prompt: "IHandbook ithi iLilanga Lokuzalwa Kwesimo lingaliphi?", choices: ["1 uMasingana", "31 uMasingana", "3 uNhlolanja", "25 uMpalakazi"], explanation: "Ithebula lamalanga aqakathekileyo libala iLilanga Lokuzalwa Kwesimo ngo-31 uMasingana (31/01/61)." },
+        h11: { category: "Amalanga", prompt: "IHandbook ibeka iSithembiso ngaluphi usuku?", choices: ["31 uZibandlela", "3 uNhlolanja", "6 uMpalakazi", "25 uMpalakazi"], explanation: "Ithebula lamalanga aqakathekileyo libeka iSithembiso ngo-3 uNhlolanja." },
+        h12: { category: "Amalanga", prompt: "Yiwuphi umkhosi wesikhumbuzo obhalwe ngo-6 uMpalakazi?", choices: ["Ukuhamba kweFirst Host of God", "Ukuhamba kweSecond Host of God", "ILilanga Lokuzalwa Kwesimo", "Umhlangano woNyaka Omutsha"], explanation: "Ithebula lihlanganisa u-6 uMpalakazi lomkhosi wokukhumbula ukuhamba kweSecond Host of God." },
+        h13: { category: "Amalanga", prompt: "Yiwuphi umkhosi wesikhumbuzo obhalwe ngo-25 uMpalakazi?", choices: ["Ukuhamba kweFirst Host of God", "Ukuhamba kweSecond Host of God", "ISithembiso", "ILilanga Lokuzalwa Kwesimo"], explanation: "Ithebula lihlanganisa u-25 uMpalakazi lomkhosi wokukhumbula ukuhamba kweFirst Host of God." },
+        c1: { category: "Imbali", prompt: "Endabeni yokuqala, uTaxwell Tayali uthi imuli yakhe yangena eGuta ngaluphi usuku?", choices: ["3 Mbimbitho 1955", "31 uZibandlela 1961", "3 uNhlolanja 1961", "25 uMpalakazi 1958"], explanation: "Indaba ethi “Kupinda MuGuta” ithi uTaxwell Tayali, umkakhe uLaizah, lomntanabo olezinyanga ezintathu bangena ngoLwesithathu, 3 Mbimbitho 1955." },
+        c2: { category: "Imbali", prompt: "UFebi wayeleminyaka emingaki ngesikhathi imuli ingena eGuta, ngokwendaba?", choices: ["Amaviki amathathu", "Izinyanga ezintathu", "Umnyaka owodwa", "Iminyaka emibili"], explanation: "Indaba yokuqala ithi uFebi wayelezinyanga ezintathu ngalesosikhathi." },
+        c3: { category: "Imbali", prompt: "Indaba ithi kwenzakalani ngemva kokwakhiwa kweNgarava ngo-1957?", choices: ["UMdali wafika eBulawayo ngo-1958", "Iqembu lasuka laya eBotswana", "Incwadi yamahubo yanyatheliswa", "Kwenziwa isivuno esitsha"], explanation: "Indaba ithi iNgarava yakhiwa ngo-1957 ngesifiso sokucela uMdali ukuthi avakatshele; wafika eBulawayo ngo-1958." },
+        c4: { category: "Imbali", prompt: "Siyini isihloko sendaba evula iCombined Volume, iVolumu 1?", choices: ["Mwari", "Kupinda MuGuta", "Chivimbiso", "Rusando Rwa Janeti"], explanation: "Uhlu lokuqukethwe luqala ngokuthi “Chivimbiso – Kupinda Guta”; indaba evulayo elesihloko esithi “Kupinda MuGuta.”" },
+        m1: { category: "Amahubo", prompt: "Siyini isihloko seHubo 2 eNcwadini Yamahubo yesiNdebele?", choices: ["Thixo Sihlangene", "Singabazalwane", "Wazesul’ Izono Thixo", "Guta Ra Mwari Khaya Lami"], explanation: "Ihubo 2 lilesihloko esithi “Singabazalwane.” Amavesi alo agcizelela uthando, ubuzalwane, lokubambana." },
+        m2: { category: "Amahubo", prompt: "Yisiphi isihloko sehubo esichaza iGuta RaMwari ngokuthi “ikhaya lami”?", choices: ["Mina Mntwana WaKho Thixo", "Thixo Sihlangene", "Guta Ra Mwari Khaya Lami", "Bazali Labantwana"], explanation: "Isihloko seHubo 4 sithi “Guta Ra Mwari Khaya Lami.”" },
+        m3: { category: "Amahubo", prompt: "Ihubo 6 ligcizelela ini ngendlela lemilayo kaNkulunkulu?", choices: ["Ukuyifunda lokuyigcina", "Ukuyifihla", "Ukuyitshintsha ngemikhuba emitsha", "Ukuyikhuluma emikhosini kuphela"], explanation: "Ihubo 6 lilevesi elikhuluma ngokuthanda lokugcina izindlela lemilayo kaNkulunkulu." }
+      }
+    };
+
+    const interfaceTranslations = {
+      sn: {
+        "Study & quiz": "Kudzidza neBvunzo",
+        "Learning space": "Nzvimbo yekudzidza",
+        "Sources attached": "Mabhuku ari kushandiswa",
+        "Main navigation": "Menyu huru",
+        "Learner": "Mudzidzi",
+        "Question time remaining": "Nguva yasara yemubvunzo",
+        "English · handbook": "Chirungu · handbook",
+        "Shona · six volumes": "ChiShona · mavhoriyamu matanhatu",
+        "Ndebele · hymns & prayers": "ChiNdebele · nziyo neminamato",
+        "Language": "Mutauro",
+        "Choose a book or theme, then select a difficulty.": "Sarudza bhuku kana musoro wedzidziso, wozosarudza mwero wekuoma.",
+        "Difficulty levels": "Matanho ekuoma",
+        "Progress by category": "Budiriro nechikamu",
+        "Home": "Kumba",
+        "Take a quiz": "Tora Bvunzo",
+        "Source library": "Raibhurari Yemabhuku",
+        "Resources": "Zvinyorwa",
+        "Main site": "Saiti huru",
+        "Admin": "Mutungamiri",
+        "Learning menu": "Menyu yekudzidza",
+        "Learning dashboard": "Dheshibhodhi yekudzidza",
+        "Welcome to Guta RaMwari": "Tikugashirei kuGuta RaMwari",
+        "Choose how you would like to use the learning platform.": "Sarudza mashandisiro aunoda kuita puratifomu yekudzidza.",
+        "For learners": "Kune vadzidzi",
+        "Other user": "Mumwe mushandisi",
+        "Take quizzes, read resources, and follow your learning progress.": "Tora mibvunzo, verenga zvinyorwa, uye tarisa budiriro yako pakudzidza.",
+        "Continue as other user": "Enderera semumwe mushandisi",
+        "For authorized leaders": "Kune vatungamiri vane mvumo",
+        "Sign in to publish, edit, and remove community updates.": "Pinda kuti uise, ugadzirise, kana kubvisa mashoko enharaunda.",
+        "Admin sign in": "Pinda semutongi",
+        "About Guta RaMwari": "NezveGuta RaMwari",
+        "Your learning space": "Nzvimbo yako yekudzidza",
+        "Choose a quiz, browse shared resources, or review your progress.": "Sarudza bvunzo, ongorora zvinyorwa zvakagoverwa, kana kuona budiriro yako.",
+        "Choose a book or theme and continue through the five levels.": "Sarudza bhuku kana musoro, woenderera mberi nematanho mashanu.",
+        "Read updates and watch videos shared by Guta RaMwari leaders.": "Verenga mashoko uye tarisa mavhidhiyo akagoverwa nevatungamiri veGuta RaMwari.",
+        "Review results, streaks, badges, and your learning history.": "Ongorora zvibodzwa, mazuva akatevedzana, mabheji, uye nhoroondo yako yekudzidza.",
+        "Open quizzes →": "Vhura bvunzo →",
+        "Open resources →": "Vhura zvinyorwa →",
+        "View progress →": "Ona budiriro →",
+        "Admin area": "Nzvimbo yevatungamiri",
+        "Manage community updates": "Tonga mashoko enharaunda",
+        "Sign in with an authorized leader account to publish or manage your updates.": "Pinda neakaundi yemutungamiri ane mvumo kuti uise kana kutonga mashoko ako.",
+        "Your updates": "Mashoko ako",
+        "Return to main site": "Dzokera kusaiti huru",
+        "Community learning": "Kudzidza munharaunda",
+        "Updates shared by Guta RaMwari leaders, alongside the books and topics used in the quiz.": "Mashoko anogoverwa nevatungamiri veGuta RaMwari, pamwe nemabhuku nemisoro inoshandiswa mubvunzo.",
+        "Leader updates": "Mashoko evatungamiri",
+        "Study materials": "Zvinyorwa zvekudzidza",
+        "My progress": "Budiriro Yangu",
+        "About": "Nezvepuratifomu",
+        "Contact": "Taura Nesu",
+        "Study with the source": "Dzidza uchitarisa bhuku",
+        "Every answer points back to a book section or hymn so learners can read more.": "Mhinduro imwe neimwe inoratidza chikamu chebhuku kana rwiyo kuti vadzidzi vaverenge zvimwe.",
+        "A learning space for Guta RaMwari": "Nzvimbo yekudzidza yeGuta RaMwari",
+        "Guta RaMwari learning space": "Nzvimbo yekudzidza yeGuta RaMwari",
+        "Learn at your own pace.": "Dzidza nemamhanyiro ako.",
+        "Explore teachings, reflect on the hymns, and grow one question at a time.": "Ongorora dzidziso, fungisisa nezvenziyo, uye ukure uchipindura mubvunzo mumwe panguva.",
+        "Start a 5-question quiz": "Tanga bvunzo yemibvunzo mishanu",
+        "Choose a quiz category": "Sarudza chikamu chebvunzo",
+        "A thoughtful place to study": "Nzvimbo yekudzidza uchifungisisa",
+        "Build understanding through the books you shared.": "Wedzera kunzwisisa uchishandisa mabhuku awakagovera.",
+        "Practice with questions grounded in the handbook, the Shona combined volume, and the Ndebele hymn book. Each answer includes its source.": "Dzidzira nemibvunzo yakatorwa muHandbook, muCombined Volume yechiShona, uye muHymn Book yechiNdebele. Mhinduro imwe neimwe inoratidza kwainobva.",
+        "Begin learning": "Tanga kudzidza",
+        "LEARN · REFLECT": "DZIDZA · FUNGISISA",
+        "Practice questions": "Mibvunzo yekudzidzira",
+        "Source books": "Mabhuku ekushandisa",
+        "Numbered teachings": "Dzidziso dzakaverengwa",
+        "Quizzes completed": "Mibvunzo yapera",
+        "Explore the source books": "Ongorora mabhuku ekushandisa",
+        "View source library →": "Ona raibhurari yemabhuku →",
+        "View resources →": "Ona zvinyorwa →",
+        "Guidance on worship, conduct, community life, and important dates.": "Nhungamiro pamusoro pekunamata, mufambiro, upenyu hwenharaunda, nemazuva anokosha.",
+        "Commandments": "Mirayiro",
+        "Worship": "Kunamata",
+        "Dates": "Mazuva",
+        "Practice handbook questions": "Dzidzira mibvunzo yeHandbook",
+        "Six volumes with 670 numbered teachings, including the account of entering the Guta.": "Mavhoriyamu matanhatu ane dzidziso 670 dzakaverengwa, kusanganisira nhoroondo yekupinda muGuta.",
+        "History": "Nhoroondo",
+        "Teachings": "Dzidziso",
+        "Community": "Nharaunda",
+        "Practice combined-volume questions": "Dzidzira mibvunzo yeCombined Volume",
+        "Hymns and prayers with original-language titles retained in the quiz.": "Nziyo neminamato; mazita azvo epamutauro wepakutanga anochengetwa mubvunzo.",
+        "Hymns": "Nziyo",
+        "Fellowship": "Kuwadzana",
+        "Prayer": "Munamato",
+        "Practice hymn questions": "Dzidzira mibvunzo yenziyo",
+        "Today’s study": "Kudzidza kwanhasi",
+        "Try five questions drawn from all three source books. You’ll see the reference after each answer.": "Edza mibvunzo mishanu yakatorwa mumabhuku ose ari matatu. Uchaona panobva mhinduro imwe neimwe.",
+        "Start practice": "Tanga kudzidzira",
+        "Your learning progress": "Budiriro yako pakudzidza",
+        "No quizzes yet": "Hausati wapedza bvunzo",
+        "Source note": "Cherechedza panobva mashoko",
+        "Starter questions are available in English, Shona, and Ndebele. Original book and teaching titles are kept for accurate source matching.": "Mibvunzo yekutanga inowanikwa muchiChirungu, chiShona nechiNdebele. Mazita epakutanga emabhuku nedzidziso anochengetwa kuti zvive nyore kuwana kwazvakatorwa.",
+        "Practice": "Dzidzira",
+        "Choose an answer, check it, then read the source note.": "Sarudza mhinduro, woiongorora, wozoverenga panobva mashoko.",
+        "Choose a source from the library or start a practice quiz from the overview.": "Sarudza bhuku muraibhurari kana kutanga bvunzo kubva papeji huru.",
+        "Your materials": "Mabhuku ako",
+        "Browse the books and topic areas used to build this starter quiz.": "Ongorora mabhuku nemisoro yakashandiswa kugadzira bvunzo iyi yekutanga.",
+        "An English-language guide to worship services, conduct, ceremonies, and community life.": "Bhuku reChirungu rinopa nhungamiro yemisangano yekunamata, mufambiro, mhemberero, uye upenyu hwenharaunda.",
+        "Included in this study set": "Zviri muboka iri rekudzidza",
+        "Admission & confession": "Kugamuchirwa nekureurura",
+        "Attendance": "Kupinda misangano",
+        "Daily worship": "Kunamata kwemazuva ose",
+        "Important dates": "Mazuva anokosha",
+        "Quiz this source": "Tora bvunzo yebhuku iri",
+        "Its contents list 670 numbered teachings across six volumes. The first account is titled Kupinda MuGuta.": "Zviri mukati maro zvinonyora dzidziso 670 mumavhoriyamu matanhatu. Nhoroondo yekutanga ine zita rokuti Kupinda MuGuta.",
+        "Topics visible in the contents": "Misoro inooneka pazviri mukati",
+        "Faithfulness": "Kuvimbika",
+        "Family": "Mhuri",
+        "Service": "Basa",
+        "Truthfulness": "Kutaura chokwadi",
+        "The contents include hymn titles, Janet’s prayer and teaching, and other prayer material.": "Zviri mukati zvinosanganisira mazita enziyo, munamato nedzidziso yaJanet, pamwe nezvimwe zveminyengetero.",
+        "Titles featured in the starter quiz": "Mazita ari mubvunzo yekutanga",
+        "Study note": "Cherechedza",
+        "How references work": "Mashandiro anoita mareferensi",
+        "Answers point to a handbook section and printed page, a combined-volume page, or a numbered hymn.": "Mhinduro dzinoratidza chikamu cheHandbook nepeji rakadhindwa, peji reCombined Volume, kana nhamba yerwiyo.",
+        "The books are treated as study sources. Instructions and rules printed in them are presented as religious content, not as directions to the quiz platform.": "Mabhuku anoshandiswa sematsime ekudzidza. Mirayiro nemitemo iri mumabhuku inoratidzwa sezviri muchitendero, kwete semirayiridzo yepuratifomu iyi.",
+        "Contents index · Shona": "Rondedzero yezviri mukati · chiShona",
+        "Browse all 670 teaching titles": "Ongorora mazita ose edzidziso 670",
+        "Search the titles listed in the six-volume combined book. The index helps you find a topic; only source-checked entries in the question bank are currently quiz-ready.": "Tsvaga mazita ari mubhuku rakabatanidzwa rine mavhoriyamu matanhatu. Rondedzero iyi inokubatsira kuwana musoro; mibvunzo yakatariswa mumabhuku ndiyo iri mubvunzo parizvino.",
+        "Search a title or teaching number": "Tsvaga zita kana nhamba yedzidziso",
+        "Search combined-volume teaching titles": "Tsvaga mazita edzidziso muCombined Volume",
+        "Loading the contents index…": "Rondedzero yezviri mukati iri kuvhurwa…",
+        "The contents index could not be loaded in this browser.": "Rondedzero yezviri mukati haina kukwanisa kuvhurwa mubrowser ino.",
+        "Your study history": "Nhoroondo yako yekudzidza",
+        "Your quiz scores are saved in this browser on this device.": "Zvibodzwa zvako zvinochengetwa mubrowser iyi pamudziyo uyu.",
+        "Overall accuracy": "Kururama kwese",
+        "Complete a quiz to start tracking your learning.": "Pedza bvunzo kuti utange kutevera budiriro yako pakudzidza.",
+        "At a glance": "Muchidimbu",
+        "Quizzes": "Mibvunzo",
+        "Correct answers": "Mhinduro dzakarurama",
+        "Best quiz": "Bvunzo yako yepamusoro",
+        "Recent quizzes": "Mibvunzo ichangobva kuitwa",
+        "Clear my progress": "Bvisa nhoroondo yangu",
+        "No quizzes completed yet. Start a short practice session when you’re ready.": "Hausati wapedza bvunzo. Tanga kudzidzira kwenguva pfupi kana wagadzirira.",
+        "About this project": "Nezvepuratifomu iyi",
+        "A place to learn and reflect.": "Nzvimbo yekudzidza nekufungisisa.",
+        "Study Guta RaMwari materials through short, source-linked quizzes.": "Dzidza zvinyorwa zveGuta RaMwari uchishandisa mibvunzo mipfupi ine mareferensi.",
+        "Our purpose": "Chinangwa chedu",
+        "Make the books easier to study, one topic at a time.": "Kuita kuti zvive nyore kudzidza mabhuku, musoro mumwe panguva.",
+        "This learning space brings together the GRM Handbook, the Shona Combined Volume, and the Ndebele Hymn Book. Questions point back to a section, page, or hymn so learners can revisit the original context.": "Nzvimbo iyi yekudzidza inounganidza GRM Handbook, Combined Volume yechiShona, neHymn Book yechiNdebele. Mibvunzo inoratidza chikamu, peji, kana rwiyo kuitira kuti vadzidzi vadzokere kuzvinyorwa zvepakutanga.",
+        "Learn from the sources": "Dzidza kubva mumabhuku",
+        "The platform keeps the book titles and original-language teaching titles visible alongside English study questions.": "Puratifomu inochengeta mazita emabhuku nemazita edzidziso emutauro wepakutanga, pamwe nemibvunzo yekudzidza.",
+        "Practice with context": "Dzidzira uchiona panobva mashoko",
+        "After each answer, learners see a short explanation and a reference to the source material.": "Mushure memhinduro imwe neimwe, vadzidzi vanoona tsananguro pfupi nereferensi yebhuku.",
+        "Build at your own pace": "Fambira mberi nemamhanyiro ako",
+        "Quiz progress is saved in this browser so learners can return to their study on this device.": "Budiriro yebvunzo inochengetwa mubrowser iyi kuitira kuti vadzidzi vaenderere mberi pakudzidza pamudziyo uyu.",
+        "The Combined Volume contents index lists 670 numbered teaching titles. The current quiz set is a starter selection and will grow as more chapters are reviewed.": "Rondedzero yeCombined Volume ine mazita edzidziso 670 akaverengwa. Boka remibvunzo razvino nderekutanga; richawedzerwa kana zvimwe zvikamu zvatariswa.",
+        "Get in touch": "Taura nesu",
+        "Questions about the learning platform or the study materials?": "Une mibvunzo nezvepuratifomu kana mabhuku ekudzidza here?",
+        "Official contact": "Nzira yepamutemo yekutaura nesu",
+        "Speak with your congregation": "Taura neungano yako",
+        "For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.": "Kana uchida nhungamiro pamusoro pedzidziso, kunamata, kana misangano yemunharaunda, taura nevatungamiri veGuta RaMwari vane mvumo munzvimbo yako.",
+        "Official email, phone, and branch details have not been provided yet. Add approved contact details here before sharing the site publicly.": "Kero yeemail, nhamba yefoni, nemashoko ebazi hazvisati zvapiwa. Isa mashoko ekutaura nawo akatenderwa pano usati wagovera saiti iyi kuruzhinji.",
+        "Message preview": "Muenzaniso wemashoko",
+        "Send a note": "Nyora mashoko",
+        "This form is a preview and does not send or store messages yet.": "Fomu iri muenzaniso chete; parizvino haritumiri kana kuchengeta mashoko.",
+        "Your name": "Zita rako",
+        "Name": "Zita",
+        "Email address": "Kero yeemail",
+        "Message": "Mashoko",
+        "How can we help?": "Tingakubatsira sei?",
+        "Preview message": "Ona muenzaniso wemashoko",
+        "This preview is not connected to a delivery service. Add an approved contact destination to enable sending.": "Muenzaniso uyu hauna kubatanidzwa nebasa rekutumira mashoko. Isa nzvimbo yakatenderwa yekutumira kuti akwanise kutumirwa.",
+        "Nothing is transmitted when you submit this preview form.": "Hapana mashoko anotumirwa paunotumira fomu remuenzaniso iri.",
+        "Choose your language": "Sarudza mutauro wako",
+        "English": "Chirungu",
+        "Shona": "ChiShona",
+        "Ndebele": "ChiNdebele",
+        " accuracy": " kururama",
+        "Correct": "Ndizvozvo",
+        "Keep learning": "Ramba uchidzidza",
+        "Time's up": "Nguva yapera",
+        "Time ran out. Review the answer, then continue.": "Nguva yapera. Ongorora mhinduro, woenderera mberi.",
+        "Read the reference, then continue.": "Verenga panobva mashoko, woenderera mberi.",
+        "Choose one answer, then check it.": "Sarudza mhinduro imwe, woiongorora.",
+        "Check answer": "Ongorora mhinduro",
+        "Next question": "Mubvunzo unotevera",
+        "See my result": "Ona zvabuda",
+        "Question ": "Mubvunzo ",
+        " of ": " pa",
+        " seconds": " masekonzi",
+        " remaining": " asara",
+        "Practice this source again": "Dzidzira bhuku iri zvakare",
+        "Back to home": "Dzokera kumba",
+        "Practice complete": "Kudzidzira kwapera",
+        "Excellent study.": "Wadzidza zvakanaka.",
+        "Good progress.": "Uri kufambira mberi zvakanaka.",
+        "Keep building your knowledge.": "Ramba uchiwedzera ruzivo rwako.",
+        "You answered ": "Wapindura ",
+        " of ": " pa",
+        " correctly. Take a moment to revisit the source notes for the questions you missed.": " zvakarurama. Dzokera panobva mashoko emibvunzo yawakapotsa.",
+        "To revisit": "Yokudzokorora",
+        "Questions": "Mibvunzo",
+        " quiz": " bvunzo",
+        " quizzes": " bvunzo",
+        " completed": " dzapera",
+        "Your local quiz progress has been cleared.": "Nhoroondo yako yemibvunzo iri pamudziyo yabviswa.",
+        "Showing ": "Zviri kuratidzwa: ",
+        " of ": " pa",
+        " matching titles": " mazita anoenderana",
+        " indexed titles": " mazita ari murondedzero",
+        " · refine your search to see more": " · wedzera mashoko ekutsvaga kuti uone mamwe"
+      },
+      nd: {
+        "Study & quiz": "Funda Lemibuzo",
+        "Learning space": "Indawo yokufunda",
+        "Sources attached": "Imithombo esetshenziswayo",
+        "Main navigation": "Imenyu enkulu",
+        "Learner": "Umfundi",
+        "Question time remaining": "Isikhathi esisele sombuzo",
+        "English · handbook": "isiNgisi · iHandbook",
+        "Shona · six volumes": "isiShona · amavolumu ayisithupha",
+        "Ndebele · hymns & prayers": "isiNdebele · amahubo lemikhuleko",
+        "Language": "Ulimi",
+        "Choose a book or theme, then select a difficulty.": "Khetha ibhuku kumbe isihloko sesifundiso, ubusukhetha izinga lobunzima.",
+        "Difficulty levels": "Amazinga obunzima",
+        "Progress by category": "Intuthuko ngesigaba",
+        "Home": "Ekhaya",
+        "Take a quiz": "Phendula imibuzo",
+        "Source library": "Umtapo wezincwadi",
+        "Resources": "Izinsiza",
+        "Main site": "Isayithi elikhulu",
+        "Admin": "Umlawuli",
+        "Learning menu": "Imenyu yokufunda",
+        "Learning dashboard": "Ibhodi lokufunda",
+        "Welcome to Guta RaMwari": "Siyanamukela eGuta RaMwari",
+        "Choose how you would like to use the learning platform.": "Khetha indlela ofuna ukusebenzisa ngayo ipulatifomu yokufunda.",
+        "For learners": "Kwabafundi",
+        "Other user": "Omunye umsebenzisi",
+        "Take quizzes, read resources, and follow your learning progress.": "Phendula imibuzo, bala izinsiza, njalo ulandele intuthuko yakho yokufunda.",
+        "Continue as other user": "Qhubeka ungomunye umsebenzisi",
+        "For authorized leaders": "Kubakhokheli abagunyaziweyo",
+        "Sign in to publish, edit, and remove community updates.": "Ngena ukuze ufake, ulungise, kumbe ususe izaziso zomphakathi.",
+        "Admin sign in": "Ukungena komlawuli",
+        "About Guta RaMwari": "Mayelana leGuta RaMwari",
+        "Your learning space": "Indawo yakho yokufunda",
+        "Choose a quiz, browse shared resources, or review your progress.": "Khetha imibuzo, hlola izinsiza ezabiweyo, kumbe ubone intuthuko yakho.",
+        "Choose a book or theme and continue through the five levels.": "Khetha ibhuku kumbe isihloko uqhubekele phambili ngamazinga amahlanu.",
+        "Read updates and watch videos shared by Guta RaMwari leaders.": "Bala izaziso ubukele lamavidiyo abiwe ngabakhokheli beGuta RaMwari.",
+        "Review results, streaks, badges, and your learning history.": "Hlola imiphumela, izinsuku ezilandelanayo, amabheji, lembali yakho yokufunda.",
+        "Open quizzes →": "Vula imibuzo →",
+        "Open resources →": "Vula izinsiza →",
+        "View progress →": "Bona intuthuko →",
+        "Admin area": "Indawo yomlawuli",
+        "Manage community updates": "Lawula izaziso zomphakathi",
+        "Sign in with an authorized leader account to publish or manage your updates.": "Ngena nge-akhawunti yomkhokheli ogunyaziweyo ukuze ufake kumbe ulawule izaziso zakho.",
+        "Your updates": "Izaziso zakho",
+        "Return to main site": "Buyela kusayithi elikhulu",
+        "Community learning": "Ukufunda emphakathini",
+        "Updates shared by Guta RaMwari leaders, alongside the books and topics used in the quiz.": "Izaziso ezabiwa ngabakhokheli beGuta RaMwari, kanye lamabhuku lezihloko ezisetshenziswa emibuzweni.",
+        "Leader updates": "Izaziso zabakhokheli",
+        "Study materials": "Izinsiza zokufunda",
+        "My progress": "Intuthuko yami",
+        "About": "Mayelana",
+        "Contact": "Xhumana lathi",
+        "Study with the source": "Funda usebenzisa umthombo",
+        "Every answer points back to a book section or hymn so learners can read more.": "Impendulo ngayinye itshengisa ingxenye yebhuku kumbe ihubo ukuze abafundi baqhubeke befunda.",
+        "A learning space for Guta RaMwari": "Indawo yokufunda yeGuta RaMwari",
+        "Guta RaMwari learning space": "Indawo yokufunda yeGuta RaMwari",
+        "Learn at your own pace.": "Funda ngejubane lakho.",
+        "Explore teachings, reflect on the hymns, and grow one question at a time.": "Hlola izifundiso, cabanga ngamahubo, njalo ukhule ngombuzo munye ngesikhathi.",
+        "Start a 5-question quiz": "Qalisa imibuzo emihlanu",
+        "Choose a quiz category": "Khetha isigaba semibuzo",
+        "A thoughtful place to study": "Indawo yokufunda ngokucabangisisa",
+        "Build understanding through the books you shared.": "Khulisa ukuqedisisa usebenzisa amabhuku owabelane ngawo.",
+        "Practice with questions grounded in the handbook, the Shona combined volume, and the Ndebele hymn book. Each answer includes its source.": "Zilolonge ngemibuzo esuselwe kuHandbook, kuCombined Volume yesiShona, laseNcwadini Yamahubo yesiNdebele. Impendulo ngayinye itshengisa lapho evela khona.",
+        "Begin learning": "Qalisa ukufunda",
+        "LEARN · REFLECT": "FUNDA · CABANGA",
+        "Practice questions": "Imibuzo yokuzilolonga",
+        "Source books": "Amabhuku omthombo",
+        "Numbered teachings": "Izifundiso ezilandelanisiweyo",
+        "Quizzes completed": "Imibuzo eseqediwe",
+        "Explore the source books": "Hlola amabhuku omthombo",
+        "View source library →": "Bona umtapo wezincwadi →",
+        "View resources →": "Bona izinsiza →",
+        "Guidance on worship, conduct, community life, and important dates.": "Isiqondiso ngokukhonza, ukuziphatha, impilo yomphakathi, lamalanga aqakathekileyo.",
+        "Commandments": "Imilayo",
+        "Worship": "Ukukhonza",
+        "Dates": "Amalanga",
+        "Practice handbook questions": "Zilolonge ngemibuzo yeHandbook",
+        "Six volumes with 670 numbered teachings, including the account of entering the Guta.": "Amavolumu ayisithupha anezifundiso ezibalisiweyo ezingu-670, kuhlanganisa lendaba yokungena eGuta.",
+        "History": "Imbali",
+        "Teachings": "Izifundiso",
+        "Community": "Umphakathi",
+        "Practice combined-volume questions": "Zilolonge ngemibuzo yeCombined Volume",
+        "Hymns and prayers with original-language titles retained in the quiz.": "Amahubo lemikhuleko; izihloko zakhona zokuqala zigcinwa kumbuzo.",
+        "Hymns": "Amahubo",
+        "Fellowship": "Ubuzalwane",
+        "Prayer": "Umkhuleko",
+        "Practice hymn questions": "Zilolonge ngemibuzo yamahubo",
+        "Today’s study": "Isifundo sanamuhla",
+        "Try five questions drawn from all three source books. You’ll see the reference after each answer.": "Zama imibuzo emihlanu evela kuwo wonke amabhuku amathathu. Uzabona umthombo ngemva kwempendulo ngayinye.",
+        "Start practice": "Qalisa ukuzilolonga",
+        "Your learning progress": "Intuthuko yakho ekufundeni",
+        "No quizzes yet": "Awukaqedi imibuzo",
+        "Source note": "Qaphela umthombo",
+        "Starter questions are available in English, Shona, and Ndebele. Original book and teaching titles are kept for accurate source matching.": "Imibuzo yokuqala itholakala ngesiNgisi, isiShona lesiNdebele. Izihloko zamabhuku lezifundiso zoqobo ziyagcinwa ukuze umthombo utholakale kuhle.",
+        "Practice": "Ukuzilolonga",
+        "Choose an answer, check it, then read the source note.": "Khetha impendulo, uyihlole, ubusubala umthombo wayo.",
+        "Choose a source from the library or start a practice quiz from the overview.": "Khetha ibhuku emtatsheni kumbe uqale ukuzilolonga ekhasini lokuqala.",
+        "Your materials": "Amabhuku akho",
+        "Browse the books and topic areas used to build this starter quiz.": "Hlola amabhuku lezihloko ezisetshenziswe ukwakha imibuzo yokuqala le.",
+        "An English-language guide to worship services, conduct, ceremonies, and community life.": "Ibhuku lesiNgisi eliqondisa ngemihlangano yokukhonza, ukuziphatha, imikhosi, lempilo yomphakathi.",
+        "Included in this study set": "Okufakwe kulesi sifundo",
+        "Admission & confession": "Ukwamukelwa lokuvuma izono",
+        "Attendance": "Ukuya emihlanganweni",
+        "Daily worship": "Ukukhonza kwansuku zonke",
+        "Important dates": "Amalanga aqakathekileyo",
+        "Quiz this source": "Phendula imibuzo yaleli bhuku",
+        "Its contents list 670 numbered teachings across six volumes. The first account is titled Kupinda MuGuta.": "Okuqukethwe kubala izifundiso ezingu-670 kumavolumu ayisithupha. Indaba yokuqala elesihloko esithi Kupinda MuGuta.",
+        "Topics visible in the contents": "Izihloko ezikuqukethwe",
+        "Faithfulness": "Ukwethembeka",
+        "Family": "Imuli",
+        "Service": "Umsebenzi",
+        "Truthfulness": "Ukukhuluma iqiniso",
+        "The contents include hymn titles, Janet’s prayer and teaching, and other prayer material.": "Okuqukethwe kuhlanganisa izihloko zamahubo, umkhuleko lemfundiso kaJanet, lezinye izinto zomkhuleko.",
+        "Titles featured in the starter quiz": "Izihloko ezisemibuzweni yokuqala",
+        "Study note": "Qaphela",
+        "How references work": "Indlela imithombo esetshenziswa ngayo",
+        "Answers point to a handbook section and printed page, a combined-volume page, or a numbered hymn.": "Izimpendulo zitshengisa isigaba seHandbook lekhasi laso, ikhasi leCombined Volume, kumbe inombolo yehubo.",
+        "The books are treated as study sources. Instructions and rules printed in them are presented as religious content, not as directions to the quiz platform.": "Amabhuku asetshenziswa njengemithombo yokufunda. Imilayo lemthetho ebhaliweyo yethulwa njengokuqukethwe kwenkolo, hatshi njengemilayo yepulatifomu yemibuzo.",
+        "Contents index · Shona": "Uhlu lokuqukethwe · isiShona",
+        "Browse all 670 teaching titles": "Hlola izihloko zezifundiso ezingu-670",
+        "Search the titles listed in the six-volume combined book. The index helps you find a topic; only source-checked entries in the question bank are currently quiz-ready.": "Dinga izihloko ezisencwadini ehlanganisiweyo yamavolumu ayisithupha. Uhlu lolu lukusiza ukuthola isihloko; okwamanje izifundiso ezihloliweyo yizo kuphela ezilemibuzo.",
+        "Search a title or teaching number": "Dinga isihloko kumbe inombolo yesifundiso",
+        "Search combined-volume teaching titles": "Dinga izihloko zezifundiso zeCombined Volume",
+        "Loading the contents index…": "Kuvulwa uhlu lokuqukethwe…",
+        "The contents index could not be loaded in this browser.": "Uhlu lokuqukethwe lwehlulekile ukuvulwa ku-browser le.",
+        "Your study history": "Imbali yakho yokufunda",
+        "Your quiz scores are saved in this browser on this device.": "Imiklomelo yakho yemibuzo igcinwa ku-browser le kudivayisi le.",
+        "Overall accuracy": "Ukunemba sekukonke",
+        "Complete a quiz to start tracking your learning.": "Qedisa umbuzo ukuze uqalise ukulandelela ukufunda kwakho.",
+        "At a glance": "Ngamafitshane",
+        "Quizzes": "Imibuzo",
+        "Correct answers": "Izimpendulo eziqondileyo",
+        "Best quiz": "Umbuzo wakho ongcono",
+        "Recent quizzes": "Imibuzo yakamuva",
+        "Clear my progress": "Sula intuthuko yami",
+        "No quizzes completed yet. Start a short practice session when you’re ready.": "Akukabikhona mibuzo eqediweyo. Qalisa ukuzilolonga okufitshane nxa usukulungele.",
+        "About this project": "Mayelana lepulatifomu le",
+        "A place to learn and reflect.": "Indawo yokufunda lokucabangisisa.",
+        "Study Guta RaMwari materials through short, source-linked quizzes.": "Funda izincwadi zeGuta RaMwari ngemibuzo emifitshane etshengisa umthombo wayo.",
+        "Our purpose": "Injongo yethu",
+        "Make the books easier to study, one topic at a time.": "Ukwenza kube lula ukufunda amabhuku, isihloko sinye ngesikhathi.",
+        "This learning space brings together the GRM Handbook, the Shona Combined Volume, and the Ndebele Hymn Book. Questions point back to a section, page, or hymn so learners can revisit the original context.": "Indawo le yokufunda ihlanganisa iGRM Handbook, iCombined Volume yesiShona, leNcwadi Yamahubo yesiNdebele. Imibuzo itshengisa isigaba, ikhasi kumbe ihubo ukuze abafundi babuyele kumongo wokuqala.",
+        "Learn from the sources": "Funda emithonjeni",
+        "The platform keeps the book titles and original-language teaching titles visible alongside English study questions.": "Ipulatifomu igcina izihloko zamabhuku lezihloko zezifundiso ngolimi lwazo lokuqala, kanye lemibuzo yokufunda.",
+        "Practice with context": "Zilolonge ngomongo",
+        "After each answer, learners see a short explanation and a reference to the source material.": "Ngemva kwempendulo ngayinye, abafundi babona incazelo emfutshane lomthombo wayo.",
+        "Build at your own pace": "Thuthuka ngejubane lakho",
+        "Quiz progress is saved in this browser so learners can return to their study on this device.": "Intuthuko yemibuzo igcinwa ku-browser le ukuze abafundi baqhubeke lokufunda kudivayisi le.",
+        "The Combined Volume contents index lists 670 numbered teaching titles. The current quiz set is a starter selection and will grow as more chapters are reviewed.": "Uhlu lweCombined Volume lulezihloko zezifundiso ezingu-670 ezibalisiweyo. Imibuzo ekhona iyisiqalo; izakhula lapho ezinye izahluko sezihloliwe.",
+        "Get in touch": "Xhumana lathi",
+        "Questions about the learning platform or the study materials?": "Ulemibuzo ngepulatifomu yokufunda kumbe amabhuku okufunda?",
+        "Official contact": "Ukuxhumana okusemthethweni",
+        "Speak with your congregation": "Khuluma lebandla lakho",
+        "For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.": "Ukuze uthole isiqondiso ngezifundiso, ukukhonza kumbe imihlangano yendawo, xhumana labakhokheli beGuta RaMwari abagunyaziweyo endaweni yakini.",
+        "Official email, phone, and branch details have not been provided yet. Add approved contact details here before sharing the site publicly.": "Ikheli le-email, inombolo yefoni, lemininingwane yegatsha akukathunyelwa. Faka imininingwane egunyaziweyo lapha ungakabelani ngesayithi emphakathini.",
+        "Message preview": "Umbukiso womlayezo",
+        "Send a note": "Bhala umlayezo",
+        "This form is a preview and does not send or store messages yet.": "Ifomu leli lingumbukiso kuphela; kalithumeli kumbe ligcine imilayezo okwamanje.",
+        "Your name": "Ibizo lakho",
+        "Name": "Ibizo",
+        "Email address": "Ikheli le-email",
+        "Message": "Umlayezo",
+        "How can we help?": "Singakunceda ngani?",
+        "Preview message": "Bona umbukiso womlayezo",
+        "This preview is not connected to a delivery service. Add an approved contact destination to enable sending.": "Umbukiso lo awuxhunyiwe enkonzweni yokuthumela. Faka indawo yokuxhumana egunyaziweyo ukuze imilayezo ithunyelwe.",
+        "Nothing is transmitted when you submit this preview form.": "Akukho lutho oluthunyelwayo nxa uthumela ifomu lombukiso le.",
+        "Choose your language": "Khetha ulimi lwakho",
+        "English": "isiNgisi",
+        "Shona": "isiShona",
+        "Ndebele": "isiNdebele",
+        " accuracy": " ukunemba",
+        "Correct": "Kulungile",
+        "Keep learning": "Qhubeka ufunda",
+        "Time's up": "Isikhathi siphelile",
+        "Time ran out. Review the answer, then continue.": "Isikhathi siphelile. Hlola impendulo, ubusulokhu uqhubeka.",
+        "Read the reference, then continue.": "Bala umthombo, ubusulokhu uqhubeka.",
+        "Choose one answer, then check it.": "Khetha impendulo eyodwa, uyihlole.",
+        "Check answer": "Hlola impendulo",
+        "Next question": "Umbuzo olandelayo",
+        "See my result": "Bona umphumela wami",
+        "Question ": "Umbuzo ",
+        " of ": " ku",
+        " seconds": " amasekhondi",
+        " remaining": " aseleyo",
+        "Practice this source again": "Zilolonge ngalomthombo futhi",
+        "Back to home": "Buyela ekhaya",
+        "Practice complete": "Ukuzilolonga sekuphelile",
+        "Excellent study.": "Ufunde kuhle kakhulu.",
+        "Good progress.": "Uyaqhubeka kuhle.",
+        "Keep building your knowledge.": "Qhubeka ukhulisa ulwazi lwakho.",
+        "You answered ": "Uphendule ",
+        " correctly. Take a moment to revisit the source notes for the questions you missed.": " kuhle. Thatha isikhathi ubuyekeze imithombo yemibuzo oyiphutsileyo.",
+        "To revisit": "Okokubuyekeza",
+        "Questions": "Imibuzo",
+        " quiz": " umbuzo",
+        " quizzes": " imibuzo",
+        " completed": " eqediweyo",
+        "Your local quiz progress has been cleared.": "Intuthuko yemibuzo yakho kudivayisi le isuliwe.",
+        "Showing ": "Okutshengiswayo: ",
+        " matching titles": " izihloko ezihambelanayo",
+        " indexed titles": " izihloko ezisohlwini",
+        " · refine your search to see more": " · cacisa ukukhangela ukuze ubone okunye"
+      }
+    };
+
+    const sourceNames = {
+      en: { all: 'All sources', handbook: 'GRM Handbook', combined: 'Combined Volume', hymns: 'Hymn Book' },
+      sn: { all: 'Mabhuku ose', handbook: 'Bhuku reGRM', combined: 'Bhuku Rakabatanidzwa', hymns: 'Bhuku reNziyo' },
+      nd: { all: 'Yonke imithombo', handbook: 'IHandbook yeGRM', combined: 'Ivolumu ehlanganisiweyo', hymns: 'Incwadi Yamahubo' }
+    };
+    const viewNames = {
+      en: { home: 'Home', 'learner-home': 'Learning dashboard', admin: 'Admin', quiz: 'Take a quiz', library: 'Resources', progress: 'My progress', about: 'About', contact: 'Contact' },
+      sn: { home: 'Kumba', 'learner-home': 'Dheshibhodhi yekudzidza', admin: 'Mutungamiri', quiz: 'Tora Bvunzo', library: 'Zvinyorwa', progress: 'Budiriro Yangu', about: 'Nezvepuratifomu', contact: 'Taura Nesu' },
+      nd: { home: 'Ekhaya', 'learner-home': 'Ibhodi lokufunda', admin: 'Umlawuli', quiz: 'Phendula imibuzo', library: 'Izinsiza', progress: 'Intuthuko yami', about: 'Mayelana', contact: 'Xhumana lathi' }
+    };
+    const quizUiCopy = {
+      en: {
+        setupHeading: 'Choose your category and level', setupIntro: 'Choose a book or teaching theme, then select an unlocked difficulty level.',
+        category: 'Book or theme', difficulty: 'Difficulty level', books: 'Books', themes: 'Teaching themes', allBooks: 'All books',
+        levels: ['Easy', 'Medium', 'Hard', 'Difficult', 'Very difficult'], start: 'Start quiz', back: 'Back to home',
+        quizHeading: '{category} · Level {level}: {name}', historyLevel: 'Level: {level}',
+        unlockRule: 'Unlock the next level by scoring 100% twice in a row at your current highest level.',
+        currentLevel: 'Highest unlocked: {level} · consecutive perfect scores: {count}/2',
+        locked: 'Locked', timeLimit: '{seconds} seconds per question', progressTitle: 'Difficulty unlocks',
+        progressUnlocked: 'Unlocked through {level}', progressStreak: 'Perfect-score streak: {count}/2',
+        resultUnlocked: 'Level {level} unlocked! You scored 100% twice in a row at level {previous}.',
+        resultOneMore: 'Perfect score. One more consecutive 100% score at this level will unlock the next level.',
+        resultReset: 'You need two consecutive 100% scores at level {level} to unlock the next level. Your streak has reset.',
+        resultTop: 'Perfect score at the highest difficulty. All levels are unlocked for this category.',
+        resultTopRepeat: 'This is the highest level. A perfect score is needed to complete it.',
+        resultReplay: 'Level {level} is already unlocked. Progression advances when you score 100% twice in a row at your highest unlocked level.',
+        resultMissReplay: 'You scored {score}% at level {level}. Your unlocked levels stay the same; play your current highest level to progress.',
+        repeatCategory: 'Choose another book, theme, or level', noQuestions: 'There are no questions available for this category yet.'
+      },
+      sn: {
+        setupHeading: 'Sarudza chikamu nedanho', setupIntro: 'Sarudza bhuku kana musoro wedzidziso, wozosarudza danho rekuoma rakavhurwa.',
+        category: 'Bhuku kana musoro', difficulty: 'Danho rekuoma', books: 'Mabhuku', themes: 'Misoro yedzidziso', allBooks: 'Mabhuku ose',
+        levels: ['Nyore', 'Pakati', 'Zvakaoma', 'Zvakaoma zvikuru', 'Zvakaoma zvakanyanya'], start: 'Tanga bvunzo', back: 'Dzokera kumba',
+        quizHeading: '{category} · Danho {level}: {name}', historyLevel: 'Danho: {level}',
+        unlockRule: 'Vhura danho rinotevera nokuwana 100% kaviri zvakatevedzana padanho repamusoro rawakavhura.',
+        currentLevel: 'Danho repamusoro rakavhurwa: {level} · zvibodzwa zvakakwana zvakatevedzana: {count}/2',
+        locked: 'Rakakiyiwa', timeLimit: 'Masekonzi {seconds} pamubvunzo', progressTitle: 'Kuvhurwa kwematanho ekuoma',
+        progressUnlocked: 'Rakavhurwa kusvika pa{level}', progressStreak: 'Zvibodzwa zvakakwana zvakatevedzana: {count}/2',
+        resultUnlocked: 'Danho {level} ravhurwa! Wawana 100% kaviri zvakatevedzana padanho {previous}.',
+        resultOneMore: 'Wawana zvibodzwa zvakakwana. Wawana 100% kamwe chete kuti uvhure danho rinotevera.',
+        resultReset: 'Unofanira kuwana 100% kaviri zvakatevedzana padanho {level} kuti uvhure rinotevera. Kuverenga kwezvibodzwa zvakatevedzana kwatanga patsva.',
+        resultTop: 'Wawana zvibodzwa zvakakwana padanho rakaoma kupfuura ose. Matanho ose echikamu ichi akavhurwa.',
+        resultTopRepeat: 'Iri ndiro danho rakaoma kupfuura ose. Unofanira kuwana zvibodzwa zvakakwana kuti uripedze.',
+        resultReplay: 'Danho {level} rakatovhurwa. Kuti ufambire mberi, wana 100% kaviri zvakatevedzana padanho repamusoro rawakavhura.',
+        resultMissReplay: 'Wawana {score}% padanho {level}. Matanho awakavhura anoramba akafanana; tamba danho rako repamusoro kuti ufambire mberi.',
+        repeatCategory: 'Sarudza rimwe bhuku, musoro, kana danho', noQuestions: 'Hapana mibvunzo iripo yechikamu ichi parizvino.'
+      },
+      nd: {
+        setupHeading: 'Khetha isigaba lezinga', setupIntro: 'Khetha ibhuku kumbe isihloko sesifundiso, ubusukhetha izinga lobunzima elivuliweyo.',
+        category: 'Ibhuku kumbe isihloko', difficulty: 'Izinga lobunzima', books: 'Amabhuku', themes: 'Izihloko zezifundiso', allBooks: 'Wonke amabhuku',
+        levels: ['Kulula', 'Phakathi', 'Lukhuni', 'Lukhuni kakhulu', 'Lukhuni ngokudlulele'], start: 'Qalisa imibuzo', back: 'Buyela ekhaya',
+        quizHeading: '{category} · Izinga {level}: {name}', historyLevel: 'Izinga: {level}',
+        unlockRule: 'Vula izinga elilandelayo ngokuthola 100% kabili kulandelana kuzinga lakho eliphezulu elivuliweyo.',
+        currentLevel: 'Izinga eliphezulu elivuliweyo: {level} · amaphuzu apheleleyo alandelanayo: {count}/2',
+        locked: 'Kuvaliwe', timeLimit: 'Amasekhondi {seconds} ngombuzo', progressTitle: 'Ukuvulwa kwamazinga obunzima',
+        progressUnlocked: 'Kuvulwe kuze kufike ku-{level}', progressStreak: 'Amaphuzu apheleleyo alandelanayo: {count}/2',
+        resultUnlocked: 'Izinga {level} selivuliwe! Uthole 100% kabili kulandelana kuzinga {previous}.',
+        resultOneMore: 'Uthole amaphuzu apheleleyo. Thola u-100% futhi kulandelana kuleli zinga ukuze uvule elilandelayo.',
+        resultReset: 'Kumele uthole 100% kabili kulandelana kuzinga {level} ukuze uvule elilandelayo. Ukulandelana kwakho kuqaliswe kutsha.',
+        resultTop: 'Uthole amaphuzu apheleleyo ebunzimeni obuphezulu kakhulu. Wonke amazinga alesi sigaba avuliwe.',
+        resultTopRepeat: 'Leli yilo izinga elinzima kakhulu. Kumele uthole amaphuzu apheleleyo ukuze uliqede.',
+        resultReplay: 'Izinga {level} selivuliwe. Ukuqhubekela phambili kudinga u-100% kabili kulandelana kuzinga lakho eliphezulu elivuliweyo.',
+        resultMissReplay: 'Uthole {score}% kuzinga {level}. Amazinga owavulileyo ahlala enjalo; dlala izinga lakho eliphezulu ukuze uqhubekele phambili.',
+        repeatCategory: 'Khetha elinye ibhuku, isihloko kumbe izinga', noQuestions: 'Akulamibuzo yalesi sigaba okwamanje.'
+      }
+    };
+    const themeNames = {
+      en: { Foundations: 'Foundations', Admission: 'Admission', Attendance: 'Attendance', Commandments: 'Commandments', Worship: 'Worship', Dates: 'Dates', History: 'History', Hymns: 'Hymns' },
+      sn: { Foundations: 'Nheyo', Admission: 'Kugamuchirwa', Attendance: 'Kupinda', Commandments: 'Mirayiro', Worship: 'Kunamata', Dates: 'Mazuva', History: 'Nhoroondo', Hymns: 'Nziyo' },
+      nd: { Foundations: 'Izisekelo', Admission: 'Ukwamukelwa', Attendance: 'Ukuya emihlanganweni', Commandments: 'Imilayo', Worship: 'Ukukhonza', Dates: 'Amalanga', History: 'Imbali', Hymns: 'Amahubo' }
+    };
+    const featureCopy = {
+      en: {
+        untimedLabel: 'Untimed practice', timedLabel: 'Timed practice', untimedHint: 'No countdown. Untimed practice does not affect level unlocks.', untimedNotice: 'Untimed practice · no countdown', untimedResult: 'Untimed practice is complete. It does not change level unlock progress.',
+        dailyTitle: 'Daily question', dailyPromptHint: 'Answer today’s question to complete the daily challenge.', dailyToday: 'Today · {date}', dailyStreak: '{count}-day streak', dailyCorrect: 'Correct answer!', dailyWrong: 'Good try. Read the explanation below.', dailyDone: 'You have completed today’s question.', dailyExplanation: 'Explanation', badgeUnlocked: 'Badge earned: {badge}',
+        communityTitle: 'Daily streak and badges', currentStreak: 'Current daily streak', bestStreak: 'Longest streak', dailyAnswered: 'Daily questions answered', badges: 'Badges', earned: 'Earned', locked: 'Not earned yet',
+        badgeNames: ['First daily answer', '3-day streak', '7-day streak', '14-day streak', '30-day streak'],
+        leaderboardTitle: 'Leaderboard', leaderboardLocal: 'This leaderboard is saved on this device only; it does not include results from other users’ devices.', username: 'Your display name', saveName: 'Save name', savedName: 'Name saved.', defaultName: 'Learner', noScores: 'No scores yet. Complete a quiz to appear here.', rank: 'Rank', accuracy: 'accuracy', attempts: 'results',
+        shareResult: 'Share result on WhatsApp', shareProgress: 'Share my progress on WhatsApp', copyStatus: 'Copy text for WhatsApp Status', statusCopied: 'Text copied. Paste it into your WhatsApp Status.', shareResultMessage: 'I scored {score} ({percent}%) on {category}, level {level}, ({mode}), in the Guta RaMwari quiz.',
+        shareProgressMessage: '{name} has completed {attempts} quizzes with {accuracy}% accuracy, a {streak}-day daily streak, and {badges} badges in the Guta RaMwari quiz.',
+        noDailyQuiz: 'Today’s question is not available.'
+      },
+      sn: {
+        untimedLabel: 'Dzidzira pasina nguva', timedLabel: 'Dzidzira nenguva', untimedHint: 'Hapana kuverenga nguva. Kudzidzira uku hakuchinji kuvhurwa kwematanho.', untimedNotice: 'Kudzidzira pasina nguva · hapana kuverenga nguva', untimedResult: 'Kudzidzira pasina nguva kwapera. Hakuchinji budiriro yekuvhura matanho.',
+        dailyTitle: 'Mubvunzo wezuva', dailyPromptHint: 'Pindura mubvunzo wanhasi kuti upedze dambudziko rezuva.', dailyToday: 'Nhasi · {date}', dailyStreak: 'Mazuva {count} akatevedzana', dailyCorrect: 'Mhinduro yakarurama!', dailyWrong: 'Waedza zvakanaka. Verenga tsananguro iri pasi apa.', dailyDone: 'Wapedza mubvunzo wanhasi.', dailyExplanation: 'Tsananguro', badgeUnlocked: 'Wawana bheji: {badge}',
+        communityTitle: 'Mazuva akatevedzana nemabheji', currentStreak: 'Mazuva aripo akatevedzana', bestStreak: 'Mazuva akawanda akatevedzana', dailyAnswered: 'Mibvunzo yezuva yapindurwa', badges: 'Mabheji', earned: 'Awaniwa', locked: 'Hausati wariwana',
+        badgeNames: ['Mhinduro yekutanga yezuva', 'Mazuva 3 akatevedzana', 'Mazuva 7 akatevedzana', 'Mazuva 14 akatevedzana', 'Mazuva 30 akatevedzana'],
+        leaderboardTitle: 'Bhodi rezvibodzwa', leaderboardLocal: 'Bhodi iri rinochengetwa pamudziyo uyu chete; harina zvibodzwa zvemimwe midziyo.', username: 'Zita rako rinoratidzwa', saveName: 'Chengeta zita', savedName: 'Zita rachengetwa.', defaultName: 'Mudzidzi', noScores: 'Hapana zvibodzwa. Pedza bvunzo kuti uonekwe pano.', rank: 'Nzvimbo', accuracy: 'kururama', attempts: 'zvabuda',
+        shareResult: 'Govera zvabuda paWhatsApp', shareProgress: 'Govera budiriro yangu paWhatsApp', copyStatus: 'Kopa mashoko eWhatsApp Status', statusCopied: 'Mashoko akopiwa. Namira muWhatsApp Status yako.', shareResultMessage: 'Ndawana {score} ({percent}%) pa{category}, danho {level} ({mode}), mubvunzo yeGuta RaMwari.',
+        shareProgressMessage: '{name} apedza bvunzo {attempts} nekururama kwe{accuracy}%, ane mazuva {streak} akatevedzana pamubvunzo wezuva, nemabheji {badges} muPuratifomu yeGuta RaMwari.',
+        noDailyQuiz: 'Mubvunzo wanhasi hauwanikwi.'
+      },
+      nd: {
+        untimedLabel: 'Zilolonge ungabalweli isikhathi', timedLabel: 'Zilolonge ngesikhathi esibaliwayo', untimedHint: 'Akulasikhathi esibaliwayo. Lokhu kuzilolonga akutshintshi ukuvulwa kwamazinga.', untimedNotice: 'Ukuzilolonga ngaphandle kwesikhathi esibaliwayo', untimedResult: 'Ukuzilolonga ngaphandle kwesikhathi kuphelile. Akuwatshintshi amazinga avuliweyo.',
+        dailyTitle: 'Umbuzo wosuku', dailyPromptHint: 'Phendula umbuzo wanamuhla ukuze uqedele inselelo yosuku.', dailyToday: 'Lamuhla · {date}', dailyStreak: 'Izinsuku {count} zilandelana', dailyCorrect: 'Impendulo iqondile!', dailyWrong: 'Uzame kuhle. Bala incazelo engezansi.', dailyDone: 'Usuwuqedile umbuzo wanamuhla.', dailyExplanation: 'Incazelo', badgeUnlocked: 'Uthole ibheji: {badge}',
+        communityTitle: 'Izinsuku ezilandelanayo lamabheji', currentStreak: 'Izinsuku ezilandelanayo khathesi', bestStreak: 'Izinsuku ezinde kakhulu zilandelana', dailyAnswered: 'Imibuzo yosuku ephenduliweyo', badges: 'Amabheji', earned: 'Atholiwe', locked: 'Akukatholwa',
+        badgeNames: ['Impendulo yokuqala yosuku', 'Izinsuku ezi-3 zilandelana', 'Izinsuku ezi-7 zilandelana', 'Izinsuku ezi-14 zilandelana', 'Izinsuku ezi-30 zilandelana'],
+        leaderboardTitle: 'Ibhodi labaphambili', leaderboardLocal: 'Ibhodi leli ligcinwa kudivayisi le kuphela; kalifaki imiphumela evela kwamanye amadivayisi.', username: 'Ibizo elizabonakala', saveName: 'Gcina ibizo', savedName: 'Ibizo ligciniwe.', defaultName: 'Umfundi', noScores: 'Akulamaphuzu okwamanje. Qedisa umbuzo ukuze uvele lapha.', rank: 'Isikhundla', accuracy: 'ukunemba', attempts: 'imiphumela',
+        shareResult: 'Yabelana ngomphumela kuWhatsApp', shareProgress: 'Yabelana ngentuthuko yami kuWhatsApp', copyStatus: 'Kopa umbhalo weWhatsApp Status', statusCopied: 'Umbhalo ukopishiwe. Wunamathisele kuWhatsApp Status yakho.', shareResultMessage: 'Ngithole {score} ({percent}%) ku{category}, izinga {level} ({mode}), kumbuzo weGuta RaMwari.',
+        shareProgressMessage: '{name} uqede imibuzo engu-{attempts} ngokunemba okungu-{accuracy}%, eloluhlu lwezinsuku {streak} zilandelana lombuzo wosuku, lamabheji angu-{badges} kumbuzo weGuta RaMwari.',
+        noDailyQuiz: 'Umbuzo wanamuhla kawutholakali.'
+      }
+    };
+    const resourceCopy = {
+      en: {
+        sectionIntro: 'Announcements and learning resources shared by Guta RaMwari leaders.',
+        loginTitle: 'Admin sign in', loginHint: 'Only approved leaders can publish or manage updates.', email: 'Email address', password: 'Password',
+        signIn: 'Sign in', signingIn: 'Signing in…', signInFailed: 'Sign-in failed. Check the email and password and try again.',
+        signedInAs: 'Signed in as {email}', noPostAccess: 'This account is signed in but is not approved to manage updates.',
+        signOut: 'Sign out', checkingAccess: 'Checking leader access…', accessCheckFailed: 'Could not check leader access. Refresh the page and try again.',
+        postTitle: 'Post an update', editTitle: 'Edit update', title: 'Title', description: 'Description', youtubeLink: 'YouTube video link',
+        titlePlaceholder: 'Write a clear title', descriptionPlaceholder: 'Share an update or learning resource', youtubePlaceholder: 'https://youtu.be/…',
+        publish: 'Publish update', saveChanges: 'Save changes', cancelEdit: 'Cancel', edit: 'Edit', delete: 'Delete',
+        publishing: 'Saving…', postSuccess: 'Your update is now visible to everyone.', updateSaved: 'Your changes have been saved.',
+        postFailed: 'Could not save the update. Please try again.', updateDeleted: 'Update deleted.', deleteFailed: 'Could not delete the update. Please try again.',
+        confirmDelete: 'Delete this update? This cannot be undone.', noYourUpdates: 'You have not posted any updates yet.', loadingYourUpdates: 'Loading your updates…',
+        yourUpdatesFailed: 'Your updates could not be loaded. Refresh the page and try again.', invalidVideo: 'Enter a valid YouTube video link.',
+        loading: 'Loading resources…', loadFailed: 'Resources could not be loaded. Check the connection and refresh.',
+        noUpdates: 'No leader updates have been posted yet.', published: 'Published {date}', watchVideo: 'Watch on YouTube',
+        clientUnavailable: 'The Supabase connection could not start. Check your internet connection and refresh the page.'
+      },
+      sn: {
+        sectionIntro: 'Zviziviso nezvinyorwa zvekudzidza zvinogoverwa nevatungamiri veGuta RaMwari.',
+        loginTitle: 'Kupinda kwemutongi', loginHint: 'Vatungamiri vakatenderwa chete ndivo vanogona kuisa kana kutonga mashoko.', email: 'Kero yeemail', password: 'Pasiwedhi',
+        signIn: 'Pinda', signingIn: 'Tiri kupinda…', signInFailed: 'Kupinda kwakundikana. Tarisa email nepasiwedhi woedza zvakare.',
+        signedInAs: 'Wapinda uchishandisa {email}', noPostAccess: 'Wapinda muakaundi iyi, asi hauna mvumo yekutonga mashoko.',
+        signOut: 'Buda', checkingAccess: 'Tiri kutarisa mvumo yehutungamiri…', accessCheckFailed: 'Hatina kukwanisa kutarisa mvumo. Vhurazve peji woedza zvakare.',
+        postTitle: 'Isa mashoko matsva', editTitle: 'Gadzirisa mashoko', title: 'Musoro', description: 'Tsananguro', youtubeLink: 'Link yevhidhiyo yeYouTube',
+        titlePlaceholder: 'Nyora musoro wakajeka', descriptionPlaceholder: 'Govera mashoko kana gwaro rekudzidza', youtubePlaceholder: 'https://youtu.be/…',
+        publish: 'Isa mashoko', saveChanges: 'Chengeta shanduko', cancelEdit: 'Kanzura', edit: 'Gadzirisa', delete: 'Bvisa',
+        publishing: 'Tiri kuchengeta…', postSuccess: 'Mashoko ako ava kuonekwa nevanhu vose.', updateSaved: 'Shanduko dzako dzachengetwa.',
+        postFailed: 'Hatina kukwanisa kuchengeta mashoko. Edza zvakare.', updateDeleted: 'Mashoko abviswa.', deleteFailed: 'Hatina kukwanisa kubvisa mashoko. Edza zvakare.',
+        confirmDelete: 'Unoda kubvisa mashoko aya here? Haugoni kudzosera izvi.', noYourUpdates: 'Hausati waisa mashoko.', loadingYourUpdates: 'Tiri kuvhura mashoko ako…',
+        yourUpdatesFailed: 'Hatina kukwanisa kuvhura mashoko ako. Vhurazve peji woedza zvakare.', invalidVideo: 'Isa link yevhidhiyo yeYouTube yakarurama.',
+        loading: 'Tiri kuvhura zvinyorwa…', loadFailed: 'Hatina kukwanisa kuvhura zvinyorwa. Tarisa internet uvhurezve peji.',
+        noUpdates: 'Hapana mashoko evatungamiri akaiswa parizvino.', published: 'Yakaiswa {date}', watchVideo: 'Tarisa paYouTube',
+        clientUnavailable: 'Kubatanidza Supabase kwakundikana. Tarisa internet uvhurezve peji.'
+      },
+      nd: {
+        sectionIntro: 'Izaziso lezinsiza zokufunda ezabiwa ngabakhokheli beGuta RaMwari.',
+        loginTitle: 'Ukungena komlawuli', loginHint: 'Abakhokheli abagunyaziweyo kuphela abangafaka kumbe balawule izaziso.', email: 'Ikheli le-email', password: 'Iphasiwedi',
+        signIn: 'Ngena', signingIn: 'Kuyangena…', signInFailed: 'Ukungena kwehlulekile. Hlola i-email lephasiwedi uzame futhi.',
+        signedInAs: 'Ungene njengo-{email}', noPostAccess: 'Ungene kule akhawunti kodwa kawugunyaziwe ukulawula izaziso.',
+        signOut: 'Phuma', checkingAccess: 'Kuhlolwa imvumo yomkhokheli…', accessCheckFailed: 'Imvumo yomkhokheli yehlulekile ukuhlolwa. Vuselela ikhasi uzame futhi.',
+        postTitle: 'Faka isaziso', editTitle: 'Lungisa isaziso', title: 'Isihloko', description: 'Incazelo', youtubeLink: 'Ikhonkco levidiyo yeYouTube',
+        titlePlaceholder: 'Bhala isihloko esicacileyo', descriptionPlaceholder: 'Yabelana ngesaziso kumbe insiza yokufunda', youtubePlaceholder: 'https://youtu.be/…',
+        publish: 'Faka isaziso', saveChanges: 'Gcina inguquko', cancelEdit: 'Cima', edit: 'Lungisa', delete: 'Susa',
+        publishing: 'Kuyagcinwa…', postSuccess: 'Isaziso sakho sesibonwa ngumuntu wonke.', updateSaved: 'Inguquko yakho igciniwe.',
+        postFailed: 'Isaziso sehlulekile ukugcinwa. Zama futhi.', updateDeleted: 'Isaziso sisusiwe.', deleteFailed: 'Isaziso sehlulekile ukususwa. Zama futhi.',
+        confirmDelete: 'Susa isaziso lesi? Ngeke usibuyisele.', noYourUpdates: 'Awukafaki izaziso.', loadingYourUpdates: 'Kuvulwa izaziso zakho…',
+        yourUpdatesFailed: 'Izaziso zakho zehlulekile ukuvulwa. Vuselela ikhasi uzame futhi.', invalidVideo: 'Faka ikhonkco levidiyo yeYouTube eliqondileyo.',
+        loading: 'Kuvulwa izinsiza…', loadFailed: 'Izinsiza zehlulekile ukuvulwa. Hlola uxhumano uvuselele ikhasi.',
+        noUpdates: 'Akukafakwa izaziso zabakhokheli.', published: 'Kwafakwa {date}', watchVideo: 'Bukela kuYouTube',
+        clientUnavailable: 'Ukuxhuma kuSupabase kwehlulekile. Hlola uxhumano lwe-inthanethi uvuselele ikhasi.'
+      }
+    };
+    const SUPABASE_URL = 'https://diqaghmrjgrqeumpxoix.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_rYTcogXIWsFWDOCOsAfePw_0G1DIp-X';
+    let supabaseClient = null;
+    const resourceState = {
+      session: null, isLeader: false, checkingAccess: false, accessCheckFailed: false,
+      updates: [], loadingUpdates: true, updatesFailed: false, clientUnavailable: false,
+      myUpdates: [], loadingMyUpdates: false, myUpdatesFailed: false, editingId: null,
+      notice: null, loginEmail: '', postDraft: { title: '', description: '', youtubeUrl: '' }
+    };
+    function resourceText(key, values) {
+      let text = resourceCopy[activeLanguage]?.[key] || resourceCopy.en[key] || key;
+      if (values) Object.entries(values).forEach(([name, value]) => { text = text.replaceAll('{' + name + '}', String(value)); });
+      return text;
+    }
+    function safeYouTubeVideo(value) {
+      try {
+        const parsed = new URL(String(value || '').trim());
+        if (!['https:', 'http:'].includes(parsed.protocol)) return null;
+        const host = parsed.hostname.toLowerCase().replace(/^www\./, '');
+        let videoId = '';
+        if (host === 'youtu.be') videoId = parsed.pathname.split('/').filter(Boolean)[0] || '';
+        else if (host === 'youtube.com') {
+          videoId = parsed.searchParams.get('v') || parsed.pathname.match(/^\/(?:embed|shorts|live)\/([^/?]+)/)?.[1] || '';
+        } else return null;
+        if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) return null;
+        return { url: parsed.href, videoId };
+      } catch (error) {
+        return null;
+      }
+    }
+    function resourceStatusMarkup(notice) {
+      if (!notice) return '';
+      return '<p class="resource-status ' + escapeHtml(notice.type || '') + '" role="status">' + escapeHtml(resourceText(notice.key, notice.values)) + '</p>';
+    }
+    function renderResourcePanels() {
+      const updatesPanel = document.getElementById('resourceUpdatesPanel');
+      if (!updatesPanel) return;
+
+      if (resourceState.loadingUpdates) {
+        updatesPanel.innerHTML = '<div class="resource-empty">' + escapeHtml(resourceText('loading')) + '</div>';
+      } else if (resourceState.updatesFailed) {
+        updatesPanel.innerHTML = '<div class="resource-empty" role="status">' + escapeHtml(resourceText('loadFailed')) + '</div>';
+      } else if (!resourceState.updates.length) {
+        updatesPanel.innerHTML = '<div class="resource-empty">' + escapeHtml(resourceText('noUpdates')) + '</div>';
+      } else {
+        const dateLocale = localeTags[activeLanguage] || 'en-ZA';
+        updatesPanel.innerHTML = '<div class="resource-updates">' + resourceState.updates.map((item) => {
+          const video = safeYouTubeVideo(item.youtube_url);
+          const parsedDate = new Date(item.created_at);
+          const date = Number.isNaN(parsedDate.getTime()) ? item.created_at : parsedDate.toLocaleDateString(dateLocale, { year: 'numeric', month: 'short', day: 'numeric' });
+          return '<article class="resource-update-card"><div class="resource-update-meta">' + escapeHtml(resourceText('published', { date })) + '</div><h3>' + escapeHtml(item.title) + '</h3><p class="resource-update-description">' + escapeHtml(item.description) + '</p>' +
+            (video ? '<iframe class="resource-video" src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.videoId) + '" title="' + escapeHtml(item.title) + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><a class="resource-video-link" href="' + escapeHtml(video.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(resourceText('watchVideo')) + ' ↗</a>' : '') +
+            '</article>';
+        }).join('') + '</div>';
+      }
+      renderAdminPanels();
+    }
+    function renderAdminPanels() {
+      const authPanel = document.getElementById('adminAuthPanel');
+      const updatesPanel = document.getElementById('adminUpdatesPanel');
+      if (!authPanel || !updatesPanel) return;
+      const titleKey = resourceState.isLeader && resourceState.editingId ? 'editTitle' : resourceState.isLeader ? 'postTitle' : 'loginTitle';
+      let authHtml = '<section class="panel resource-auth-card"><div class="resource-auth-top"><div><h2>' + escapeHtml(resourceText(titleKey)) + '</h2><p>' + escapeHtml(resourceText('loginHint')) + '</p></div>';
+      if (resourceState.session) authHtml += '<div class="resource-auth-identity">' + escapeHtml(resourceText('signedInAs', { email: resourceState.session.user?.email || '' })) + '</div>';
+      authHtml += '</div>';
+      if (resourceState.clientUnavailable) {
+        authHtml += resourceStatusMarkup({ key: 'clientUnavailable', type: 'error' });
+      } else if (resourceState.checkingAccess) {
+        authHtml += resourceStatusMarkup({ key: 'checkingAccess' });
+      } else if (resourceState.accessCheckFailed) {
+        authHtml += resourceStatusMarkup({ key: 'accessCheckFailed', type: 'error' });
+        authHtml += '<button class="button secondary" type="button" id="adminSignOut">' + escapeHtml(resourceText('signOut')) + '</button>';
+      } else if (!resourceState.session) {
+        authHtml += '<form class="resource-form" id="adminLoginForm"><div class="resource-form-fields">' +
+          '<label class="resource-field">' + escapeHtml(resourceText('email')) + '<input name="email" type="email" required autocomplete="username" value="' + escapeHtml(resourceState.loginEmail) + '"></label>' +
+          '<label class="resource-field">' + escapeHtml(resourceText('password')) + '<input name="password" type="password" required autocomplete="current-password"></label></div>' +
+          '<div><button class="button" type="submit">' + escapeHtml(resourceText('signIn')) + '</button></div></form>' +
+          resourceStatusMarkup(resourceState.notice);
+      } else if (!resourceState.isLeader) {
+        authHtml += resourceStatusMarkup({ key: 'noPostAccess', type: 'error' });
+        authHtml += '<button class="button secondary" type="button" id="adminSignOut">' + escapeHtml(resourceText('signOut')) + '</button>';
+      } else {
+        const draft = resourceState.postDraft;
+        authHtml += '<form class="resource-form" id="adminPostForm"><div class="resource-form-fields">' +
+          '<label class="resource-field">' + escapeHtml(resourceText('title')) + '<input name="title" maxlength="140" required value="' + escapeHtml(draft.title) + '" placeholder="' + escapeHtml(resourceText('titlePlaceholder')) + '"></label>' +
+          '<label class="resource-field">' + escapeHtml(resourceText('youtubeLink')) + '<input name="youtubeUrl" type="url" required value="' + escapeHtml(draft.youtubeUrl) + '" placeholder="' + escapeHtml(resourceText('youtubePlaceholder')) + '"></label>' +
+          '<label class="resource-field resource-wide">' + escapeHtml(resourceText('description')) + '<textarea name="description" maxlength="5000" required placeholder="' + escapeHtml(resourceText('descriptionPlaceholder')) + '">' + escapeHtml(draft.description) + '</textarea></label>' +
+          '</div><div class="setup-actions"><button class="button" type="submit">' + escapeHtml(resourceText(resourceState.editingId ? 'saveChanges' : 'publish')) + '</button>' +
+          (resourceState.editingId ? '<button class="button secondary" type="button" id="cancelUpdateEdit">' + escapeHtml(resourceText('cancelEdit')) + '</button>' : '') +
+          '<button class="button secondary" type="button" id="adminSignOut">' + escapeHtml(resourceText('signOut')) + '</button></div></form>' + resourceStatusMarkup(resourceState.notice);
+      }
+      authHtml += '</section>';
+      authPanel.innerHTML = authHtml;
+
+      if (!resourceState.session || !resourceState.isLeader || resourceState.checkingAccess) {
+        updatesPanel.innerHTML = '<div class="resource-empty">' + escapeHtml(resourceText('loginHint')) + '</div>';
+      } else if (resourceState.loadingMyUpdates) {
+        updatesPanel.innerHTML = '<div class="resource-empty">' + escapeHtml(resourceText('loadingYourUpdates')) + '</div>';
+      } else if (resourceState.myUpdatesFailed) {
+        updatesPanel.innerHTML = '<div class="resource-empty" role="status">' + escapeHtml(resourceText('yourUpdatesFailed')) + '</div>';
+      } else if (!resourceState.myUpdates.length) {
+        updatesPanel.innerHTML = '<div class="resource-empty">' + escapeHtml(resourceText('noYourUpdates')) + '</div>';
+      } else {
+        updatesPanel.innerHTML = '<div class="admin-update-list">' + resourceState.myUpdates.map((item) => {
+          const video = safeYouTubeVideo(item.youtube_url);
+          return '<article class="admin-update-item"><div><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + '</p>' +
+            (video ? '<a class="resource-video-link" href="' + escapeHtml(video.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(resourceText('watchVideo')) + ' ↗</a>' : '') +
+            '</div><div class="admin-entry-actions"><button class="button secondary" type="button" data-edit-update="' + escapeHtml(item.id) + '">' + escapeHtml(resourceText('edit')) + '</button><button class="button secondary" type="button" data-delete-update="' + escapeHtml(item.id) + '">' + escapeHtml(resourceText('delete')) + '</button></div></article>';
+        }).join('') + '</div>';
+      }
+      document.getElementById('adminLoginForm')?.addEventListener('submit', handleLeaderLogin);
+      document.getElementById('adminPostForm')?.addEventListener('submit', handleLeaderPost);
+      document.getElementById('adminSignOut')?.addEventListener('click', handleLeaderSignOut);
+      document.getElementById('cancelUpdateEdit')?.addEventListener('click', cancelUpdateEdit);
+      updatesPanel.querySelectorAll('[data-edit-update]').forEach((button) => button.addEventListener('click', () => editUpdate(button.dataset.editUpdate)));
+      updatesPanel.querySelectorAll('[data-delete-update]').forEach((button) => button.addEventListener('click', () => deleteUpdate(button.dataset.deleteUpdate)));
+    }
+    async function refreshLeaderAccess() {
+      if (!supabaseClient || !resourceState.session) {
+        resourceState.isLeader = false;
+        resourceState.checkingAccess = false;
+        resourceState.accessCheckFailed = false;
+        resourceState.myUpdates = [];
+        resourceState.loadingMyUpdates = false;
+        renderResourcePanels();
+        return;
+      }
+      resourceState.checkingAccess = true;
+      resourceState.accessCheckFailed = false;
+      renderResourcePanels();
+      const { data, error } = await supabaseClient.from('leaders').select('user_id').eq('user_id', resourceState.session.user.id).maybeSingle();
+      resourceState.checkingAccess = false;
+      resourceState.accessCheckFailed = Boolean(error);
+      resourceState.isLeader = !error && Boolean(data);
+      renderResourcePanels();
+      if (resourceState.isLeader) await loadAdminUpdates();
+      else {
+        resourceState.myUpdates = [];
+        resourceState.loadingMyUpdates = false;
+        renderResourcePanels();
+      }
+    }
+    async function loadResourceUpdates() {
+      if (!supabaseClient) return;
+      resourceState.loadingUpdates = true;
+      resourceState.updatesFailed = false;
+      renderResourcePanels();
+      const { data, error } = await supabaseClient.from('leader_updates').select('id,title,description,youtube_url,created_at').order('created_at', { ascending: false }).limit(50);
+      resourceState.loadingUpdates = false;
+      resourceState.updatesFailed = Boolean(error);
+      resourceState.updates = error ? [] : (data || []);
+      renderResourcePanels();
+    }
+    async function loadAdminUpdates() {
+      if (!supabaseClient || !resourceState.session || !resourceState.isLeader) return;
+      resourceState.loadingMyUpdates = true;
+      resourceState.myUpdatesFailed = false;
+      renderResourcePanels();
+      const { data, error } = await supabaseClient.from('leader_updates')
+        .select('id,title,description,youtube_url,created_at,created_by')
+        .eq('created_by', resourceState.session.user.id)
+        .order('created_at', { ascending: false });
+      resourceState.loadingMyUpdates = false;
+      resourceState.myUpdatesFailed = Boolean(error);
+      resourceState.myUpdates = error ? [] : (data || []);
+      renderResourcePanels();
+    }
+    async function handleLeaderLogin(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const email = form.elements.email.value.trim();
+      const password = form.elements.password.value;
+      resourceState.loginEmail = email;
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = resourceText('signingIn');
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error) {
+        resourceState.notice = { key: 'signInFailed', type: 'error' };
+        renderResourcePanels();
+        return;
+      }
+      resourceState.notice = null;
+      resourceState.session = data.session;
+      await refreshLeaderAccess();
+    }
+    async function handleLeaderSignOut() {
+      if (!supabaseClient) return;
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) {
+        resourceState.notice = { key: 'signInFailed', type: 'error' };
+        renderResourcePanels();
+      }
+    }
+    async function handleLeaderPost(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const title = form.elements.title.value.trim();
+      const description = form.elements.description.value.trim();
+      const youtubeUrl = form.elements.youtubeUrl.value.trim();
+      resourceState.postDraft = { title, description, youtubeUrl };
+      const video = safeYouTubeVideo(youtubeUrl);
+      if (!video) {
+        resourceState.notice = { key: 'invalidVideo', type: 'error' };
+        renderResourcePanels();
+        return;
+      }
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = resourceText('publishing');
+      const updatePayload = { title, description, youtube_url: video.url };
+      const editingId = resourceState.editingId;
+      const { error } = editingId
+        ? await supabaseClient.from('leader_updates').update(updatePayload).eq('id', editingId).eq('created_by', resourceState.session.user.id)
+        : await supabaseClient.from('leader_updates').insert(updatePayload);
+      if (error) {
+        resourceState.notice = { key: 'postFailed', type: 'error' };
+        renderResourcePanels();
+        return;
+      }
+      resourceState.editingId = null;
+      resourceState.postDraft = { title: '', description: '', youtubeUrl: '' };
+      resourceState.notice = { key: editingId ? 'updateSaved' : 'postSuccess', type: 'success' };
+      await Promise.all([loadResourceUpdates(), loadAdminUpdates()]);
+    }
+    function editUpdate(id) {
+      const item = resourceState.myUpdates.find((entry) => entry.id === id);
+      if (!item) return;
+      resourceState.editingId = item.id;
+      resourceState.postDraft = { title: item.title, description: item.description, youtubeUrl: item.youtube_url };
+      resourceState.notice = null;
+      renderResourcePanels();
+      document.getElementById('adminAuthPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function cancelUpdateEdit() {
+      resourceState.editingId = null;
+      resourceState.postDraft = { title: '', description: '', youtubeUrl: '' };
+      resourceState.notice = null;
+      renderResourcePanels();
+    }
+    async function deleteUpdate(id) {
+      if (!supabaseClient || !resourceState.session || !window.confirm(resourceText('confirmDelete'))) return;
+      const { error } = await supabaseClient.from('leader_updates').delete()
+        .eq('id', id).eq('created_by', resourceState.session.user.id);
+      if (error) {
+        resourceState.notice = { key: 'deleteFailed', type: 'error' };
+        renderResourcePanels();
+        return;
+      }
+      if (resourceState.editingId === id) cancelUpdateEdit();
+      resourceState.notice = { key: 'updateDeleted', type: 'success' };
+      await Promise.all([loadResourceUpdates(), loadAdminUpdates()]);
+    }
+    async function initializeResourcesBackend() {
+      renderResourcePanels();
+      if (!window.supabase?.createClient) {
+        resourceState.clientUnavailable = true;
+        resourceState.loadingUpdates = false;
+        resourceState.updatesFailed = true;
+        renderResourcePanels();
+        return;
+      }
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+      supabaseClient.auth.onAuthStateChange((_event, session) => {
+        resourceState.session = session;
+        resourceState.isLeader = false;
+        resourceState.checkingAccess = Boolean(session);
+        resourceState.accessCheckFailed = false;
+        if (!session) {
+          resourceState.editingId = null;
+          resourceState.postDraft = { title: '', description: '', youtubeUrl: '' };
+          resourceState.myUpdates = [];
+          resourceState.notice = null;
+        }
+        renderResourcePanels();
+        window.setTimeout(() => { refreshLeaderAccess(); }, 0);
+      });
+      const { data, error } = await supabaseClient.auth.getSession();
+      if (error) {
+        resourceState.clientUnavailable = true;
+        resourceState.loadingUpdates = false;
+        resourceState.updatesFailed = true;
+        renderResourcePanels();
+        return;
+      }
+      resourceState.session = data.session;
+      await refreshLeaderAccess();
+      await loadResourceUpdates();
+    }
+    const levelSeconds = [30, 25, 20, 15, 10];
+    function quizText(key, values) {
+      let text = quizUiCopy[activeLanguage][key] || quizUiCopy.en[key] || key;
+      if (values) Object.entries(values).forEach(([name, value]) => { text = text.replaceAll('{' + name + '}', value); });
+      return text;
+    }
+    function featureText(key, values) {
+      let text = featureCopy[activeLanguage][key] || featureCopy.en[key] || key;
+      if (values) Object.entries(values).forEach(([name, value]) => { text = text.replaceAll('{' + name + '}', value); });
+      return text;
+    }
+    function levelName(level) { return quizUiCopy[activeLanguage].levels[level - 1]; }
+    function categoryIds() {
+      return ['all', 'book:handbook', 'book:combined', 'book:hymns', ...Array.from(new Set(questions.map((question) => question.category)), (theme) => 'theme:' + theme)];
+    }
+    function categoryName(categoryId) {
+      if (categoryId === 'all') return quizText('allBooks');
+      if (categoryId.startsWith('book:')) return sourceNames[activeLanguage][categoryId.slice(5)];
+      return themeNames[activeLanguage][categoryId.slice(6)] || categoryId.slice(6);
+    }
+    function categoryQuestions(categoryId) {
+      if (categoryId === 'all') return questions;
+      if (categoryId.startsWith('book:')) return questions.filter((question) => question.source === categoryId.slice(5));
+      return questions.filter((question) => question.category === categoryId.slice(6));
+    }
+    const languageStorageKey = 'grm-ui-language';
+    const originalTextNodes = new WeakMap();
+    const localeTags = { en: 'en-ZA', sn: 'sn-ZW', nd: 'nd-ZW' };
+    function loadLanguage() {
+      try {
+        const savedLanguage = localStorage.getItem(languageStorageKey);
+        return ['en', 'sn', 'nd'].includes(savedLanguage) ? savedLanguage : 'en';
+      } catch (error) {
+        return 'en';
+      }
+    }
+    let activeLanguage = loadLanguage();
+    function t(text, values) {
+      let translated = interfaceTranslations[activeLanguage]?.[text] || text;
+      if (values) Object.entries(values).forEach(([key, value]) => { translated = translated.replaceAll('{' + key + '}', value); });
+      return translated;
+    }
+    function translateStaticText() {
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let node = walker.nextNode();
+      while (node) {
+        if (!originalTextNodes.has(node)) originalTextNodes.set(node, node.nodeValue);
+        const original = originalTextNodes.get(node);
+        const trimmed = original.trim();
+        if (trimmed) {
+          const leading = original.match(/^\s*/)[0];
+          const trailing = original.match(/\s*$/)[0];
+          node.nodeValue = leading + t(trimmed) + trailing;
+        }
+        node = walker.nextNode();
+      }
+    }
+    function localizedQuestion(question) {
+      const translated = questionTranslations[activeLanguage]?.[question.id];
+      return translated ? { ...question, ...translated } : question;
+    }
+    function localizedReference(reference) {
+      if (activeLanguage === 'en') return reference;
+      const replacements = activeLanguage === 'sn'
+        ? [['GRM Handbook', 'Bhuku reGRM'], ['Preamble', 'Nhanganyaya'], ['Admission', 'Kugamuchirwa'], ['Attendance', 'Kupinda misangano'], ['Commandments', 'Mirayiro'], ['Daily Worship Services', 'Kunamata kwemazuva ose'], ['Important Dates', 'Mazuva anokosha'], ['Combined Volume', 'Bhuku Rakabatanidzwa'], ['Volume 1', 'Vhoriyamu 1'], ['contents and opening account', 'zviri mukati nenhoroondo yokutanga'], ['Guta Ra Mwari Hymn Book', 'Bhuku reNziyo reGuta RaMwari'], ['Hymn', 'Rwiyo']]
+        : [['GRM Handbook', 'IHandbook yeGRM'], ['Preamble', 'Isandulelo'], ['Admission', 'Ukwamukelwa'], ['Attendance', 'Ukuya emihlanganweni'], ['Commandments', 'Imilayo'], ['Daily Worship Services', 'Ukukhonza kwansuku zonke'], ['Important Dates', 'Amalanga aqakathekileyo'], ['Combined Volume', 'Ivolumu ehlanganisiweyo'], ['Volume 1', 'Ivolumu 1'], ['contents and opening account', 'uhlu lokuqukethwe lendaba yokuvula'], ['Guta Ra Mwari Hymn Book', 'Incwadi Yamahubo yeGuta RaMwari'], ['Hymn', 'Ihubo']];
+      let translated = reference;
+      replacements.forEach(([from, to]) => { translated = translated.replaceAll(from, to); });
+      return translated.replaceAll('pp. ', activeLanguage === 'sn' ? 'mapeji ' : 'amakhasi ').replaceAll('p. ', activeLanguage === 'sn' ? 'peji ' : 'ikhasi ');
+    }
+    function applyLanguage() {
+      document.documentElement.lang = activeLanguage;
+      document.title = activeLanguage === 'en' ? 'Guta RaMwari | Study & Quiz' : activeLanguage === 'sn' ? 'Guta RaMwari | Kudzidza neBvunzo' : 'Guta RaMwari | Funda Lemibuzo';
+      document.getElementById('languageSelect').value = activeLanguage;
+      translateStaticText();
+      document.querySelector('.language-picker select').setAttribute('aria-label', t('Choose your language'));
+      document.getElementById('publicNav').setAttribute('aria-label', t('Main navigation'));
+      document.getElementById('learnerNav').setAttribute('aria-label', t('Learning menu'));
+      document.querySelector('.avatar').setAttribute('aria-label', t('Learner'));
+      document.getElementById('lessonSearch').placeholder = t('Search a title or teaching number');
+      document.getElementById('lessonSearch').setAttribute('aria-label', t('Search combined-volume teaching titles'));
+      document.querySelector('#contactForm [name="name"]').placeholder = t('Name');
+      document.querySelector('#contactForm [name="message"]').placeholder = t('How can we help?');
+      if (document.getElementById('view-quiz').classList.contains('active')) {
+        if (quizMode === 'setup') renderQuizSetup();
+        else if (quizMode === 'result') renderResult();
+        else renderQuestion();
+      }
+      if (document.getElementById('view-learner-home').classList.contains('active')) renderDailyQuestion();
+      updateHomeStats();
+      if (document.getElementById('view-progress').classList.contains('active')) renderProgress();
+      if (document.getElementById('view-library').classList.contains('active')) {
+        renderLessonIndex(document.getElementById('lessonSearch').value);
+        renderResourcePanels();
+      }
+      if (document.getElementById('view-admin').classList.contains('active')) renderAdminPanels();
+    }
     const letterLabels = ['A', 'B', 'C', 'D'];
     const storageKey = 'grm-learning-progress-v1';
     let progress = loadProgress();
@@ -433,17 +1618,56 @@
     let selectedChoice = null;
     let checkedAnswer = false;
     let quizCorrect = 0;
-    let activeSource = 'all';
+    let activeCategoryId = 'all';
+    let selectedLevel = 1;
+    let selectedUntimed = false;
+    let activeLevel = 1;
+    let activeUntimed = false;
+    let quizMode = 'setup';
+    let quizCompleted = false;
+    let secondsPerQuestion = levelSeconds[0];
+    let secondsRemaining = secondsPerQuestion;
+    let timerInterval = null;
+    let timerQuestionId = null;
+    let timeExpired = false;
+    let levelOutcome = null;
+    let renderedDailyDate = '';
 
+    function emptyDailyProgress() {
+      return { lastDate: '', answeredDate: '', selected: null, wasCorrect: false, streak: 0, bestStreak: 0, total: 0, correct: 0, badges: [], lastBadge: '', lastBadgeDate: '' };
+    }
     function loadProgress() {
       try {
         const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
-      return { attempts: Number(saved.attempts) || 0, correct: Number(saved.correct) || 0, possible: Number(saved.possible) || 0, best: Number(saved.best) || 0, recent: Array.isArray(saved.recent) ? saved.recent : [] };
+        const daily = saved.daily && typeof saved.daily === 'object' ? { ...emptyDailyProgress(), ...saved.daily } : emptyDailyProgress();
+        daily.badges = Array.isArray(daily.badges) ? daily.badges : [];
+        return {
+          attempts: Number(saved.attempts) || 0,
+          correct: Number(saved.correct) || 0,
+          possible: Number(saved.possible) || 0,
+          best: Number(saved.best) || 0,
+          recent: Array.isArray(saved.recent) ? saved.recent : [],
+          levelProgress: saved.levelProgress && typeof saved.levelProgress === 'object' ? saved.levelProgress : {},
+          daily,
+          username: typeof saved.username === 'string' ? saved.username.slice(0, 24) : '',
+          leaderboard: Array.isArray(saved.leaderboard) ? saved.leaderboard : []
+        };
       } catch (error) {
-        return { attempts: 0, correct: 0, possible: 0, best: 0, recent: [] };
+        return { attempts: 0, correct: 0, possible: 0, best: 0, recent: [], levelProgress: {}, daily: emptyDailyProgress(), username: '', leaderboard: [] };
       }
     }
     function saveProgress() { localStorage.setItem(storageKey, JSON.stringify(progress)); }
+    function getCategoryLevelProgress(categoryId) {
+      if (!progress.levelProgress || typeof progress.levelProgress !== 'object') progress.levelProgress = {};
+      let record = progress.levelProgress[categoryId];
+      if (!record || typeof record !== 'object') {
+        record = { unlocked: 1, streak: 0 };
+        progress.levelProgress[categoryId] = record;
+      }
+      record.unlocked = Math.min(5, Math.max(1, Number(record.unlocked) || 1));
+      record.streak = Math.min(1, Math.max(0, Number(record.streak) || 0));
+      return record;
+    }
     function showToast(message) {
       const toast = document.getElementById('toast');
       toast.textContent = message;
@@ -453,22 +1677,215 @@
     function showView(name) {
       document.querySelectorAll('.view').forEach((view) => view.classList.toggle('active', view.id === 'view-' + name));
       document.querySelectorAll('.nav [data-view]').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
-      document.getElementById('crumbName').textContent = viewNames[name] || 'Overview';
+      const learnerArea = ['learner-home', 'quiz', 'library', 'progress'].includes(name);
+      document.getElementById('publicNav').classList.toggle('nav-hidden', learnerArea);
+      document.getElementById('learnerNav').classList.toggle('nav-hidden', !learnerArea);
+      document.getElementById('crumbName').textContent = viewNames[activeLanguage][name] || viewNames[activeLanguage].home;
+      if (name === 'quiz') {
+        if (quizMode === 'setup') renderQuizSetup();
+        else if (quizMode === 'active') renderQuestion();
+        else if (quizMode === 'result') renderResult();
+      }
+      if (name === 'learner-home') renderDailyQuestion();
       if (name === 'progress') renderProgress();
-      if (name === 'library') renderLessonIndex(document.getElementById('lessonSearch').value);
+      if (name === 'library') {
+        renderLessonIndex(document.getElementById('lessonSearch').value);
+        renderResourcePanels();
+      }
+      if (name === 'admin') renderResourcePanels();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     function escapeHtml(value) {
       return String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+    }
+    function localDateKey(date) {
+      const current = date || new Date();
+      return current.getFullYear() + '-' + String(current.getMonth() + 1).padStart(2, '0') + '-' + String(current.getDate()).padStart(2, '0');
+    }
+    function shiftDateKey(dateKey, offset) {
+      const [year, month, day] = dateKey.split('-').map(Number);
+      const shifted = new Date(Date.UTC(year, month - 1, day + offset));
+      return shifted.getUTCFullYear() + '-' + String(shifted.getUTCMonth() + 1).padStart(2, '0') + '-' + String(shifted.getUTCDate()).padStart(2, '0');
+    }
+    function dailyQuestionFor(dateKey) {
+      const [year, month, day] = dateKey.split('-').map(Number);
+      const dayNumber = Math.floor(Date.UTC(year, month - 1, day) / 86400000);
+      const index = ((dayNumber % questions.length) + questions.length) % questions.length;
+      return questions[index];
+    }
+    function dailyStreakNow() {
+      const daily = progress.daily || emptyDailyProgress();
+      const today = localDateKey();
+      return daily.lastDate === today || daily.lastDate === shiftDateKey(today, -1) ? daily.streak : 0;
+    }
+    function badgeMilestones() {
+      return [1, 3, 7, 14, 30].map((days, index) => ({ id: 'streak-' + days, days, name: featureCopy[activeLanguage].badgeNames[index] }));
+    }
+    function recordLeaderboardResult(correct, possible) {
+      if (!Array.isArray(progress.leaderboard)) progress.leaderboard = [];
+      const username = (progress.username || featureCopy.en.defaultName).trim().slice(0, 24) || featureCopy.en.defaultName;
+      const normalized = username.toLocaleLowerCase();
+      let row = progress.leaderboard.find((entry) => String(entry.username || '').trim().toLocaleLowerCase() === normalized);
+      if (!row) {
+        row = { username, attempts: 0, correct: 0, possible: 0, best: 0 };
+        progress.leaderboard.push(row);
+      }
+      const percent = possible ? Math.round((correct / possible) * 100) : 0;
+      row.username = username;
+      row.attempts = (Number(row.attempts) || 0) + 1;
+      row.correct = (Number(row.correct) || 0) + correct;
+      row.possible = (Number(row.possible) || 0) + possible;
+      row.best = Math.max(Number(row.best) || 0, percent);
+    }
+    function renderDailyQuestion() {
+      const target = document.getElementById('dailyQuestionContent');
+      if (!target) return;
+      const today = localDateKey();
+      renderedDailyDate = today;
+      const daily = progress.daily || (progress.daily = emptyDailyProgress());
+      const sourceQuestion = dailyQuestionFor(today);
+      const question = localizedQuestion(sourceQuestion);
+      const answered = daily.answeredDate === today;
+      const selected = Number(daily.selected);
+      const streak = dailyStreakNow();
+      document.getElementById('dailyQuestionTitle').textContent = featureText('dailyTitle');
+      document.getElementById('dailyStreak').textContent = featureText('dailyStreak', { count: streak });
+      const todayDate = new Date().toLocaleDateString(localeTags[activeLanguage]);
+      const badgeEarned = daily.lastBadgeDate === today && daily.lastBadge
+        ? '<div class="daily-badge-earned">' + escapeHtml(featureText('badgeUnlocked', { badge: badgeMilestones().find((badge) => badge.id === daily.lastBadge)?.name || '' })) + '</div>'
+        : '';
+      target.innerHTML = '<div class="daily-question-meta">' + escapeHtml(featureText('dailyToday', { date: todayDate })) + ' · ' + escapeHtml(question.category) + ' · ' + escapeHtml(sourceNames[activeLanguage][question.source]) + '</div>' +
+        '<p class="daily-question-text">' + escapeHtml(question.prompt) + '</p><p class="daily-question-meta">' + escapeHtml(answered ? featureText('dailyDone') : featureText('dailyPromptHint')) + '</p>' +
+        '<div class="daily-choices">' + question.choices.map((choice, index) => {
+          let state = '';
+          if (answered && index === question.answer) state = ' correct';
+          else if (answered && index === selected) state = ' incorrect';
+          return '<button class="daily-choice' + state + '" data-daily-choice="' + index + '"' + (answered ? ' disabled' : '') + '>' + String.fromCharCode(65 + index) + '. ' + escapeHtml(choice) + '</button>';
+        }).join('') + '</div>' +
+        (answered ? '<div class="daily-feedback' + (daily.wasCorrect ? ' correct' : '') + '"><strong>' + escapeHtml(daily.wasCorrect ? featureText('dailyCorrect') : featureText('dailyWrong')) + '</strong><span>' + escapeHtml(featureText('dailyExplanation')) + ': </span>' + escapeHtml(question.explanation) + '<span class="daily-feedback-ref">' + escapeHtml(localizedReference(question.reference)) + '</span></div>' : '') + badgeEarned;
+      target.querySelectorAll('[data-daily-choice]').forEach((button) => button.addEventListener('click', () => submitDailyAnswer(Number(button.dataset.dailyChoice))));
+    }
+    function submitDailyAnswer(choice) {
+      const today = localDateKey();
+      const daily = progress.daily || (progress.daily = emptyDailyProgress());
+      if (daily.answeredDate === today) return;
+      if (renderedDailyDate !== today) {
+        renderDailyQuestion();
+        return;
+      }
+      const question = dailyQuestionFor(today);
+      const correct = choice === question.answer;
+      daily.streak = daily.lastDate === shiftDateKey(today, -1) ? (Number(daily.streak) || 0) + 1 : 1;
+      daily.lastDate = today;
+      daily.answeredDate = today;
+      daily.selected = choice;
+      daily.wasCorrect = correct;
+      daily.total = (Number(daily.total) || 0) + 1;
+      if (correct) daily.correct = (Number(daily.correct) || 0) + 1;
+      daily.bestStreak = Math.max(Number(daily.bestStreak) || 0, daily.streak);
+      daily.lastBadge = '';
+      for (const badge of badgeMilestones()) {
+        if (daily.streak >= badge.days && !daily.badges.includes(badge.id)) {
+          daily.badges.push(badge.id);
+          daily.lastBadge = badge.id;
+        }
+      }
+      daily.lastBadgeDate = daily.lastBadge ? today : '';
+      recordLeaderboardResult(correct ? 1 : 0, 1);
+      saveProgress();
+      renderDailyQuestion();
+      if (document.getElementById('view-progress').classList.contains('active')) renderProgress();
+    }
+    function getHistoryCategoryName(source) {
+      const oldSourceKeys = { 'All sources': 'all', 'GRM Handbook': 'book:handbook', 'Combined Volume': 'book:combined', 'Hymn Book': 'book:hymns', 'Mabhuku ose': 'all', 'Yonke imithombo': 'all', handbook: 'book:handbook', combined: 'book:combined', hymns: 'book:hymns' };
+      const categoryId = categoryIds().includes(source) ? source : oldSourceKeys[source];
+      return categoryId ? categoryName(categoryId) : source;
+    }
+    function buildShareMessage(kind) {
+      let message;
+      if (kind === 'result') {
+        const item = progress.recent[0] || { score: '0/0', percent: 0, source: activeCategoryId, level: activeLevel };
+        message = featureText('shareResultMessage', { score: item.score, percent: item.percent, category: getHistoryCategoryName(item.source), level: levelName(item.level || 1), mode: featureText(item.untimed ? 'untimedLabel' : 'timedLabel') });
+      } else {
+        const accuracy = progress.possible ? Math.round(progress.correct / progress.possible * 100) : 0;
+        const name = progress.username || featureCopy[activeLanguage].defaultName;
+        message = featureText('shareProgressMessage', { name, attempts: progress.attempts, accuracy, streak: dailyStreakNow(), badges: (progress.daily?.badges || []).length });
+      }
+      return message;
+    }
+    function shareViaWhatsApp(kind) {
+      const message = buildShareMessage(kind);
+      window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+    }
+    async function copyForWhatsAppStatus(kind) {
+      const message = buildShareMessage(kind);
+      let copied = false;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(message);
+          copied = true;
+        }
+      } catch (error) { /* try the local clipboard fallback below */ }
+      if (!copied) {
+        const field = document.createElement('textarea');
+        field.value = message;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        try { copied = document.execCommand('copy'); } catch (error) { copied = false; }
+        field.remove();
+      }
+      showToast(copied ? featureText('statusCopied') : message);
+    }
+    function renderSocialProgress() {
+      const target = document.getElementById('socialProgressPanel');
+      if (!target) return;
+      const daily = progress.daily || emptyDailyProgress();
+      const currentStreak = dailyStreakNow();
+      const badges = badgeMilestones().map((badge) => {
+        const earned = daily.badges.includes(badge.id);
+        return '<span class="badge-chip' + (earned ? '' : ' locked') + '">' + escapeHtml(badge.name) + ' · ' + escapeHtml(earned ? featureText('earned') : featureText('locked')) + '</span>';
+      }).join('');
+      const rows = (Array.isArray(progress.leaderboard) ? progress.leaderboard : []).slice().sort((a, b) => {
+        const aAccuracy = a.possible ? a.correct / a.possible : 0;
+        const bAccuracy = b.possible ? b.correct / b.possible : 0;
+        return bAccuracy - aAccuracy || (Number(b.best) || 0) - (Number(a.best) || 0) || (Number(b.attempts) || 0) - (Number(a.attempts) || 0);
+      });
+      const leaderboardRows = rows.length ? rows.slice(0, 10).map((row, index) => {
+        const accuracy = row.possible ? Math.round(row.correct / row.possible * 100) : 0;
+        return '<div class="leaderboard-row"><span class="leaderboard-rank">#' + (index + 1) + '</span><strong>' + escapeHtml(row.username || featureCopy.en.defaultName) + '</strong><span class="leaderboard-score">' + accuracy + '% ' + escapeHtml(featureText('accuracy')) + ' · ' + row.attempts + ' ' + escapeHtml(featureText('attempts')) + '</span></div>';
+      }).join('') : '<p class="leaderboard-note">' + escapeHtml(featureText('noScores')) + '</p>';
+      target.innerHTML = '<div class="eyebrow">' + escapeHtml(featureText('communityTitle')) + '</div>' +
+        '<div class="result-details" style="justify-content:flex-start;flex-wrap:wrap;margin:12px 0"><div><strong>' + currentStreak + '</strong>' + escapeHtml(featureText('currentStreak')) + '</div><div><strong>' + (daily.bestStreak || 0) + '</strong>' + escapeHtml(featureText('bestStreak')) + '</div><div><strong>' + (daily.total || 0) + '</strong>' + escapeHtml(featureText('dailyAnswered')) + '</div></div>' +
+        '<h3>' + escapeHtml(featureText('badges')) + '</h3><div class="badge-list">' + badges + '</div>' +
+        '<hr style="border:0;border-top:1px solid var(--line);margin:19px 0">' +
+        '<div class="eyebrow">' + escapeHtml(featureText('leaderboardTitle')) + '</div><p class="leaderboard-note">' + escapeHtml(featureText('leaderboardLocal')) + '</p>' +
+        '<form class="username-form" id="usernameForm"><input id="usernameInput" maxlength="24" autocomplete="nickname" placeholder="' + escapeHtml(featureText('username')) + '" aria-label="' + escapeHtml(featureText('username')) + '" value="' + escapeHtml(progress.username || '') + '"><button class="button secondary" type="submit">' + escapeHtml(featureText('saveName')) + '</button></form>' +
+        '<div class="leaderboard-list">' + leaderboardRows + '</div><div class="setup-actions"><button class="button secondary" id="shareProgressButton">' + escapeHtml(featureText('shareProgress')) + '</button><button class="button secondary" id="copyProgressStatus">' + escapeHtml(featureText('copyStatus')) + '</button></div>';
+      document.getElementById('usernameForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        progress.username = document.getElementById('usernameInput').value.trim().slice(0, 24);
+        saveProgress();
+        showToast(featureText('savedName'));
+        renderSocialProgress();
+      });
+      document.getElementById('shareProgressButton').addEventListener('click', () => shareViaWhatsApp('progress'));
+      document.getElementById('copyProgressStatus').addEventListener('click', () => copyForWhatsAppStatus('progress'));
     }
     function renderLessonIndex(searchTerm) {
       const titles = Array.isArray(window.grmVolumeTitles) ? window.grmVolumeTitles : [];
       const query = (searchTerm || '').trim().toLocaleLowerCase();
       const matches = titles.filter((item) => !query || String(item.number).includes(query) || item.title.toLocaleLowerCase().includes(query));
       const visible = matches.slice(0, 40);
-      document.getElementById('lessonSummary').textContent = titles.length
-        ? 'Showing ' + visible.length + ' of ' + matches.length + (query ? ' matching titles' : ' indexed titles') + (matches.length > visible.length ? ' · refine your search to see more' : '')
-        : 'The contents index could not be loaded in this browser.';
+      document.getElementById('lessonSummary').textContent = !titles.length
+        ? t('The contents index could not be loaded in this browser.')
+        : activeLanguage === 'en'
+          ? 'Showing ' + visible.length + ' of ' + matches.length + (query ? ' matching titles' : ' indexed titles') + (matches.length > visible.length ? ' · refine your search to see more' : '')
+          : activeLanguage === 'sn'
+            ? 'Zviri kuratidzwa: ' + visible.length + ' pa' + matches.length + (query ? ' mazita anoenderana' : ' mazita ari murondedzero') + (matches.length > visible.length ? ' · wedzera mashoko ekutsvaga kuti uone mamwe' : '')
+            : 'Okutshengiswayo: ' + visible.length + ' ku' + matches.length + (query ? ' izihloko ezihambelanayo' : ' izihloko ezisohlwini') + (matches.length > visible.length ? ' · cacisa ukukhangela ukuze ubone okunye' : '');
       document.getElementById('lessonResults').innerHTML = visible.map((item) =>
         '<div class="lesson-row"><span class="lesson-number">' + item.number + '</span><span>' + escapeHtml(item.title) + '</span></div>'
       ).join('');
@@ -481,27 +1898,91 @@
       }
       return shuffled;
     }
-    function startQuiz(source) {
-      activeSource = source || 'all';
-      const pool = questions.filter((question) => activeSource === 'all' || question.source === activeSource);
+    function openQuizSetup(source) {
+      stopQuestionTimer();
+      const requestedCategory = source && (source.startsWith('book:') || source.startsWith('theme:')) ? source : source === 'all' || !source ? 'all' : 'book:' + source;
+      activeCategoryId = categoryIds().includes(requestedCategory) ? requestedCategory : 'all';
+      selectedLevel = getCategoryLevelProgress(activeCategoryId).unlocked;
+      selectedUntimed = false;
+      quizSet = [];
+      quizCompleted = false;
+      quizMode = 'setup';
+      levelOutcome = null;
+      showView('quiz');
+    }
+    function renderQuizSetup() {
+      const record = getCategoryLevelProgress(activeCategoryId);
+      if (selectedLevel > record.unlocked) selectedLevel = record.unlocked;
+      const ids = categoryIds();
+      const bookOptions = ['book:handbook', 'book:combined', 'book:hymns'].map((id) => '<option value="' + id + '"' + (id === activeCategoryId ? ' selected' : '') + '>' + escapeHtml(categoryName(id)) + '</option>').join('');
+      const themeOptions = ids.filter((id) => id.startsWith('theme:')).map((id) => '<option value="' + escapeHtml(id) + '"' + (id === activeCategoryId ? ' selected' : '') + '>' + escapeHtml(categoryName(id)) + '</option>').join('');
+      const levels = quizUiCopy[activeLanguage].levels.map((name, index) => {
+        const number = index + 1;
+        const locked = number > record.unlocked;
+        return '<option value="' + number + '"' + (number === selectedLevel ? ' selected' : '') + (locked ? ' disabled' : '') + '>' + number + '. ' + escapeHtml(name) + (locked ? ' · ' + escapeHtml(quizText('locked')) : '') + ' · ' + escapeHtml(quizText('timeLimit', { seconds: levelSeconds[index] })) + '</option>';
+      }).join('');
+      document.getElementById('quizHeading').textContent = quizText('setupHeading');
+      document.getElementById('quizBody').innerHTML =
+        '<div class="panel quiz-setup"><div class="eyebrow">' + escapeHtml(quizText('setupHeading')) + '</div><p class="setup-hint">' + escapeHtml(quizText('setupIntro')) + '</p>' +
+        '<div class="setup-controls"><label class="setup-field">' + escapeHtml(quizText('category')) + '<select id="categorySelect" aria-label="' + escapeHtml(quizText('category')) + '"><option value="all"' + (activeCategoryId === 'all' ? ' selected' : '') + '>' + escapeHtml(categoryName('all')) + '</option><optgroup label="' + escapeHtml(quizText('books')) + '">' + bookOptions + '</optgroup><optgroup label="' + escapeHtml(quizText('themes')) + '">' + themeOptions + '</optgroup></select></label>' +
+        '<label class="setup-field">' + escapeHtml(quizText('difficulty')) + '<select id="levelSelect" aria-label="' + escapeHtml(quizText('difficulty')) + '">' + levels + '</select></label></div>' +
+        '<div class="untimed-row"><label><input id="untimedPractice" type="checkbox"' + (selectedUntimed ? ' checked' : '') + '>' + escapeHtml(featureText('untimedLabel')) + '</label><p>' + escapeHtml(featureText('untimedHint')) + '</p></div>' +
+        '<div class="setup-streak">' + escapeHtml(quizText('currentLevel', { level: levelName(record.unlocked), count: record.streak })) + '</div>' +
+        '<p class="setup-hint">' + escapeHtml(quizText('unlockRule')) + '</p><div class="setup-actions"><button class="button" id="startSelectedQuiz">' + escapeHtml(quizText('start')) + '</button><button class="button secondary" data-view="learner-home">' + escapeHtml(quizText('back')) + '</button></div></div>';
+      document.getElementById('categorySelect').addEventListener('change', (event) => {
+        activeCategoryId = event.currentTarget.value;
+        selectedLevel = getCategoryLevelProgress(activeCategoryId).unlocked;
+        renderQuizSetup();
+      });
+      document.getElementById('levelSelect').addEventListener('change', (event) => {
+        selectedLevel = Number(event.currentTarget.value);
+      });
+      document.getElementById('untimedPractice').addEventListener('change', (event) => { selectedUntimed = event.currentTarget.checked; });
+      document.getElementById('startSelectedQuiz').addEventListener('click', () => startQuiz(activeCategoryId, selectedLevel, selectedUntimed));
+    }
+    function startQuiz(categoryId, level, untimed) {
+      stopQuestionTimer();
+      activeCategoryId = categoryId || activeCategoryId || 'all';
+      const record = getCategoryLevelProgress(activeCategoryId);
+      activeLevel = Number(level) || record.unlocked;
+      activeUntimed = Boolean(untimed);
+      if (activeLevel > record.unlocked || activeLevel < 1 || activeLevel > 5) {
+        selectedLevel = record.unlocked;
+        quizMode = 'setup';
+        renderQuizSetup();
+        return;
+      }
+      const pool = categoryQuestions(activeCategoryId);
       quizSet = shuffle(pool).slice(0, Math.min(5, pool.length));
+      if (!quizSet.length) {
+        showToast(quizText('noQuestions'));
+        renderQuizSetup();
+        return;
+      }
       quizIndex = 0;
       selectedChoice = null;
       checkedAnswer = false;
       quizCorrect = 0;
-      document.getElementById('quizHeading').textContent = sourceNames[activeSource] + ' practice';
+      timerQuestionId = null;
+      timeExpired = false;
+      quizCompleted = false;
+      secondsPerQuestion = levelSeconds[activeLevel - 1];
+      quizMode = 'active';
       showView('quiz');
-      renderQuestion();
     }
     function renderQuestion() {
-      const question = quizSet[quizIndex];
-      if (!question) { renderResult(); return; }
+      const sourceQuestion = quizSet[quizIndex];
+      if (!sourceQuestion) { renderResult(); return; }
+      document.getElementById('quizHeading').textContent = quizText('quizHeading', { category: categoryName(activeCategoryId), level: activeLevel, name: levelName(activeLevel) });
+      if (!activeUntimed && !checkedAnswer && timerQuestionId !== sourceQuestion.id) startQuestionTimer(sourceQuestion);
+      const question = localizedQuestion(sourceQuestion);
       const body = document.getElementById('quizBody');
       const percent = Math.round((quizIndex / quizSet.length) * 100);
       body.innerHTML =
-        '<div class="quiz-top"><span class="eyebrow" style="margin:0">Question ' + (quizIndex + 1) + ' of ' + quizSet.length + '</span><span class="quiz-progress-label">' + sourceNames[question.source] + '</span></div>' +
+        '<div class="quiz-top"><span class="eyebrow" style="margin:0">' + formatQuestionCount(quizIndex + 1, quizSet.length) + '</span><span class="quiz-progress-label">' + sourceNames[activeLanguage][question.source] + '</span></div>' +
         '<div class="quiz-progress"><span style="width:' + percent + '%"></span></div>' +
-        '<div class="question-meta"><span>' + question.category + '</span><span>' + sourceNames[question.source] + '</span></div>' +
+        (activeUntimed ? '<div class="untimed-notice">' + escapeHtml(featureText('untimedNotice')) + '</div>' : '<div class="timer-row" id="timerRow" role="timer" aria-label="' + t('Question time remaining') + '"><span class="timer-text" id="timerLabel"></span><span class="timer-track" aria-hidden="true"><span id="timerBar"></span></span></div>') +
+        '<div class="question-meta"><span>' + question.category + '</span><span>' + sourceNames[activeLanguage][question.source] + '</span></div>' +
         '<h2 class="question-text">' + question.prompt + '</h2>' +
         '<div class="choices">' + question.choices.map((choice, index) => {
           let stateClass = selectedChoice === index ? ' selected' : '';
@@ -509,12 +1990,13 @@
           else if (checkedAnswer && index === selectedChoice) stateClass = ' incorrect';
           return '<button class="choice' + stateClass + '" data-choice="' + index + '"' + (checkedAnswer ? ' disabled' : '') + '><span class="choice-letter">' + letterLabels[index] + '</span><span>' + choice + '</span></button>';
         }).join('') + '</div>' +
-        '<div class="feedback' + (checkedAnswer ? ' show' + (selectedChoice === question.answer ? '' : ' wrong') : '') + '" id="feedback">' +
-          (checkedAnswer ? '<strong>' + (selectedChoice === question.answer ? 'Correct' : 'Keep learning') + '</strong>' + question.explanation + '<br><span class="feedback-ref">' + question.reference + '</span>' : '') +
+        '<div class="feedback' + (checkedAnswer ? ' show' + (timeExpired || selectedChoice !== question.answer ? ' wrong' : ' correct') : '') + '" id="feedback">' +
+          (checkedAnswer ? '<strong>' + (timeExpired ? t("Time's up") : selectedChoice === question.answer ? t('Correct') : t('Keep learning')) + '</strong>' + question.explanation + '<br><span class="feedback-ref">' + localizedReference(question.reference) + '</span>' : '') +
         '</div>' +
-        '<div class="quiz-actions"><span class="quiz-hint">' + (checkedAnswer ? 'Read the reference, then continue.' : 'Choose one answer, then check it.') + '</span>' +
-          (checkedAnswer ? '<button class="button" id="nextButton">' + (quizIndex === quizSet.length - 1 ? 'See my result' : 'Next question') + ' →</button>' : '<button class="button" id="checkButton"' + (selectedChoice === null ? ' disabled' : '') + '>Check answer</button>') +
+        '<div class="quiz-actions"><span class="quiz-hint">' + (checkedAnswer ? (timeExpired ? t('Time ran out. Review the answer, then continue.') : t('Read the reference, then continue.')) : t('Choose one answer, then check it.')) + '</span>' +
+          (checkedAnswer ? '<button class="button" id="nextButton">' + (quizIndex === quizSet.length - 1 ? t('See my result') : t('Next question')) + ' →</button>' : '<button class="button" id="checkButton"' + (selectedChoice === null ? ' disabled' : '') + '>' + t('Check answer') + '</button>') +
         '</div>';
+      updateTimerDisplay();
       body.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => {
         selectedChoice = Number(button.dataset.choice);
         renderQuestion();
@@ -524,8 +2006,52 @@
       const nextButton = document.getElementById('nextButton');
       if (nextButton) nextButton.addEventListener('click', nextQuestion);
     }
+    function stopQuestionTimer() {
+      if (timerInterval !== null) window.clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    function startQuestionTimer(question) {
+      stopQuestionTimer();
+      timerQuestionId = question.id;
+      if (activeUntimed) return;
+      secondsPerQuestion = levelSeconds[activeLevel - 1];
+      secondsRemaining = secondsPerQuestion;
+      timeExpired = false;
+      timerInterval = window.setInterval(() => {
+        if (checkedAnswer) {
+          stopQuestionTimer();
+          return;
+        }
+        secondsRemaining -= 1;
+        if (secondsRemaining <= 0) {
+          secondsRemaining = 0;
+          stopQuestionTimer();
+          timeExpired = true;
+          checkedAnswer = true;
+          selectedChoice = null;
+          renderQuestion();
+          return;
+        }
+        updateTimerDisplay();
+      }, 1000);
+    }
+    function updateTimerDisplay() {
+      const label = document.getElementById('timerLabel');
+      const bar = document.getElementById('timerBar');
+      const row = document.getElementById('timerRow');
+      if (!label || !bar || !row) return;
+      label.textContent = activeLanguage === 'en' ? secondsRemaining + 's remaining' : activeLanguage === 'sn' ? secondsRemaining + ' masekonzi asara' : secondsRemaining + 's aseleyo';
+      bar.style.width = (secondsRemaining / secondsPerQuestion * 100) + '%';
+      row.classList.toggle('urgent', secondsRemaining <= 5);
+    }
+    function formatQuestionCount(current, total) {
+      if (activeLanguage === 'sn') return 'Mubvunzo ' + current + ' pa' + total;
+      if (activeLanguage === 'nd') return 'Umbuzo ' + current + ' ku' + total;
+      return 'Question ' + current + ' of ' + total;
+    }
     function checkAnswer() {
       if (selectedChoice === null || checkedAnswer) return;
+      stopQuestionTimer();
       checkedAnswer = true;
       if (selectedChoice === quizSet[quizIndex].answer) quizCorrect += 1;
       renderQuestion();
@@ -535,6 +2061,7 @@
         quizIndex += 1;
         selectedChoice = null;
         checkedAnswer = false;
+        timeExpired = false;
         renderQuestion();
       } else {
         finishQuiz();
@@ -542,37 +2069,100 @@
       }
     }
     function finishQuiz() {
+      stopQuestionTimer();
+      timerQuestionId = null;
+      quizCompleted = true;
+      quizMode = 'result';
       const percent = Math.round((quizCorrect / quizSet.length) * 100);
+      const categoryRecord = getCategoryLevelProgress(activeCategoryId);
+      const previousUnlocked = categoryRecord.unlocked;
+      let advanced = false;
+      let tracked = !activeUntimed && activeLevel === previousUnlocked && previousUnlocked < 5;
+      if (tracked) {
+        if (percent === 100) {
+          categoryRecord.streak += 1;
+          if (categoryRecord.streak >= 2) {
+            categoryRecord.unlocked += 1;
+            categoryRecord.streak = 0;
+            advanced = true;
+          }
+        } else {
+          categoryRecord.streak = 0;
+        }
+      } else if (!activeUntimed && activeLevel !== previousUnlocked) {
+        categoryRecord.streak = 0;
+      }
+      levelOutcome = { percent, previousUnlocked, unlocked: categoryRecord.unlocked, streak: categoryRecord.streak, advanced, tracked, untimed: activeUntimed, top: !activeUntimed && activeLevel === 5 && percent === 100 };
       progress.attempts += 1;
       progress.correct += quizCorrect;
       progress.possible += quizSet.length;
       progress.best = Math.max(progress.best, percent);
-      progress.recent.unshift({ source: sourceNames[activeSource], score: quizCorrect + '/' + quizSet.length, percent: percent, date: new Date().toLocaleDateString() });
+      progress.recent.unshift({ source: activeCategoryId, level: activeLevel, untimed: activeUntimed, score: quizCorrect + '/' + quizSet.length, percent: percent, date: new Date().toISOString() });
       progress.recent = progress.recent.slice(0, 6);
+      recordLeaderboardResult(quizCorrect, quizSet.length);
       saveProgress();
       updateHomeStats();
     }
     function renderResult() {
       const percent = Math.round((quizCorrect / quizSet.length) * 100);
+      const heading = activeLanguage === 'en'
+        ? (percent === 100 ? 'Excellent study.' : percent >= 60 ? 'Good progress.' : 'Keep building your knowledge.')
+        : activeLanguage === 'sn'
+          ? (percent === 100 ? 'Wadzidza zvakanaka.' : percent >= 60 ? 'Uri kufambira mberi zvakanaka.' : 'Ramba uchiwedzera ruzivo rwako.')
+          : (percent === 100 ? 'Ufunde kuhle kakhulu.' : percent >= 60 ? 'Uyaqhubeka kuhle.' : 'Qhubeka ukhulisa ulwazi lwakho.');
+      const summary = activeLanguage === 'en'
+        ? 'You answered ' + quizCorrect + ' of ' + quizSet.length + ' correctly. Take a moment to revisit the source notes for the questions you missed.'
+        : activeLanguage === 'sn'
+          ? 'Wapindura mibvunzo ' + quizCorrect + ' pa' + quizSet.length + ' zvakarurama. Dzokera panobva mashoko emibvunzo yawakapotsa.'
+          : 'Uphendule ' + quizCorrect + ' ku' + quizSet.length + ' kuhle. Buyekeza imithombo yemibuzo oyiphutsileyo.';
+      document.getElementById('quizHeading').textContent = quizText('quizHeading', { category: categoryName(activeCategoryId), level: activeLevel, name: levelName(activeLevel) });
+      let levelMessage;
+      if (levelOutcome?.untimed) levelMessage = featureText('untimedResult');
+      else if (levelOutcome?.advanced) levelMessage = quizText('resultUnlocked', { level: levelName(levelOutcome.unlocked), previous: levelName(levelOutcome.previousUnlocked) });
+      else if (levelOutcome?.top) levelMessage = quizText('resultTop');
+      else if (levelOutcome?.tracked && percent === 100) levelMessage = quizText('resultOneMore');
+      else if (levelOutcome?.tracked) levelMessage = quizText('resultReset', { level: levelName(activeLevel) });
+      else if (activeLevel === 5) levelMessage = quizText('resultTopRepeat');
+      else if (percent === 100) levelMessage = quizText('resultReplay', { level: levelName(activeLevel) });
+      else levelMessage = quizText('resultMissReplay', { score: percent, level: levelName(activeLevel) });
       document.getElementById('quizBody').innerHTML =
-        '<div class="result-card"><div class="eyebrow">Practice complete</div><div class="result-score">' + percent + '%</div>' +
-        '<h2>' + (percent === 100 ? 'Excellent study.' : percent >= 60 ? 'Good progress.' : 'Keep building your knowledge.') + '</h2>' +
-        '<p>You answered ' + quizCorrect + ' of ' + quizSet.length + ' correctly. Take a moment to revisit the source notes for the questions you missed.</p>' +
-        '<div class="result-details"><div><strong>' + quizCorrect + '</strong>Correct</div><div><strong>' + (quizSet.length - quizCorrect) + '</strong>To revisit</div><div><strong>' + quizSet.length + '</strong>Questions</div></div>' +
-        '<button class="button" data-start="' + activeSource + '">Practice this source again</button> <button class="button secondary" data-view="home">Back to overview</button></div>';
-      document.querySelector('#quizBody [data-start]').addEventListener('click', (event) => startQuiz(event.currentTarget.dataset.start));
-      document.querySelector('#quizBody [data-view]').addEventListener('click', () => showView('home'));
+        '<div class="result-card"><div class="eyebrow">' + t('Practice complete') + '</div><div class="result-score">' + percent + '%</div>' +
+        '<h2>' + heading + '</h2><p>' + summary + '</p>' +
+        '<p class="level-outcome">' + escapeHtml(levelMessage) + '</p>' +
+        '<div class="result-details"><div><strong>' + quizCorrect + '</strong>' + t('Correct answers') + '</div><div><strong>' + (quizSet.length - quizCorrect) + '</strong>' + t('To revisit') + '</div><div><strong>' + quizSet.length + '</strong>' + t('Questions') + '</div></div>' +
+        '<div class="setup-actions" style="justify-content:center"><button class="button" data-setup="' + escapeHtml(activeCategoryId) + '">' + escapeHtml(quizText('repeatCategory')) + '</button><button class="button secondary" id="shareResultButton">' + escapeHtml(featureText('shareResult')) + '</button><button class="button secondary" id="copyResultStatus">' + escapeHtml(featureText('copyStatus')) + '</button><button class="button secondary" data-view="learner-home">' + escapeHtml(quizText('back')) + '</button></div></div>';
+      document.querySelector('#quizBody [data-setup]').addEventListener('click', (event) => openQuizSetup(event.currentTarget.dataset.setup));
+      document.getElementById('shareResultButton').addEventListener('click', () => shareViaWhatsApp('result'));
+      document.getElementById('copyResultStatus').addEventListener('click', () => copyForWhatsAppStatus('result'));
       renderProgress();
     }
     function updateHomeStats() {
-      document.getElementById('quizCount').textContent = progress.attempts;
+      const quizCount = document.getElementById('quizCount');
+      const homeMeter = document.getElementById('homeMeter');
+      const homeProgressText = document.getElementById('homeProgressText');
+      const homeAccuracy = document.getElementById('homeAccuracy');
+      if (!quizCount || !homeMeter || !homeProgressText || !homeAccuracy) return;
+      quizCount.textContent = progress.attempts;
       const percent = progress.possible ? Math.round((progress.correct / progress.possible) * 100) : 0;
-      document.getElementById('homeMeter').style.width = percent + '%';
-      document.getElementById('homeProgressText').textContent = progress.attempts ? progress.attempts + ' quiz' + (progress.attempts === 1 ? '' : 'zes') + ' completed' : 'No quizzes yet';
-      document.getElementById('homeAccuracy').textContent = percent + '% accuracy';
+      homeMeter.style.width = percent + '%';
+      homeProgressText.textContent = activeLanguage === 'en'
+        ? progress.attempts ? progress.attempts + ' quiz' + (progress.attempts === 1 ? '' : 'zes') + ' completed' : 'No quizzes yet'
+        : activeLanguage === 'sn'
+          ? progress.attempts ? 'Mabvunzo apera: ' + progress.attempts : 'Hausati wapedza bvunzo'
+          : progress.attempts ? 'Imibuzo eseqediwe: ' + progress.attempts : 'Awukaqedi imibuzo';
+      homeAccuracy.textContent = percent + (activeLanguage === 'en' ? '% accuracy' : activeLanguage === 'sn' ? '% kururama' : '% ukunemba');
+    }
+    function renderLevelProgressList() {
+      const target = document.getElementById('levelProgressList');
+      if (!target) return;
+      target.innerHTML = categoryIds().map((categoryId) => {
+        const record = getCategoryLevelProgress(categoryId);
+        return '<div class="level-progress-item"><strong>' + escapeHtml(categoryName(categoryId)) + '</strong><span>' + escapeHtml(quizText('progressUnlocked', { level: levelName(record.unlocked) })) + '<br>' + escapeHtml(quizText('progressStreak', { count: record.streak })) + '</span></div>';
+      }).join('');
     }
     function renderProgress() {
-      document.getElementById('quizCount').textContent = progress.attempts;
+      const quizCount = document.getElementById('quizCount');
+      if (quizCount) quizCount.textContent = progress.attempts;
       document.getElementById('progressAttempts').textContent = progress.attempts;
       document.getElementById('progressCorrect').textContent = progress.correct;
       document.getElementById('progressBest').textContent = progress.attempts ? progress.best + '%' : '—';
@@ -580,22 +2170,58 @@
       const accuracy = possible ? Math.round((progress.correct / possible) * 100) : 0;
       document.getElementById('progressPercent').textContent = accuracy + '%';
       document.getElementById('progressCircle').style.setProperty('--progress-angle', accuracy * 3.6 + 'deg');
-      document.getElementById('progressDescription').textContent = progress.attempts ? 'You have answered ' + progress.correct + ' questions correctly across ' + progress.attempts + ' quiz' + (progress.attempts === 1 ? '' : 'zes') + '.' : 'Complete a quiz to start tracking your learning.';
+      document.getElementById('progressDescription').textContent = activeLanguage === 'en'
+        ? progress.attempts ? 'You have answered ' + progress.correct + ' questions correctly across ' + progress.attempts + ' quiz' + (progress.attempts === 1 ? '' : 'zes') + '.' : 'Complete a quiz to start tracking your learning.'
+        : activeLanguage === 'sn'
+          ? progress.attempts ? 'Wapindura mibvunzo ' + progress.correct + ' zvakarurama mumabvunzo ' + progress.attempts + '.' : 'Pedza bvunzo kuti utange kutevera budiriro yako pakudzidza.'
+          : progress.attempts ? 'Uphendule imibuzo engu-' + progress.correct + ' kuhle emibuzweni engu-' + progress.attempts + '.' : 'Qedisa umbuzo ukuze uqalise ukulandelela ukufunda kwakho.';
       const history = document.getElementById('historyList');
-      history.innerHTML = progress.recent.length ? progress.recent.map((item) => '<div class="history-item"><div><strong>' + item.source + '</strong><br><span>' + item.date + '</span></div><span class="history-score">' + item.score + ' · ' + item.percent + '%</span></div>').join('') : '<div class="empty">No quizzes completed yet. Start a short practice session when you’re ready.</div>';
+      const oldSourceKeys = { 'All sources': 'all', 'GRM Handbook': 'book:handbook', 'Combined Volume': 'book:combined', 'Hymn Book': 'book:hymns', 'Mabhuku ose': 'all', 'Yonke imithombo': 'all' };
+      const historySourceName = (source) => {
+        const categoryId = categoryIds().includes(source) ? source : oldSourceKeys[source] || (['handbook', 'combined', 'hymns'].includes(source) ? 'book:' + source : null);
+        return categoryId ? categoryName(categoryId) : sourceNames[activeLanguage][source] || source;
+      };
+      const historyDate = (value) => {
+        const parsed = new Date(value);
+        return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleDateString(localeTags[activeLanguage]);
+      };
+      history.innerHTML = progress.recent.length ? progress.recent.map((item) => '<div class="history-item"><div><strong>' + escapeHtml(historySourceName(item.source)) + '</strong>' + (item.level ? '<br><small>' + escapeHtml(quizText('historyLevel', { level: levelName(item.level) })) + (item.untimed ? ' · ' + escapeHtml(featureText('untimedLabel')) : '') + '</small>' : '') + '<br><span>' + escapeHtml(historyDate(item.date)) + '</span></div><span class="history-score">' + escapeHtml(item.score) + ' · ' + item.percent + '%</span></div>').join('') : '<div class="empty">' + t('No quizzes completed yet. Start a short practice session when you’re ready.') + '</div>';
+      renderLevelProgressList();
+      renderSocialProgress();
       updateHomeStats();
     }
 
-    document.querySelectorAll('.nav [data-view], [data-view].text-button').forEach((button) => button.addEventListener('click', () => showView(button.dataset.view)));
-    document.querySelectorAll('[data-start]').forEach((button) => button.addEventListener('click', () => startQuiz(button.dataset.start)));
+    document.addEventListener('click', (event) => {
+      const roleButton = event.target.closest('[data-enter-role]');
+      if (roleButton) {
+        showView(roleButton.dataset.enterRole);
+        return;
+      }
+      const viewButton = event.target.closest('[data-view]');
+      if (viewButton) showView(viewButton.dataset.view);
+    });
+    document.querySelectorAll('[data-start]').forEach((button) => button.addEventListener('click', () => openQuizSetup(button.dataset.start)));
     document.getElementById('clearProgress').addEventListener('click', () => {
-      progress = { attempts: 0, correct: 0, possible: 0, best: 0, recent: [] };
+      progress = { attempts: 0, correct: 0, possible: 0, best: 0, recent: [], levelProgress: {}, daily: emptyDailyProgress(), username: '', leaderboard: [] };
       saveProgress();
       renderProgress();
-      showToast('Your local quiz progress has been cleared.');
+      showToast(t('Your local quiz progress has been cleared.'));
+    });
+    document.getElementById('languageSelect').addEventListener('change', (event) => {
+      activeLanguage = event.currentTarget.value;
+      try { localStorage.setItem(languageStorageKey, activeLanguage); } catch (error) { /* keep this session's choice */ }
+      applyLanguage();
     });
     document.getElementById('lessonSearch').addEventListener('input', (event) => renderLessonIndex(event.currentTarget.value));
-    updateHomeStats();
+    document.getElementById('contactForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      document.getElementById('contactStatus').classList.add('show');
+    });
+    window.setInterval(() => {
+      if (document.getElementById('view-learner-home').classList.contains('active') && renderedDailyDate !== localDateKey()) renderDailyQuestion();
+    }, 60000);
+    applyLanguage();
+    initializeResourcesBackend();
   </script>
 </body>
 </html>
