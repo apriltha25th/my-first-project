@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f1">
+  <title>Guta raMwari | Study & Quiz</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17251f;
+      --muted: #718078;
+      --line: #e6ebe5;
+      --paper: #f5f6f1;
+      --white: #fff;
+      --green: #215c43;
+      --green-dark: #173f30;
+      --green-soft: #e8f1e9;
+      --gold: #c38c3e;
+      --gold-soft: #f6efdf;
+      --blue-soft: #e9eff4;
+      --red: #ae5446;
+      --red-soft: #f8e9e5;
+      --shadow: 0 12px 32px #1f332408;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); }
+    button { font: inherit; cursor: pointer; }
+    .app { min-height: 100vh; }
+    .sidebar {
+      position: fixed; inset: 0 auto 0 0; z-index: 5; display: flex; flex-direction: column;
+      width: 245px; padding: 24px 16px 18px; background: var(--white); border-right: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 0 10px 32px; }
+    .brand-mark {
+      display: grid; place-items: center; width: 39px; height: 39px; color: #fff;
+      border-radius: 13px; background: var(--green); font: 700 17px Georgia, serif;
+    }
+    .brand-name { font: 700 15px Georgia, serif; letter-spacing: -.2px; }
+    .brand-sub { margin-top: 3px; color: #879189; font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .nav-label { padding: 0 11px 9px; color: #9aa39d; font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    .nav { display: grid; gap: 4px; }
+    .nav button {
+      display: flex; align-items: center; gap: 11px; width: 100%; padding: 10px 11px;
+      border: 0; border-radius: 9px; background: transparent; color: #657168; text-align: left; font-size: 12px;
+    }
+    .nav button:hover { background: #f5f7f4; }
+    .nav button.active { background: var(--green-soft); color: var(--green); font-weight: 700; }
+    .nav-icon { display: grid; place-items: center; width: 19px; font-size: 15px; }
+    .side-note { margin-top: auto; padding: 14px; border: 1px solid #e6ece5; border-radius: 12px; background: #f4f7f2; }
+    .side-note strong { display: block; margin-bottom: 5px; font: 700 11px Georgia, serif; }
+    .side-note p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .side-foot { padding: 14px 10px 0; color: #98a199; font-size: 9px; }
+    .main { min-height: 100vh; margin-left: 245px; }
+    .topbar {
+      position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; padding: 0 34px; border-bottom: 1px solid var(--line); background: #ffffffed; backdrop-filter: blur(12px);
+    }
+    .crumb { color: #98a199; font-size: 11px; }
+    .crumb strong { color: var(--ink); font-weight: 600; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .source-pill { display: flex; align-items: center; gap: 7px; color: var(--green); font-size: 10px; font-weight: 700; }
+    .source-dot { width: 7px; height: 7px; border-radius: 50%; background: #5a9b6a; box-shadow: 0 0 0 3px #5a9b6a1c; }
+    .avatar { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: #e9dfcf; color: #72583a; font-size: 10px; font-weight: 700; }
+    .content { width: min(1160px, 100%); margin: 0 auto; padding: 30px 34px 54px; }
+    .view { display: none; }
+    .view.active { display: block; }
+    .eyebrow { margin-bottom: 9px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: 1.35px; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 7px; font: 700 27px Georgia, serif; letter-spacing: -.65px; }
+    h2 { margin-bottom: 7px; font: 700 19px Georgia, serif; letter-spacing: -.3px; }
+    h3 { margin-bottom: 6px; font: 700 13px Georgia, serif; }
+    .subtext { color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .welcome { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+    .welcome p { margin-bottom: 0; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px;
+      padding: 0 15px; border: 1px solid transparent; border-radius: 9px; background: var(--green);
+      color: #fff; font-size: 11px; font-weight: 700; transition: .18s ease;
+    }
+    .button:hover { transform: translateY(-1px); background: var(--green-dark); box-shadow: 0 5px 12px #173f3024; }
+    .button:disabled { cursor: not-allowed; transform: none; background: #aebbb1; box-shadow: none; }
+    .button.secondary { border-color: var(--line); background: #fff; color: var(--ink); }
+    .button.secondary:hover { background: #f7f8f5; box-shadow: none; }
+    .hero {
+      position: relative; overflow: hidden; display: grid; grid-template-columns: 1.35fr .65fr; gap: 20px;
+      min-height: 224px; margin-bottom: 17px; padding: 28px 30px; border-radius: 17px;
+      background: linear-gradient(120deg, #1c4936 0%, #245f45 70%, #356f4b 100%); color: #fff;
+    }
+    .hero:after { position: absolute; right: 4%; top: -115px; width: 290px; height: 290px; border: 1px solid #ffffff20; border-radius: 50%; content: ""; }
+    .hero:before { position: absolute; right: 11%; top: -61px; width: 180px; height: 180px; border: 1px solid #ffffff20; border-radius: 50%; content: ""; }
+    .hero-copy { position: relative; z-index: 1; align-self: center; max-width: 500px; }
+    .hero .eyebrow { color: #d9c28f; }
+    .hero h2 { max-width: 440px; margin-bottom: 9px; font-size: 25px; line-height: 1.16; }
+    .hero p { max-width: 440px; margin-bottom: 16px; color: #d7e4da; font-size: 11px; line-height: 1.6; }
+    .hero .button { background: #fff; color: var(--green-dark); }
+    .hero .button:hover { background: #f5f3e9; }
+    .hero-art { position: relative; z-index: 1; display: grid; place-items: center; }
+    .seal { display: grid; place-items: center; width: 145px; height: 145px; border: 1px solid #ffffff54; border-radius: 50%; color: #efd9a8; font: 54px Georgia, serif; box-shadow: 0 0 0 15px #ffffff08, 0 0 0 31px #ffffff05; }
+    .seal span { position: absolute; margin-top: 101px; color: #f4e7ca; font: 700 8px "Segoe UI", Arial, sans-serif; letter-spacing: 1.5px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 23px; }
+    .stat, .panel, .source-card { border: 1px solid var(--line); border-radius: 12px; background: var(--white); box-shadow: var(--shadow); }
+    .stat { display: flex; align-items: center; gap: 11px; padding: 13px 15px; }
+    .stat-icon { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; background: var(--green-soft); color: var(--green); font-size: 15px; }
+    .stat:nth-child(2) .stat-icon { background: var(--gold-soft); color: #9b702d; }
+    .stat:nth-child(3) .stat-icon { background: var(--blue-soft); color: #557794; }
+    .stat:nth-child(4) .stat-icon { background: #f5ece7; color: #9f6951; }
+    .stat-label { color: var(--muted); font-size: 9px; }
+    .stat-value { margin-top: 2px; font: 700 19px Georgia, serif; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin: 25px 0 12px; }
+    .section-head h2 { margin: 0; font-size: 17px; }
+    .text-button { padding: 5px 0; border: 0; background: none; color: var(--green); font-size: 10px; font-weight: 700; }
+    .source-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .source-card { padding: 16px; transition: .16s ease; }
+    .source-card:hover { transform: translateY(-2px); box-shadow: 0 15px 30px #1f33240d; }
+    .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .book-mark { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 10px; background: var(--green-soft); color: var(--green); font: 700 14px Georgia, serif; }
+    .source-card:nth-child(2) .book-mark { background: var(--gold-soft); color: #9a6d2c; }
+    .source-card:nth-child(3) .book-mark { background: var(--blue-soft); color: #557794; }
+    .lang { padding: 5px 7px; border-radius: 20px; background: #f3f5f2; color: #7b867e; font-size: 8px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
+    .source-card p { min-height: 34px; margin-bottom: 11px; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 14px; }
+    .tag { padding: 5px 7px; border-radius: 20px; background: #f4f5f2; color: #77827a; font-size: 8px; }
+    .card-link { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 0 0; border: 0; border-top: 1px solid #edf0ec; background: none; color: var(--green); text-align: left; font-size: 10px; font-weight: 700; }
+    .study-row { display: grid; grid-template-columns: 1.35fr .65fr; gap: 12px; margin-top: 17px; }
+    .panel { padding: 18px; }
+    .daily { display: flex; align-items: center; gap: 15px; }
+    .daily-icon { display: grid; place-items: center; flex: 0 0 45px; width: 45px; height: 45px; border-radius: 13px; background: var(--gold-soft); color: #966b2b; font-size: 19px; }
+    .daily-copy { flex: 1; }
+    .daily-copy p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .progress-panel .meter { height: 6px; margin: 13px 0 7px; overflow: hidden; border-radius: 10px; background: #edf0ec; }
+    .progress-panel .meter span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--green); transition: width .25s ease; }
+    .meter-label { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; }
+    .source-note { margin: 16px 0 0; padding: 10px 12px; border-left: 3px solid #d4b677; border-radius: 0 8px 8px 0; background: #faf8f1; color: #797366; font-size: 9px; line-height: 1.6; }
+    .page-heading { margin-bottom: 21px; }
+    .library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    .library-card { padding: 20px; }
+    .library-card .source-card p { min-height: auto; }
+    .list-title { margin: 17px 0 8px; color: #8b958d; font-size: 9px; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; }
+    .topic-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .topic-chip { padding: 7px 9px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: #5f6d63; font-size: 9px; }
+    .topic-chip:hover { border-color: #c9d9cc; color: var(--green); }
+    .lesson-search { width: 100%; max-width: 420px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; }
+    .lesson-search:focus { border-color: #88a992; box-shadow: 0 0 0 3px #215c4310; }
+    .lesson-summary { margin: 9px 0 10px; color: var(--muted); font-size: 9px; }
+    .lesson-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px 15px; max-height: 420px; overflow: auto; padding-right: 4px; }
+    .lesson-row { display: flex; align-items: start; gap: 9px; padding: 8px 0; border-bottom: 1px solid #eff1ed; color: #536158; font-size: 9px; line-height: 1.45; }
+    .lesson-number { flex: 0 0 28px; color: #9b7a42; font: 700 9px Georgia, serif; }
+    .quiz-wrap { max-width: 780px; margin: 4px auto; }
+    .quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+    .quiz-progress-label { color: var(--muted); font-size: 10px; }
+    .quiz-progress { height: 5px; margin-bottom: 17px; overflow: hidden; border-radius: 9px; background: #e8ece7; }
+    .quiz-progress span { display: block; height: 100%; border-radius: inherit; background: var(--green); transition: width .2s ease; }
+    .quiz-card { padding: 25px; }
+    .question-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
+    .question-meta span { padding: 5px 8px; border-radius: 20px; background: var(--green-soft); color: var(--green); font-size: 8px; font-weight: 700; }
+    .question-meta span:last-child { background: #f4f5f2; color: #78847b; font-weight: 500; }
+    .question-text { margin-bottom: 18px; font: 700 20px Georgia, serif; line-height: 1.35; }
+    .choices { display: grid; gap: 8px; }
+    .choice {
+      display: flex; align-items: center; gap: 11px; width: 100%; min-height: 44px; padding: 9px 12px;
+      border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #38473e; text-align: left; font-size: 11px; line-height: 1.45;
+    }
+    .choice:hover { border-color: #b5c9bb; background: #fbfcfa; }
+    .choice.selected { border-color: #5f8a6d; background: #eff6f0; color: var(--green-dark); }
+    .choice.correct { border-color: #6ea17b; background: #e8f4ea; color: #205a35; }
+    .choice.incorrect { border-color: #cc8576; background: var(--red-soft); color: #873f35; }
+    .choice-letter { display: grid; place-items: center; flex: 0 0 23px; width: 23px; height: 23px; border: 1px solid #e7ebe6; border-radius: 7px; color: #7b897f; font-size: 9px; font-weight: 700; }
+    .choice.correct .choice-letter { border-color: #a4c5aa; color: #205a35; }
+    .choice.incorrect .choice-letter { border-color: #e0aca2; color: #873f35; }
+    .feedback { display: none; margin-top: 13px; padding: 12px 13px; border-radius: 9px; background: #f3f6f1; color: #536258; font-size: 10px; line-height: 1.55; }
+    .feedback.show { display: block; }
+    .feedback strong { display: block; margin-bottom: 4px; color: var(--green); font-size: 11px; }
+    .feedback.wrong { background: #fbf1ee; }
+    .feedback.wrong strong { color: var(--red); }
+    .feedback-ref { display: inline-block; margin-top: 6px; color: var(--green); font-weight: 700; }
+    .quiz-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 17px; }
+    .quiz-hint { color: #929b94; font-size: 9px; }
+    .result-card { padding: 30px; text-align: center; }
+    .result-score { display: grid; place-items: center; width: 104px; height: 104px; margin: 0 auto 15px; border: 8px solid var(--green-soft); border-radius: 50%; color: var(--green); font: 700 25px Georgia, serif; }
+    .result-card p { max-width: 450px; margin: 0 auto 18px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .result-details { display: flex; justify-content: center; gap: 24px; margin: 18px 0 22px; color: var(--muted); font-size: 9px; }
+    .result-details strong { display: block; margin-bottom: 3px; color: var(--ink); font: 700 17px Georgia, serif; }
+    .progress-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .progress-big { display: flex; align-items: center; gap: 17px; }
+    .progress-circle { display: grid; place-items: center; flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(var(--green) var(--progress-angle, 0deg), #edf0ec 0); color: var(--green-dark); font: 700 15px Georgia, serif; }
+    .progress-circle span { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: #fff; }
+    .progress-big p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .history-list { display: grid; gap: 8px; margin-top: 12px; }
+    .history-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #edf0ec; font-size: 10px; }
+    .history-item span { color: var(--muted); }
+    .history-score { color: var(--green); font-weight: 700; }
+    .empty { padding: 16px 0; color: var(--muted); font-size: 10px; }
+    .toast { position: fixed; right: 22px; bottom: 20px; z-index: 10; padding: 11px 14px; transform: translateY(12px); border-radius: 9px; background: var(--green-dark); color: #fff; opacity: 0; pointer-events: none; font-size: 10px; transition: .2s ease; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    @media (max-width: 900px) {
+      .sidebar { width: 205px; }
+      .main { margin-left: 205px; }
+      .content { padding: 25px 22px 42px; }
+      .topbar { padding: 0 22px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .hero { min-height: 205px; }
+      .seal { width: 120px; height: 120px; font-size: 44px; }
+      .seal span { margin-top: 84px; }
+    }
+    @media (max-width: 650px) {
+      .sidebar { position: static; width: auto; height: auto; padding: 12px 14px 10px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .brand { padding: 0 3px 10px; }
+      .brand-mark { width: 33px; height: 33px; border-radius: 10px; }
+      .nav-label, .side-note, .side-foot { display: none; }
+      .nav { display: flex; overflow-x: auto; gap: 5px; padding-bottom: 1px; }
+      .nav button { flex: 0 0 auto; width: auto; padding: 8px 10px; font-size: 10px; }
+      .nav-icon { width: auto; }
+      .main { margin-left: 0; }
+      .topbar { height: 50px; padding: 0 17px; }
+      .content { padding: 22px 16px 38px; }
+      .welcome { align-items: start; flex-direction: column; gap: 13px; }
+      h1 { font-size: 23px; }
+      .hero { grid-template-columns: 1fr; min-height: 0; padding: 22px; }
+      .hero-art { display: none; }
+      .hero h2 { font-size: 22px; }
+      .stats { gap: 8px; }
+      .stat { padding: 11px; }
+      .source-grid, .library-grid, .study-row, .progress-layout { grid-template-columns: 1fr; }
+      .lesson-results { grid-template-columns: 1fr; max-height: 360px; }
+      .source-card p { min-height: 0; }
+      .daily { flex-wrap: wrap; }
+      .daily .button { margin-left: 60px; }
+      .quiz-card { padding: 18px 14px; }
+      .question-text { font-size: 18px; }
+      .quiz-actions { align-items: stretch; flex-direction: column; }
+      .quiz-actions .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">G</div>
+        <div><div class="brand-name">Guta raMwari</div><div class="brand-sub">Study &amp; quiz</div></div>
+      </div>
+      <div class="nav-label">Learning space</div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="active" data-view="home"><span class="nav-icon">⌂</span>Overview</button>
+        <button data-view="quiz"><span class="nav-icon">✳</span>Take a quiz</button>
+        <button data-view="library"><span class="nav-icon">▤</span>Source library</button>
+        <button data-view="progress"><span class="nav-icon">◷</span>My progress</button>
+      </nav>
+      <div class="side-note">
+        <strong>Study with the source</strong>
+        <p>Every answer points back to a book section or hymn so learners can read more.</p>
+      </div>
+      <div class="side-foot">A learning space for Guta raMwari</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb">Learning space <span aria-hidden="true"> / </span> <strong id="crumbName">Overview</strong></div>
+        <div class="top-actions"><div class="source-pill"><span class="source-dot"></span>Sources attached</div><div class="avatar" aria-label="Learner">GR</div></div>
+      </header>
+
+      <div class="content">
+        <section class="view active" id="view-home">
+          <div class="welcome">
+            <div><div class="eyebrow">Guta raMwari learning space</div><h1>Learn at your own pace.</h1><p class="subtext">Explore teachings, reflect on the hymns, and grow one question at a time.</p></div>
+            <button class="button" data-start="all">Start a 5-question quiz <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow">A thoughtful place to study</div>
+              <h2>Build understanding through the books you shared.</h2>
+              <p>Practice with questions grounded in the handbook, the Shona combined volume, and the Ndebele hymn book. Each answer includes its source.</p>
+              <button class="button" data-start="all">Begin learning <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="hero-art" aria-hidden="true"><div class="seal">✧<span>LEARN · REFLECT</span></div></div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><div class="stat-icon">✳</div><div><div class="stat-label">Practice questions</div><div class="stat-value">20</div></div></div>
+            <div class="stat"><div class="stat-icon">▤</div><div><div class="stat-label">Source books</div><div class="stat-value">3</div></div></div>
+            <div class="stat"><div class="stat-icon">⌁</div><div><div class="stat-label">Numbered teachings</div><div class="stat-value">670</div></div></div>
+            <div class="stat"><div class="stat-icon">◷</div><div><div class="stat-label">Quizzes completed</div><div class="stat-value" id="quizCount">0</div></div></div>
+          </div>
+
+          <div class="section-head"><h2>Explore the source books</h2><button class="text-button" data-view="library">View source library →</button></div>
+          <div class="source-grid">
+            <article class="source-card">
+              <div class="card-top"><div class="book-mark">H</div><span class="lang">English</span></div>
+              <h3>GRM Handbook</h3>
+              <p>Guidance on worship, conduct, community life, and important dates.</p>
+              <div class="tags"><span class="tag">Commandments</span><span class="tag">Worship</span><span class="tag">Dates</span></div>
+              <button class="card-link" data-start="handbook">Practice handbook questions <span>→</span></button>
+            </article>
+            <article class="source-card">
+              <div class="card-top"><div class="book-mark">C</div><span class="lang">Shona</span></div>
+              <h3>Combined Volume</h3>
+              <p>Six volumes with 670 numbered teachings, including the account of entering the Guta.</p>
+              <div class="tags"><span class="tag">History</span><span class="tag">Teachings</span><span class="tag">Community</span></div>
+              <button class="card-link" data-start="combined">Practice combined-volume questions <span>→</span></button>
+            </article>
+            <article class="source-card">
+              <div class="card-top"><div class="book-mark">♫</div><span class="lang">Ndebele</span></div>
+              <h3>Guta Ra Mwari Hymn Book</h3>
+              <p>Hymns and prayers with original-language titles retained in the quiz.</p>
+              <div class="tags"><span class="tag">Hymns</span><span class="tag">Fellowship</span><span class="tag">Prayer</span></div>
+              <button class="card-link" data-start="hymns">Practice hymn questions <span>→</span></button>
+            </article>
+          </div>
+
+          <div class="study-row">
+            <div class="panel daily">
+              <div class="daily-icon">✧</div><div class="daily-copy"><h3>Today’s study</h3><p>Try five questions drawn from all three source books. You’ll see the reference after each answer.</p></div>
+              <button class="button" data-start="all">Start practice</button>
+            </div>
+            <div class="panel progress-panel">
+              <h3>Your learning progress</h3><div class="meter"><span id="homeMeter"></span></div>
+              <div class="meter-label"><span id="homeProgressText">No quizzes yet</span><span id="homeAccuracy">0% accuracy</span></div>
+            </div>
+          </div>
+          <p class="source-note">Starter questions are in English, with Shona and Ndebele source titles preserved. The English wording is a study aid; the cited book remains the source.</p>
+        </section>
+
+        <section class="view" id="view-quiz">
+          <div class="page-heading"><div class="eyebrow">Practice</div><h1 id="quizHeading">Take a quiz</h1><p class="subtext">Choose an answer, check it, then read the source note.</p></div>
+          <div class="quiz-wrap">
+            <div id="quizBody" class="panel quiz-card">
+              <div class="empty">Choose a source from the library or start a practice quiz from the overview.</div>
+              <button class="button" data-start="all">Start a 5-question quiz</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-library">
+          <div class="page-heading"><div class="eyebrow">Your materials</div><h1>Source library</h1><p class="subtext">Browse the books and topic areas used to build this starter quiz.</p></div>
+          <div class="library-grid">
+            <article class="panel library-card">
+              <div class="card-top"><div class="book-mark">H</div><span class="lang">English · handbook</span></div>
+              <h2>GRM Handbook</h2><p class="subtext">An English-language guide to worship services, conduct, ceremonies, and community life.</p>
+              <div class="list-title">Included in this study set</div><div class="topic-list">
+                <span class="topic-chip">Admission &amp; confession</span><span class="topic-chip">Attendance</span><span class="topic-chip">Commandments</span><span class="topic-chip">Daily worship</span><span class="topic-chip">Important dates</span>
+              </div>
+              <button class="button" style="margin-top:17px" data-start="handbook">Quiz this source</button>
+            </article>
+            <article class="panel library-card">
+              <div class="card-top"><div class="book-mark">C</div><span class="lang">Shona · six volumes</span></div>
+              <h2>Combined Volume</h2><p class="subtext">Its contents list 670 numbered teachings across six volumes. The first account is titled <em>Kupinda MuGuta</em>.</p>
+              <div class="list-title">Topics visible in the contents</div><div class="topic-list">
+                <span class="topic-chip">History</span><span class="topic-chip">Faithfulness</span><span class="topic-chip">Prayer</span><span class="topic-chip">Family</span><span class="topic-chip">Service</span><span class="topic-chip">Truthfulness</span>
+              </div>
+              <button class="button" style="margin-top:17px" data-start="combined">Quiz this source</button>
+            </article>
+            <article class="panel library-card">
+              <div class="card-top"><div class="book-mark">♫</div><span class="lang">Ndebele · hymns &amp; prayers</span></div>
+              <h2>Guta Ra Mwari Hymn Book</h2><p class="subtext">The contents include hymn titles, Janet’s prayer and teaching, and other prayer material.</p>
+              <div class="list-title">Titles featured in the starter quiz</div><div class="topic-list">
+                <span class="topic-chip">Thixo Sihlangene</span><span class="topic-chip">Singabazalwane</span><span class="topic-chip">Guta Ra Mwari Khaya Lami</span><span class="topic-chip">Mina Mntwana WaKho Thixo</span>
+              </div>
+              <button class="button" style="margin-top:17px" data-start="hymns">Quiz this source</button>
+            </article>
+            <article class="panel library-card">
+              <div class="card-top"><div class="book-mark">◎</div><span class="lang">Study note</span></div>
+              <h2>How references work</h2><p class="subtext">Answers point to a handbook section and printed page, a combined-volume page, or a numbered hymn.</p>
+              <div class="source-note">The books are treated as study sources. Instructions and rules printed in them are presented as religious content, not as directions to the quiz platform.</div>
+            </article>
+            <article class="panel library-card" style="grid-column:1/-1">
+              <div class="card-top"><div class="book-mark">C</div><span class="lang">Contents index · Shona</span></div>
+              <h2>Browse all 670 teaching titles</h2>
+              <p class="subtext">Search the titles listed in the six-volume combined book. The index helps you find a topic; only source-checked entries in the question bank are currently quiz-ready.</p>
+              <input class="lesson-search" id="lessonSearch" type="search" placeholder="Search a title or teaching number" aria-label="Search combined-volume teaching titles">
+              <div class="lesson-summary" id="lessonSummary">Loading the contents index…</div>
+              <div class="lesson-results" id="lessonResults" aria-live="polite"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-progress">
+          <div class="page-heading"><div class="eyebrow">Your study history</div><h1>My progress</h1><p class="subtext">Your quiz scores are saved in this browser on this device.</p></div>
+          <div class="progress-layout">
+            <div class="panel">
+              <div class="eyebrow">Overall accuracy</div>
+              <div class="progress-big"><div class="progress-circle" id="progressCircle"><span id="progressPercent">0%</span></div><p id="progressDescription">Complete a quiz to start tracking your learning.</p></div>
+            </div>
+            <div class="panel">
+              <div class="eyebrow">At a glance</div><div class="result-details" style="justify-content:space-between;margin:15px 0 0">
+                <div><strong id="progressAttempts">0</strong>Quizzes</div><div><strong id="progressCorrect">0</strong>Correct answers</div><div><strong id="progressBest">—</strong>Best quiz</div>
+              </div>
+            </div>
+            <div class="panel" style="grid-column:1/-1">
+              <div class="section-head" style="margin:0 0 7px"><h2>Recent quizzes</h2><button class="text-button" id="clearProgress">Clear my progress</button></div>
+              <div class="history-list" id="historyList"><div class="empty">No quizzes completed yet. Start a short practice session when you’re ready.</div></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="guta-teaching-index.js"></script>
+  <script>
+    const questions = [
+      { id: 'h1', source: 'handbook', category: 'Foundations', prompt: 'What does the Handbook say its role is?', choices: ['A guide for members, subsidiary to the Standing Orders and Constitution', 'A replacement for the Constitution', 'A hymn collection only', 'A record of one congregation’s attendance'], answer: 0, explanation: 'The preamble describes the Handbook as a guide for members and says it is subsidiary to the Standing Orders and the Guta raMwari Constitution.', reference: 'GRM Handbook · Preamble · p. 6' },
+      { id: 'h2', source: 'handbook', category: 'Admission', prompt: 'According to the Handbook, who forgives sin?', choices: ['An Elder', 'Only God', 'A hymn leader', 'The congregation'], answer: 1, explanation: 'The confession section states that only God forgives sin.', reference: 'GRM Handbook · Admission · p. 6' },
+      { id: 'h3', source: 'handbook', category: 'Admission', prompt: 'Which hymn does the Handbook list for new members?', choices: ['Hymn 2', 'Hymn 5', 'Hymn 8', 'Hymn 9'], answer: 2, explanation: 'The admission section names Hymn 8 as the hymn for new members.', reference: 'GRM Handbook · Admission · p. 6' },
+      { id: 'h4', source: 'handbook', category: 'Attendance', prompt: 'What does the Handbook call a three-month period without worship attendance or contact with the congregation?', choices: ['A leave of absence', 'Backsliding', 'A transfer', 'A new admission'], answer: 1, explanation: 'The attendance section says that three months without attending or contacting the congregation is regarded as backsliding.', reference: 'GRM Handbook · Attendance §3.4 · p. 8' },
+      { id: 'h5', source: 'handbook', category: 'Commandments', prompt: 'What does Commandment 4.9 say members should do when praying?', choices: ['Pray directly to God', 'Pray only through a hymn leader', 'Avoid asking for help', 'Pray to ancestral spirits'], answer: 0, explanation: 'Commandment 4.9 says to pray directly to God and ask the Creator to do His will over problems.', reference: 'GRM Handbook · Commandments §4.9 · p. 9' },
+      { id: 'h6', source: 'handbook', category: 'Commandments', prompt: 'Which responsibility for children appears in the Handbook’s commandments?', choices: ['Children should lead every service', 'Children shall go to school', 'Children should choose a uniform at age five', 'Children should not attend worship'], answer: 1, explanation: 'Commandment 4.4 says that children shall go to school.', reference: 'GRM Handbook · Commandments §4.4 · p. 9' },
+      { id: 'h7', source: 'handbook', category: 'Commandments', prompt: 'Which of these is listed as a commandment?', choices: ['Love one another', 'Compete for leadership', 'Avoid helping family', 'Keep teachings private'], answer: 0, explanation: 'The Handbook lists “love one another” as Commandment 4.21.', reference: 'GRM Handbook · Commandments §4.21 · p. 9' },
+      { id: 'h8', source: 'handbook', category: 'Worship', prompt: 'What is the Tuesday evening service theme in the Handbook?', choices: ['The Day Dedicated to Youth', 'The Day of the Guta raMwari Leaders Meeting', 'Janet’s Service', 'The Harvest'], answer: 1, explanation: 'The Tuesday evening service is assigned the theme of the Guta raMwari leaders meeting.', reference: 'GRM Handbook · Daily Worship Services · p. 10' },
+      { id: 'h9', source: 'handbook', category: 'Worship', prompt: 'Which day is dedicated to the youth, boys and girls, with God’s guidance?', choices: ['Monday', 'Tuesday', 'Wednesday', 'Saturday'], answer: 2, explanation: 'The Handbook assigns this theme to Wednesday.', reference: 'GRM Handbook · Daily Worship Services · p. 10' },
+      { id: 'h10', source: 'handbook', category: 'Dates', prompt: 'Which date does the Handbook identify as the Day of Incarnation?', choices: ['1 January', '31 January', '3 February', '25 December'], answer: 1, explanation: 'The important-dates table lists the Day of Incarnation on 31 January, marked 31/01/61.', reference: 'GRM Handbook · Important Dates · p. 46' },
+      { id: 'h11', source: 'handbook', category: 'Dates', prompt: 'On which date does the Handbook list The Promise?', choices: ['31 January', '3 February', '6 December', '25 December'], answer: 1, explanation: 'The important-dates table lists The Promise on 3 February.', reference: 'GRM Handbook · Important Dates · p. 46' },
+      { id: 'h12', source: 'handbook', category: 'Dates', prompt: 'Which memorial service is listed for 6 December?', choices: ['Departure of the first Host of God', 'Departure of the second Host of God', 'The Day of Incarnation', 'The New Year service'], answer: 1, explanation: 'The table associates 6 December with the memorial service of the departure of the second Host of God.', reference: 'GRM Handbook · Important Dates · p. 46' },
+      { id: 'h13', source: 'handbook', category: 'Dates', prompt: 'Which memorial service is listed for 25 December?', choices: ['Departure of the first Host of God', 'Departure of the second Host of God', 'The Promise', 'The Day of Incarnation'], answer: 0, explanation: 'The table associates 25 December with the memorial service of the departure of the first Host of God.', reference: 'GRM Handbook · Important Dates · p. 46' },
+      { id: 'c1', source: 'combined', category: 'History', prompt: 'In the opening account, on what date does Taxwell Tayali say his family entered the Guta?', choices: ['3 March 1955', '31 January 1961', '3 February 1961', '25 December 1958'], answer: 0, explanation: 'The account “Kupinda MuGuta” says Taxwell Tayali, his wife Laizah, and their three-month-old child entered on Wednesday, 3 March 1955.', reference: 'Combined Volume · Volume 1, “Kupinda MuGuta” · p. 20' },
+      { id: 'c2', source: 'combined', category: 'History', prompt: 'How old was Febi when the family entered the Guta, according to the account?', choices: ['Three weeks', 'Three months', 'One year', 'Two years'], answer: 1, explanation: 'The opening account describes Febi as three months old at the time.', reference: 'Combined Volume · Volume 1, “Kupinda MuGuta” · p. 20' },
+      { id: 'c3', source: 'combined', category: 'History', prompt: 'What does the account say happened after a Ngarava was built in 1957?', choices: ['The Creator came to Bulawayo in 1958', 'The group moved to Botswana', 'The hymn book was printed', 'A new harvest was held'], answer: 0, explanation: 'The narrative says a Ngarava was built in 1957 with the wish to invite the Creator, who came to Bulawayo in 1958.', reference: 'Combined Volume · Volume 1, “Kupinda MuGuta” · p. 20' },
+      { id: 'c4', source: 'combined', category: 'History', prompt: 'What is the title of the first teaching listed in Volume 1?', choices: ['Mwari', 'Kupinda MuGuta', 'Chivimbiso', 'Rusando Rwa Janeti'], answer: 1, explanation: 'The contents list the first teaching as “Chivimbiso – Kupinda Guta”; the opening account is headed “Kupinda MuGuta.”', reference: 'Combined Volume · Volume 1 contents and opening account · pp. 1, 20' },
+      { id: 'm1', source: 'hymns', category: 'Hymns', prompt: 'What is the title of Hymn 2 in the Ndebele hymn book?', choices: ['Thixo Sihlangene', 'Singabazalwane', 'Wazesul’ Izono Thixo', 'Guta Ra Mwari Khaya Lami'], answer: 1, explanation: 'Hymn 2 is titled “Singabazalwane.” Its verses emphasize fellowship, love, and unity.', reference: 'Guta Ra Mwari Hymn Book · Hymn 2' },
+      { id: 'm2', source: 'hymns', category: 'Hymns', prompt: 'Which hymn title describes Guta Ra Mwari as “my home”?', choices: ['Mina Mntwana WaKho Thixo', 'Thixo Sihlangene', 'Guta Ra Mwari Khaya Lami', 'Bazali Labantwana'], answer: 2, explanation: 'The title of Hymn 4 is “Guta Ra Mwari Khaya Lami.”', reference: 'Guta Ra Mwari Hymn Book · Hymn 4' },
+      { id: 'm3', source: 'hymns', category: 'Hymns', prompt: 'What does Hymn 6 emphasize about God’s ways and commandments?', choices: ['Learning and keeping them', 'Keeping them secret', 'Replacing them with new customs', 'Discussing them only at festivals'], answer: 0, explanation: 'Hymn 6 includes a verse about loving and keeping God’s ways and commandments.', reference: 'Guta Ra Mwari Hymn Book · Hymn 6' }
+    ];
+
+    const sourceNames = { all: 'All sources', handbook: 'GRM Handbook', combined: 'Combined Volume', hymns: 'Hymn Book' };
+    const viewNames = { home: 'Overview', quiz: 'Take a quiz', library: 'Source library', progress: 'My progress' };
+    const letterLabels = ['A', 'B', 'C', 'D'];
+    const storageKey = 'grm-learning-progress-v1';
+    let progress = loadProgress();
+    let quizSet = [];
+    let quizIndex = 0;
+    let selectedChoice = null;
+    let checkedAnswer = false;
+    let quizCorrect = 0;
+    let activeSource = 'all';
+
+    function loadProgress() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      return { attempts: Number(saved.attempts) || 0, correct: Number(saved.correct) || 0, possible: Number(saved.possible) || 0, best: Number(saved.best) || 0, recent: Array.isArray(saved.recent) ? saved.recent : [] };
+      } catch (error) {
+        return { attempts: 0, correct: 0, possible: 0, best: 0, recent: [] };
+      }
+    }
+    function saveProgress() { localStorage.setItem(storageKey, JSON.stringify(progress)); }
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      window.setTimeout(() => toast.classList.remove('show'), 2300);
+    }
+    function showView(name) {
+      document.querySelectorAll('.view').forEach((view) => view.classList.toggle('active', view.id === 'view-' + name));
+      document.querySelectorAll('.nav [data-view]').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
+      document.getElementById('crumbName').textContent = viewNames[name] || 'Overview';
+      if (name === 'progress') renderProgress();
+      if (name === 'library') renderLessonIndex(document.getElementById('lessonSearch').value);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+    }
+    function renderLessonIndex(searchTerm) {
+      const titles = Array.isArray(window.grmVolumeTitles) ? window.grmVolumeTitles : [];
+      const query = (searchTerm || '').trim().toLocaleLowerCase();
+      const matches = titles.filter((item) => !query || String(item.number).includes(query) || item.title.toLocaleLowerCase().includes(query));
+      const visible = matches.slice(0, 40);
+      document.getElementById('lessonSummary').textContent = titles.length
+        ? 'Showing ' + visible.length + ' of ' + matches.length + (query ? ' matching titles' : ' indexed titles') + (matches.length > visible.length ? ' · refine your search to see more' : '')
+        : 'The contents index could not be loaded in this browser.';
+      document.getElementById('lessonResults').innerHTML = visible.map((item) =>
+        '<div class="lesson-row"><span class="lesson-number">' + item.number + '</span><span>' + escapeHtml(item.title) + '</span></div>'
+      ).join('');
+    }
+    function shuffle(items) {
+      const shuffled = items.slice();
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const target = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[target]] = [shuffled[target], shuffled[index]];
+      }
+      return shuffled;
+    }
+    function startQuiz(source) {
+      activeSource = source || 'all';
+      const pool = questions.filter((question) => activeSource === 'all' || question.source === activeSource);
+      quizSet = shuffle(pool).slice(0, Math.min(5, pool.length));
+      quizIndex = 0;
+      selectedChoice = null;
+      checkedAnswer = false;
+      quizCorrect = 0;
+      document.getElementById('quizHeading').textContent = sourceNames[activeSource] + ' practice';
+      showView('quiz');
+      renderQuestion();
+    }
+    function renderQuestion() {
+      const question = quizSet[quizIndex];
+      if (!question) { renderResult(); return; }
+      const body = document.getElementById('quizBody');
+      const percent = Math.round((quizIndex / quizSet.length) * 100);
+      body.innerHTML =
+        '<div class="quiz-top"><span class="eyebrow" style="margin:0">Question ' + (quizIndex + 1) + ' of ' + quizSet.length + '</span><span class="quiz-progress-label">' + sourceNames[question.source] + '</span></div>' +
+        '<div class="quiz-progress"><span style="width:' + percent + '%"></span></div>' +
+        '<div class="question-meta"><span>' + question.category + '</span><span>' + sourceNames[question.source] + '</span></div>' +
+        '<h2 class="question-text">' + question.prompt + '</h2>' +
+        '<div class="choices">' + question.choices.map((choice, index) => {
+          let stateClass = selectedChoice === index ? ' selected' : '';
+          if (checkedAnswer && index === question.answer) stateClass = ' correct';
+          else if (checkedAnswer && index === selectedChoice) stateClass = ' incorrect';
+          return '<button class="choice' + stateClass + '" data-choice="' + index + '"' + (checkedAnswer ? ' disabled' : '') + '><span class="choice-letter">' + letterLabels[index] + '</span><span>' + choice + '</span></button>';
+        }).join('') + '</div>' +
+        '<div class="feedback' + (checkedAnswer ? ' show' + (selectedChoice === question.answer ? '' : ' wrong') : '') + '" id="feedback">' +
+          (checkedAnswer ? '<strong>' + (selectedChoice === question.answer ? 'Correct' : 'Keep learning') + '</strong>' + question.explanation + '<br><span class="feedback-ref">' + question.reference + '</span>' : '') +
+        '</div>' +
+        '<div class="quiz-actions"><span class="quiz-hint">' + (checkedAnswer ? 'Read the reference, then continue.' : 'Choose one answer, then check it.') + '</span>' +
+          (checkedAnswer ? '<button class="button" id="nextButton">' + (quizIndex === quizSet.length - 1 ? 'See my result' : 'Next question') + ' →</button>' : '<button class="button" id="checkButton"' + (selectedChoice === null ? ' disabled' : '') + '>Check answer</button>') +
+        '</div>';
+      body.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => {
+        selectedChoice = Number(button.dataset.choice);
+        renderQuestion();
+      }));
+      const checkButton = document.getElementById('checkButton');
+      if (checkButton) checkButton.addEventListener('click', checkAnswer);
+      const nextButton = document.getElementById('nextButton');
+      if (nextButton) nextButton.addEventListener('click', nextQuestion);
+    }
+    function checkAnswer() {
+      if (selectedChoice === null || checkedAnswer) return;
+      checkedAnswer = true;
+      if (selectedChoice === quizSet[quizIndex].answer) quizCorrect += 1;
+      renderQuestion();
+    }
+    function nextQuestion() {
+      if (quizIndex < quizSet.length - 1) {
+        quizIndex += 1;
+        selectedChoice = null;
+        checkedAnswer = false;
+        renderQuestion();
+      } else {
+        finishQuiz();
+        renderResult();
+      }
+    }
+    function finishQuiz() {
+      const percent = Math.round((quizCorrect / quizSet.length) * 100);
+      progress.attempts += 1;
+      progress.correct += quizCorrect;
+      progress.possible += quizSet.length;
+      progress.best = Math.max(progress.best, percent);
+      progress.recent.unshift({ source: sourceNames[activeSource], score: quizCorrect + '/' + quizSet.length, percent: percent, date: new Date().toLocaleDateString() });
+      progress.recent = progress.recent.slice(0, 6);
+      saveProgress();
+      updateHomeStats();
+    }
+    function renderResult() {
+      const percent = Math.round((quizCorrect / quizSet.length) * 100);
+      document.getElementById('quizBody').innerHTML =
+        '<div class="result-card"><div class="eyebrow">Practice complete</div><div class="result-score">' + percent + '%</div>' +
+        '<h2>' + (percent === 100 ? 'Excellent study.' : percent >= 60 ? 'Good progress.' : 'Keep building your knowledge.') + '</h2>' +
+        '<p>You answered ' + quizCorrect + ' of ' + quizSet.length + ' correctly. Take a moment to revisit the source notes for the questions you missed.</p>' +
+        '<div class="result-details"><div><strong>' + quizCorrect + '</strong>Correct</div><div><strong>' + (quizSet.length - quizCorrect) + '</strong>To revisit</div><div><strong>' + quizSet.length + '</strong>Questions</div></div>' +
+        '<button class="button" data-start="' + activeSource + '">Practice this source again</button> <button class="button secondary" data-view="home">Back to overview</button></div>';
+      document.querySelector('#quizBody [data-start]').addEventListener('click', (event) => startQuiz(event.currentTarget.dataset.start));
+      document.querySelector('#quizBody [data-view]').addEventListener('click', () => showView('home'));
+      renderProgress();
+    }
+    function updateHomeStats() {
+      document.getElementById('quizCount').textContent = progress.attempts;
+      const percent = progress.possible ? Math.round((progress.correct / progress.possible) * 100) : 0;
+      document.getElementById('homeMeter').style.width = percent + '%';
+      document.getElementById('homeProgressText').textContent = progress.attempts ? progress.attempts + ' quiz' + (progress.attempts === 1 ? '' : 'zes') + ' completed' : 'No quizzes yet';
+      document.getElementById('homeAccuracy').textContent = percent + '% accuracy';
+    }
+    function renderProgress() {
+      document.getElementById('quizCount').textContent = progress.attempts;
+      document.getElementById('progressAttempts').textContent = progress.attempts;
+      document.getElementById('progressCorrect').textContent = progress.correct;
+      document.getElementById('progressBest').textContent = progress.attempts ? progress.best + '%' : '—';
+      const possible = progress.possible;
+      const accuracy = possible ? Math.round((progress.correct / possible) * 100) : 0;
+      document.getElementById('progressPercent').textContent = accuracy + '%';
+      document.getElementById('progressCircle').style.setProperty('--progress-angle', accuracy * 3.6 + 'deg');
+      document.getElementById('progressDescription').textContent = progress.attempts ? 'You have answered ' + progress.correct + ' questions correctly across ' + progress.attempts + ' quiz' + (progress.attempts === 1 ? '' : 'zes') + '.' : 'Complete a quiz to start tracking your learning.';
+      const history = document.getElementById('historyList');
+      history.innerHTML = progress.recent.length ? progress.recent.map((item) => '<div class="history-item"><div><strong>' + item.source + '</strong><br><span>' + item.date + '</span></div><span class="history-score">' + item.score + ' · ' + item.percent + '%</span></div>').join('') : '<div class="empty">No quizzes completed yet. Start a short practice session when you’re ready.</div>';
+      updateHomeStats();
+    }
+
+    document.querySelectorAll('.nav [data-view], [data-view].text-button').forEach((button) => button.addEventListener('click', () => showView(button.dataset.view)));
+    document.querySelectorAll('[data-start]').forEach((button) => button.addEventListener('click', () => startQuiz(button.dataset.start)));
+    document.getElementById('clearProgress').addEventListener('click', () => {
+      progress = { attempts: 0, correct: 0, possible: 0, best: 0, recent: [] };
+      saveProgress();
+      renderProgress();
+      showToast('Your local quiz progress has been cleared.');
+    });
+    document.getElementById('lessonSearch').addEventListener('input', (event) => renderLessonIndex(event.currentTarget.value));
+    updateHomeStats();
+  </script>
+</body>
+</html>
