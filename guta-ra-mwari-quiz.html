@@ -83,7 +83,7 @@
       padding: 0 15px; border: 1px solid transparent; border-radius: 9px; background: var(--accent-red);
       color: #fff; font-size: 11px; font-weight: 700; transition: .18s ease;
     }
-    .button:hover { transform: translateY(-1px); background: var(--black); box-shadow: 0 5px 12px #17141224; }
+    .button:hover { transform: translateY(-1px); background: var(--red); box-shadow: 0 5px 12px #17141224; }
     .button:disabled { cursor: not-allowed; transform: none; background: #9a9389; box-shadow: none; }
     .button.secondary { border-color: var(--line); background: #fff; color: var(--ink); }
     .button.secondary:hover { background: #f5f0e4; box-shadow: none; }
@@ -116,7 +116,12 @@
     .section-head h2 { margin: 0; font-size: 17px; }
     .text-button { padding: 5px 0; border: 0; background: none; color: var(--accent-red); font-size: 10px; font-weight: 700; }
     .source-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .landing-heading { margin: 22px 0 22px; }
+    .landing-portraits { display: flex; align-items: center; justify-content: space-between; min-height: 106px; margin: 0 2px 2px; }
+    .landing-portrait { display: block; width: 76px; height: 94px; border: 3px solid #fff; border-radius: 13px; object-fit: cover; box-shadow: 0 6px 18px #1714122b; }
+    .landing-portrait-left { object-position: 50% 30%; transform: rotate(-3deg); }
+    .landing-portrait-right { object-position: 50% 30%; transform: rotate(3deg); }
+    .landing-heading { margin: 0 0 22px; text-align: center; }
+    .landing-tagline { margin: -3px 0 6px; color: #66583f; font-size: 12px; font-weight: 700; }
     .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .role-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 22px; }
     .role-card h2 { margin: 0; }
@@ -210,7 +215,7 @@
     .resource-update-card h3 { margin-bottom: 7px; font-size: 16px; }
     .resource-update-description { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
     .resource-update-meta { margin: 0 0 9px; color: #92978e; font-size: 9px; }
-    .resource-video { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 13px; border: 0; border-radius: 9px; background: #171412; }
+    .resource-video { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 13px; border: 0; border-radius: 9px; background: var(--red); }
     .resource-video-link { display: inline-flex; margin-top: 12px; color: var(--accent-red); font-size: 10px; font-weight: 700; text-decoration: none; }
     .resource-video-link:hover { text-decoration: underline; }
     .resource-empty { padding: 17px 19px; border: 1px solid var(--line); border-radius: 10px; background: #fffefa; color: var(--muted); font-size: 10px; line-height: 1.6; }
@@ -225,10 +230,13 @@
     .topic-list { display: flex; flex-wrap: wrap; gap: 7px; }
     .topic-chip { padding: 7px 9px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: #5f6d63; font-size: 9px; }
     .topic-chip:hover { border-color: var(--khaki-dark); color: var(--accent-red); }
-    .lesson-search { width: 100%; max-width: 420px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; }
+    .lesson-search-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .lesson-search { flex: 1 1 280px; width: 100%; max-width: 420px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; }
     .lesson-search:focus { border-color: var(--red); box-shadow: 0 0 0 3px #a51f2d12; }
     .lesson-summary { margin: 9px 0 10px; color: var(--muted); font-size: 9px; }
     .lesson-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px 15px; max-height: 420px; overflow: auto; padding-right: 4px; }
+    .lesson-empty { grid-column: 1 / -1; padding: 16px; border: 1px dashed var(--line); border-radius: 8px; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .lesson-more { margin-top: 12px; }
     .lesson-row { display: flex; align-items: start; gap: 9px; padding: 8px 0; border-bottom: 1px solid #eff1ed; color: #536158; font-size: 9px; line-height: 1.45; }
     .lesson-number { flex: 0 0 28px; color: #9b7a42; font: 700 9px Georgia, serif; }
     .quiz-wrap { max-width: 780px; margin: 4px auto; }
@@ -297,7 +305,7 @@
     .history-item span { color: var(--muted); }
     .history-score { color: var(--accent-red); font-weight: 700; }
     .empty { padding: 16px 0; color: var(--muted); font-size: 10px; }
-    .about-banner { padding: 28px; border-radius: 15px; background: var(--black); color: #fff; }
+    .about-banner { padding: 28px; border-radius: 15px; background: var(--red); color: #fff; }
     .about-banner .eyebrow { color: #e7d8b3; }
     .about-banner h2 { max-width: 560px; margin-bottom: 9px; font-size: 24px; }
     .about-banner p { max-width: 660px; margin-bottom: 0; color: #e7e1d6; font-size: 11px; line-height: 1.7; }
@@ -307,15 +315,20 @@
     .about-item p, .contact-card p { margin-bottom: 0; color: var(--muted); font-size: 10px; line-height: 1.65; }
     .contact-grid { grid-template-columns: .8fr 1.2fr; align-items: start; }
     .contact-card { padding: 19px; }
+    .contact-card a { color: var(--accent-red); font-weight: 700; }
+    .contact-card a:hover { color: var(--red); }
     .contact-form { display: grid; gap: 11px; margin-top: 14px; }
     .contact-form label { display: grid; gap: 5px; color: #5b544a; font-size: 9px; font-weight: 700; }
     .contact-form input, .contact-form textarea { width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 8px; outline: none; background: #fff; color: var(--ink); font: inherit; font-size: 10px; }
     .contact-form input:focus, .contact-form textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px #a51f2d12; }
     .contact-form textarea { min-height: 100px; resize: vertical; }
+    .contact-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
     .form-note { margin: 2px 0 0; color: #7b7265; font-size: 9px; line-height: 1.55; }
     .contact-status { display: none; padding: 10px 11px; border-radius: 8px; background: #efe5ca; color: var(--black); font-size: 9px; line-height: 1.5; }
     .contact-status.show { display: block; }
-    .toast { position: fixed; right: 22px; bottom: 20px; z-index: 10; padding: 11px 14px; transform: translateY(12px); border-radius: 9px; background: var(--black); color: #fff; opacity: 0; pointer-events: none; font-size: 10px; transition: .2s ease; }
+    .contact-status.error { background: #fbefed; color: #8b2d2c; }
+    .contact-status.success { background: var(--correct-green-soft); color: #20552d; }
+    .toast { position: fixed; right: 22px; bottom: 20px; z-index: 10; padding: 11px 14px; transform: translateY(12px); border-radius: 9px; background: var(--red); color: #fff; opacity: 0; pointer-events: none; font-size: 10px; transition: .2s ease; }
     .toast.show { transform: translateY(0); opacity: 1; }
     @media (max-width: 900px) {
       .sidebar { width: 205px; }
@@ -347,7 +360,9 @@
       .stat { padding: 11px; }
       .source-grid, .library-grid, .study-row, .progress-layout { grid-template-columns: 1fr; }
       .role-grid, .learner-dashboard-grid { grid-template-columns: 1fr; }
-      .landing-heading { margin-top: 4px; }
+      .landing-portraits { min-height: 82px; }
+      .landing-portrait { width: 58px; height: 72px; border-width: 2px; border-radius: 10px; }
+      .landing-heading { margin: 4px 0 20px; }
       .resource-auth-top { flex-direction: column; }
       .resource-form-fields { grid-template-columns: 1fr; }
       .resource-wide { grid-column: auto; }
@@ -402,9 +417,13 @@
 
       <div class="content">
         <section class="view active" id="view-home">
+          <div class="landing-portraits" aria-hidden="true">
+            <img class="landing-portrait landing-portrait-left" src="pic2.webp" alt="">
+            <img class="landing-portrait landing-portrait-right" src="pic3.webp" alt="">
+          </div>
           <div class="page-heading landing-heading">
             <div class="eyebrow">Guta RaMwari</div>
-            <h1>Welcome to Guta RaMwari</h1>
+            <p class="landing-tagline">A learning tool for Guta RaMwari.</p>
             <p class="subtext">Choose how you would like to use the learning platform.</p>
           </div>
           <div class="role-grid">
@@ -500,9 +519,10 @@
               <div class="card-top"><div class="book-mark">C</div><span class="lang">Contents index · Shona</span></div>
               <h2>Browse all 670 teaching titles</h2>
               <p class="subtext">Search the titles listed in the six-volume combined book. The index helps you find a topic; only source-checked entries in the question bank are currently quiz-ready.</p>
-              <input class="lesson-search" id="lessonSearch" type="search" placeholder="Search a title or teaching number" aria-label="Search combined-volume teaching titles">
+              <div class="lesson-search-row"><input class="lesson-search" id="lessonSearch" type="search" placeholder="Search a title or teaching number" aria-label="Search combined-volume teaching titles"><button class="button secondary" id="clearLessonSearch" type="button">Clear search</button></div>
               <div class="lesson-summary" id="lessonSummary">Loading the contents index…</div>
               <div class="lesson-results" id="lessonResults" aria-live="polite"></div>
+              <button class="button secondary lesson-more" id="lessonLoadMore" type="button" hidden>Show more titles</button>
             </article>
           </div>
         </section>
@@ -560,20 +580,21 @@
           <div class="page-heading"><div class="eyebrow">Get in touch</div><h1>Contact</h1><p class="subtext">Questions about the learning platform or the study materials?</p></div>
           <div class="contact-grid">
             <article class="panel contact-card">
-              <div class="eyebrow">Official contact</div><h2>Speak with your congregation</h2>
-              <p>For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.</p>
-              <div class="source-note">Official email, phone, and branch details have not been provided yet. Add approved contact details here before sharing the site publicly.</div>
+              <div class="eyebrow">Official contact</div><h2>Contact by email</h2>
+              <p>Send questions about the learning platform or study materials to <a href="mailto:apriltha25th@gmail.com">apriltha25th@gmail.com</a>.</p>
+              <div class="source-note">For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.</div>
             </article>
             <article class="panel contact-card">
-              <div class="eyebrow">Message preview</div><h2>Send a note</h2>
-              <p>This form is a preview and does not send or store messages yet.</p>
+              <div class="eyebrow">Contact form</div><h2>Send a query</h2>
+              <p>Complete the form to send your query directly to apriltha25th@gmail.com.</p>
               <form class="contact-form" id="contactForm">
-                <label>Your name<input name="name" autocomplete="name" required placeholder="Name"></label>
-                <label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
-                <label>Message<textarea name="message" required placeholder="How can we help?"></textarea></label>
-                <button class="button" type="submit">Preview message</button>
-                <div class="contact-status" id="contactStatus" role="status" aria-live="polite">This preview is not connected to a delivery service. Add an approved contact destination to enable sending.</div>
-                <p class="form-note">Nothing is transmitted when you submit this preview form.</p>
+                <label>Your name<input name="name" autocomplete="name" maxlength="100" required placeholder="Name"></label>
+                <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"></label>
+                <label>Message<textarea name="message" maxlength="4000" required placeholder="How can we help?"></textarea></label>
+                <div class="contact-honeypot" aria-hidden="true"><label>Leave this field empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+                <button class="button" type="submit">Send query</button>
+                <div class="contact-status" id="contactStatus" role="status" aria-live="polite"></div>
+                <p class="form-note">Submitting sends your message to apriltha25th@gmail.com.</p>
               </form>
             </article>
           </div>
@@ -681,6 +702,7 @@
         "Learning menu": "Menyu yekudzidza",
         "Learning dashboard": "Dheshibhodhi yekudzidza",
         "Welcome to Guta RaMwari": "Tikugashirei kuGuta RaMwari",
+        "A learning tool for Guta RaMwari.": "Chishandiso chekudzidza cheGuta RaMwari.",
         "Choose how you would like to use the learning platform.": "Sarudza mashandisiro aunoda kuita puratifomu yekudzidza.",
         "For learners": "Kune vadzidzi",
         "Other user": "Mumwe mushandisi",
@@ -781,6 +803,9 @@
         "Search the titles listed in the six-volume combined book. The index helps you find a topic; only source-checked entries in the question bank are currently quiz-ready.": "Tsvaga mazita ari mubhuku rakabatanidzwa rine mavhoriyamu matanhatu. Rondedzero iyi inokubatsira kuwana musoro; mibvunzo yakatariswa mumabhuku ndiyo iri mubvunzo parizvino.",
         "Search a title or teaching number": "Tsvaga zita kana nhamba yedzidziso",
         "Search combined-volume teaching titles": "Tsvaga mazita edzidziso muCombined Volume",
+        "Clear search": "Bvisa tsvakiridzo",
+        "Show more titles": "Ratidza mamwe mazita",
+        "No teaching titles match your search. Try another word or teaching number.": "Hapana mazita edzidziso anoenderana nezvawatsvaga. Edza rimwe shoko kana nhamba yedzidziso.",
         "Loading the contents index…": "Rondedzero yezviri mukati iri kuvhurwa…",
         "The contents index could not be loaded in this browser.": "Rondedzero yezviri mukati haina kukwanisa kuvhurwa mubrowser ino.",
         "Your study history": "Nhoroondo yako yekudzidza",
@@ -812,18 +837,25 @@
         "Official contact": "Nzira yepamutemo yekutaura nesu",
         "Speak with your congregation": "Taura neungano yako",
         "For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.": "Kana uchida nhungamiro pamusoro pedzidziso, kunamata, kana misangano yemunharaunda, taura nevatungamiri veGuta RaMwari vane mvumo munzvimbo yako.",
-        "Official email, phone, and branch details have not been provided yet. Add approved contact details here before sharing the site publicly.": "Kero yeemail, nhamba yefoni, nemashoko ebazi hazvisati zvapiwa. Isa mashoko ekutaura nawo akatenderwa pano usati wagovera saiti iyi kuruzhinji.",
-        "Message preview": "Muenzaniso wemashoko",
-        "Send a note": "Nyora mashoko",
-        "This form is a preview and does not send or store messages yet.": "Fomu iri muenzaniso chete; parizvino haritumiri kana kuchengeta mashoko.",
+        "Contact by email": "Taura nesu neemail",
+        "Send questions about the learning platform or study materials to": "Tumira mibvunzo nezvepuratifomu yekudzidza kana zvinyorwa zvekudzidza ku",
+        "Contact form": "Fomu rekutaura nesu",
+        "Send a query": "Tumira mubvunzo",
+        "Complete the form to send your query directly to apriltha25th@gmail.com.": "Zadza fomu kuti utumire mubvunzo wako zvakananga kuapriltha25th@gmail.com.",
         "Your name": "Zita rako",
         "Name": "Zita",
         "Email address": "Kero yeemail",
         "Message": "Mashoko",
         "How can we help?": "Tingakubatsira sei?",
-        "Preview message": "Ona muenzaniso wemashoko",
-        "This preview is not connected to a delivery service. Add an approved contact destination to enable sending.": "Muenzaniso uyu hauna kubatanidzwa nebasa rekutumira mashoko. Isa nzvimbo yakatenderwa yekutumira kuti akwanise kutumirwa.",
-        "Nothing is transmitted when you submit this preview form.": "Hapana mashoko anotumirwa paunotumira fomu remuenzaniso iri.",
+        "Send query": "Tumira mubvunzo",
+        "Sending query": "Tiri kutumira mubvunzo wako",
+        "Your query was sent successfully. Thank you for contacting us.": "Mubvunzo wako watumirwa. Tinokutendai nekutaura nesu.",
+        "We could not send your query. Please try again in a moment.": "Hatina kukwanisa kutumira mubvunzo wako. Edza zvakare munguva pfupi.",
+        "Submitting sends your message to apriltha25th@gmail.com.": "Paunotumira, mashoko ako anotumirwa kuapriltha25th@gmail.com.",
+        "Contact query about the Guta RaMwari quiz platform": "Mubvunzo nezvepuratifomu yemibvunzo yeGuta RaMwari",
+        "Name:": "Zita:",
+        "Reply email:": "Email yekupindura:",
+        "Message:": "Mashoko:",
         "Choose your language": "Sarudza mutauro wako",
         "English": "Chirungu",
         "Shona": "ChiShona",
@@ -886,6 +918,7 @@
         "Learning menu": "Imenyu yokufunda",
         "Learning dashboard": "Ibhodi lokufunda",
         "Welcome to Guta RaMwari": "Siyanamukela eGuta RaMwari",
+        "A learning tool for Guta RaMwari.": "Ithuluzi lokufunda leGuta RaMwari.",
         "Choose how you would like to use the learning platform.": "Khetha indlela ofuna ukusebenzisa ngayo ipulatifomu yokufunda.",
         "For learners": "Kwabafundi",
         "Other user": "Omunye umsebenzisi",
@@ -986,6 +1019,9 @@
         "Search the titles listed in the six-volume combined book. The index helps you find a topic; only source-checked entries in the question bank are currently quiz-ready.": "Dinga izihloko ezisencwadini ehlanganisiweyo yamavolumu ayisithupha. Uhlu lolu lukusiza ukuthola isihloko; okwamanje izifundiso ezihloliweyo yizo kuphela ezilemibuzo.",
         "Search a title or teaching number": "Dinga isihloko kumbe inombolo yesifundiso",
         "Search combined-volume teaching titles": "Dinga izihloko zezifundiso zeCombined Volume",
+        "Clear search": "Sula ukukhangela",
+        "Show more titles": "Tshengisa ezinye izihloko",
+        "No teaching titles match your search. Try another word or teaching number.": "Akulazihloko zezifundiso ezihambelana lokudinga kwakho. Zama elinye ibala kumbe inombolo yesifundiso.",
         "Loading the contents index…": "Kuvulwa uhlu lokuqukethwe…",
         "The contents index could not be loaded in this browser.": "Uhlu lokuqukethwe lwehlulekile ukuvulwa ku-browser le.",
         "Your study history": "Imbali yakho yokufunda",
@@ -1017,18 +1053,25 @@
         "Official contact": "Ukuxhumana okusemthethweni",
         "Speak with your congregation": "Khuluma lebandla lakho",
         "For guidance about teachings, worship, or local services, please contact authorized Guta RaMwari leadership in your area.": "Ukuze uthole isiqondiso ngezifundiso, ukukhonza kumbe imihlangano yendawo, xhumana labakhokheli beGuta RaMwari abagunyaziweyo endaweni yakini.",
-        "Official email, phone, and branch details have not been provided yet. Add approved contact details here before sharing the site publicly.": "Ikheli le-email, inombolo yefoni, lemininingwane yegatsha akukathunyelwa. Faka imininingwane egunyaziweyo lapha ungakabelani ngesayithi emphakathini.",
-        "Message preview": "Umbukiso womlayezo",
-        "Send a note": "Bhala umlayezo",
-        "This form is a preview and does not send or store messages yet.": "Ifomu leli lingumbukiso kuphela; kalithumeli kumbe ligcine imilayezo okwamanje.",
+        "Contact by email": "Xhumana lathi nge-email",
+        "Send questions about the learning platform or study materials to": "Thumela imibuzo ngepulatifomu yokufunda kumbe izinsiza zokufunda ku",
+        "Contact form": "Ifomu lokuxhumana",
+        "Send a query": "Thumela umbuzo",
+        "Complete the form to send your query directly to apriltha25th@gmail.com.": "Gcwalisa ifomu ukuze uthumele umbuzo wakho ku-apriltha25th@gmail.com.",
         "Your name": "Ibizo lakho",
         "Name": "Ibizo",
         "Email address": "Ikheli le-email",
         "Message": "Umlayezo",
         "How can we help?": "Singakunceda ngani?",
-        "Preview message": "Bona umbukiso womlayezo",
-        "This preview is not connected to a delivery service. Add an approved contact destination to enable sending.": "Umbukiso lo awuxhunyiwe enkonzweni yokuthumela. Faka indawo yokuxhumana egunyaziweyo ukuze imilayezo ithunyelwe.",
-        "Nothing is transmitted when you submit this preview form.": "Akukho lutho oluthunyelwayo nxa uthumela ifomu lombukiso le.",
+        "Send query": "Thumela umbuzo",
+        "Sending query": "Kuthunyelwa umbuzo wakho",
+        "Your query was sent successfully. Thank you for contacting us.": "Umbuzo wakho uthunyelwe. Siyabonga ngokuxhumana lathi.",
+        "We could not send your query. Please try again in a moment.": "Sehlulekile ukuthumela umbuzo wakho. Zama futhi ngemva kwesikhatshana.",
+        "Submitting sends your message to apriltha25th@gmail.com.": "Ukuthumela kuzathumela umlayezo wakho ku-apriltha25th@gmail.com.",
+        "Contact query about the Guta RaMwari quiz platform": "Umbuzo ngepulatifomu yemibuzo yeGuta RaMwari",
+        "Name:": "Ibizo:",
+        "Reply email:": "I-email yokuphendula:",
+        "Message:": "Umlayezo:",
         "Choose your language": "Khetha ulimi lwakho",
         "English": "isiNgisi",
         "Shona": "isiShona",
@@ -1145,7 +1188,7 @@
         dailyTitle: 'Daily question', dailyPromptHint: 'Answer today’s question to complete the daily challenge.', dailyToday: 'Today · {date}', dailyStreak: '{count}-day streak', dailyCorrect: 'Correct answer!', dailyWrong: 'Good try. Read the explanation below.', dailyDone: 'You have completed today’s question.', dailyExplanation: 'Explanation', badgeUnlocked: 'Badge earned: {badge}',
         communityTitle: 'Daily streak and badges', currentStreak: 'Current daily streak', bestStreak: 'Longest streak', dailyAnswered: 'Daily questions answered', badges: 'Badges', earned: 'Earned', locked: 'Not earned yet',
         badgeNames: ['First daily answer', '3-day streak', '7-day streak', '14-day streak', '30-day streak'],
-        leaderboardTitle: 'Leaderboard', leaderboardLocal: 'This leaderboard is saved on this device only; it does not include results from other users’ devices.', username: 'Your display name', saveName: 'Save name', savedName: 'Name saved.', defaultName: 'Learner', noScores: 'No scores yet. Complete a quiz to appear here.', rank: 'Rank', accuracy: 'accuracy', attempts: 'results',
+        leaderboardTitle: 'Leaderboard', leaderboardShared: 'Shared leaderboard: scores from all devices. Save your display name before answering to appear here.', leaderboardLoading: 'Loading shared scores…', leaderboardUnavailable: 'Shared scores could not load. Showing scores saved on this device only.', leaderboardSaveFailed: 'Your latest score could not be shared; it is still saved on this device.', username: 'Your display name', saveName: 'Save name', savedName: 'Name saved.', defaultName: 'Learner', noScores: 'No scores yet. Complete a quiz to appear here.', rank: 'Rank', accuracy: 'accuracy', attempts: 'results',
         shareResult: 'Share result on WhatsApp', shareProgress: 'Share my progress on WhatsApp', copyStatus: 'Copy text for WhatsApp Status', statusCopied: 'Text copied. Paste it into your WhatsApp Status.', shareResultMessage: 'I scored {score} ({percent}%) on {category}, level {level}, ({mode}), in the Guta RaMwari quiz.',
         shareProgressMessage: '{name} has completed {attempts} quizzes with {accuracy}% accuracy, a {streak}-day daily streak, and {badges} badges in the Guta RaMwari quiz.',
         noDailyQuiz: 'Today’s question is not available.'
@@ -1155,7 +1198,7 @@
         dailyTitle: 'Mubvunzo wezuva', dailyPromptHint: 'Pindura mubvunzo wanhasi kuti upedze dambudziko rezuva.', dailyToday: 'Nhasi · {date}', dailyStreak: 'Mazuva {count} akatevedzana', dailyCorrect: 'Mhinduro yakarurama!', dailyWrong: 'Waedza zvakanaka. Verenga tsananguro iri pasi apa.', dailyDone: 'Wapedza mubvunzo wanhasi.', dailyExplanation: 'Tsananguro', badgeUnlocked: 'Wawana bheji: {badge}',
         communityTitle: 'Mazuva akatevedzana nemabheji', currentStreak: 'Mazuva aripo akatevedzana', bestStreak: 'Mazuva akawanda akatevedzana', dailyAnswered: 'Mibvunzo yezuva yapindurwa', badges: 'Mabheji', earned: 'Awaniwa', locked: 'Hausati wariwana',
         badgeNames: ['Mhinduro yekutanga yezuva', 'Mazuva 3 akatevedzana', 'Mazuva 7 akatevedzana', 'Mazuva 14 akatevedzana', 'Mazuva 30 akatevedzana'],
-        leaderboardTitle: 'Bhodi rezvibodzwa', leaderboardLocal: 'Bhodi iri rinochengetwa pamudziyo uyu chete; harina zvibodzwa zvemimwe midziyo.', username: 'Zita rako rinoratidzwa', saveName: 'Chengeta zita', savedName: 'Zita rachengetwa.', defaultName: 'Mudzidzi', noScores: 'Hapana zvibodzwa. Pedza bvunzo kuti uonekwe pano.', rank: 'Nzvimbo', accuracy: 'kururama', attempts: 'zvabuda',
+        leaderboardTitle: 'Bhodi rezvibodzwa', leaderboardShared: 'Bhodi rezvibodzwa rakagovaniswa rinoratidza zvibodzwa zvemidziyo yose. Chengeta zita rako usati wapindura kuti uonekwe pano.', leaderboardLoading: 'Zviri kutora zvibodzwa zvakagovaniswa…', leaderboardUnavailable: 'Zvibodzwa zvakagovaniswa hazvina kuvhurika. Zvibodzwa zviri pamudziyo uyu chete ndizvo zviri kuratidzwa.', leaderboardSaveFailed: 'Mhedzisiro yako yazvino haina kukwanisa kugovaniswa; ichiri kuchengetwa pamudziyo uyu.', username: 'Zita rako rinoratidzwa', saveName: 'Chengeta zita', savedName: 'Zita rachengetwa.', defaultName: 'Mudzidzi', noScores: 'Hapana zvibodzwa. Pedza bvunzo kuti uonekwe pano.', rank: 'Nzvimbo', accuracy: 'kururama', attempts: 'zvabuda',
         shareResult: 'Govera zvabuda paWhatsApp', shareProgress: 'Govera budiriro yangu paWhatsApp', copyStatus: 'Kopa mashoko eWhatsApp Status', statusCopied: 'Mashoko akopiwa. Namira muWhatsApp Status yako.', shareResultMessage: 'Ndawana {score} ({percent}%) pa{category}, danho {level} ({mode}), mubvunzo yeGuta RaMwari.',
         shareProgressMessage: '{name} apedza bvunzo {attempts} nekururama kwe{accuracy}%, ane mazuva {streak} akatevedzana pamubvunzo wezuva, nemabheji {badges} muPuratifomu yeGuta RaMwari.',
         noDailyQuiz: 'Mubvunzo wanhasi hauwanikwi.'
@@ -1165,7 +1208,7 @@
         dailyTitle: 'Umbuzo wosuku', dailyPromptHint: 'Phendula umbuzo wanamuhla ukuze uqedele inselelo yosuku.', dailyToday: 'Lamuhla · {date}', dailyStreak: 'Izinsuku {count} zilandelana', dailyCorrect: 'Impendulo iqondile!', dailyWrong: 'Uzame kuhle. Bala incazelo engezansi.', dailyDone: 'Usuwuqedile umbuzo wanamuhla.', dailyExplanation: 'Incazelo', badgeUnlocked: 'Uthole ibheji: {badge}',
         communityTitle: 'Izinsuku ezilandelanayo lamabheji', currentStreak: 'Izinsuku ezilandelanayo khathesi', bestStreak: 'Izinsuku ezinde kakhulu zilandelana', dailyAnswered: 'Imibuzo yosuku ephenduliweyo', badges: 'Amabheji', earned: 'Atholiwe', locked: 'Akukatholwa',
         badgeNames: ['Impendulo yokuqala yosuku', 'Izinsuku ezi-3 zilandelana', 'Izinsuku ezi-7 zilandelana', 'Izinsuku ezi-14 zilandelana', 'Izinsuku ezi-30 zilandelana'],
-        leaderboardTitle: 'Ibhodi labaphambili', leaderboardLocal: 'Ibhodi leli ligcinwa kudivayisi le kuphela; kalifaki imiphumela evela kwamanye amadivayisi.', username: 'Ibizo elizabonakala', saveName: 'Gcina ibizo', savedName: 'Ibizo ligciniwe.', defaultName: 'Umfundi', noScores: 'Akulamaphuzu okwamanje. Qedisa umbuzo ukuze uvele lapha.', rank: 'Isikhundla', accuracy: 'ukunemba', attempts: 'imiphumela',
+        leaderboardTitle: 'Ibhodi labaphambili', leaderboardShared: 'Ibhodi elihlanganyelweyo libonisa imiphumela evela kuwo wonke amadivayisi. Gcina ibizo lakho ungakaphenduli ukuze ubonakale lapha.', leaderboardLoading: 'Kulayishwa imiphumela eyabiweyo…', leaderboardUnavailable: 'Imiphumela eyabiweyo ayilayisekanga. Kuboniswa imiphumela egcinwe kudivayisi le kuphela.', leaderboardSaveFailed: 'Umphumela wakho wakamuva awabelwanga; usagcinwe kudivayisi le.', username: 'Ibizo elizabonakala', saveName: 'Gcina ibizo', savedName: 'Ibizo ligciniwe.', defaultName: 'Umfundi', noScores: 'Akulamaphuzu okwamanje. Qedisa umbuzo ukuze uvele lapha.', rank: 'Isikhundla', accuracy: 'ukunemba', attempts: 'imiphumela',
         shareResult: 'Yabelana ngomphumela kuWhatsApp', shareProgress: 'Yabelana ngentuthuko yami kuWhatsApp', copyStatus: 'Kopa umbhalo weWhatsApp Status', statusCopied: 'Umbhalo ukopishiwe. Wunamathisele kuWhatsApp Status yakho.', shareResultMessage: 'Ngithole {score} ({percent}%) ku{category}, izinga {level} ({mode}), kumbuzo weGuta RaMwari.',
         shareProgressMessage: '{name} uqede imibuzo engu-{attempts} ngokunemba okungu-{accuracy}%, eloluhlu lwezinsuku {streak} zilandelana lombuzo wosuku, lamabheji angu-{badges} kumbuzo weGuta RaMwari.',
         noDailyQuiz: 'Umbuzo wanamuhla kawutholakali.'
@@ -1226,7 +1269,11 @@
     };
     const SUPABASE_URL = 'https://diqaghmrjgrqeumpxoix.supabase.co';
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_rYTcogXIWsFWDOCOsAfePw_0G1DIp-X';
+    const EMAILJS_SERVICE_ID = 'service_umybah4';
+    const EMAILJS_TEMPLATE_ID = 'template_hz02zi8';
+    const EMAILJS_PUBLIC_KEY = '-nN3zyZ3n53dlkuiT';
     let supabaseClient = null;
+    const sharedLeaderboardState = { status: 'loading', rows: [], writeFailed: false };
     const resourceState = {
       session: null, isLeader: false, checkingAccess: false, accessCheckFailed: false,
       updates: [], loadingUpdates: true, updatesFailed: false, clientUnavailable: false,
@@ -1483,6 +1530,7 @@
         resourceState.clientUnavailable = true;
         resourceState.loadingUpdates = false;
         resourceState.updatesFailed = true;
+        sharedLeaderboardState.status = 'unavailable';
         renderResourcePanels();
         return;
       }
@@ -1506,12 +1554,15 @@
         resourceState.clientUnavailable = true;
         resourceState.loadingUpdates = false;
         resourceState.updatesFailed = true;
+        sharedLeaderboardState.status = 'unavailable';
         renderResourcePanels();
         return;
       }
       resourceState.session = data.session;
       await refreshLeaderAccess();
       await loadResourceUpdates();
+      await migrateLocalLeaderboardOnce();
+      await loadSharedLeaderboard();
     }
     const levelSeconds = [30, 25, 20, 15, 10];
     function quizText(key, values) {
@@ -1594,6 +1645,7 @@
       document.querySelector('.avatar').setAttribute('aria-label', t('Learner'));
       document.getElementById('lessonSearch').placeholder = t('Search a title or teaching number');
       document.getElementById('lessonSearch').setAttribute('aria-label', t('Search combined-volume teaching titles'));
+      document.getElementById('clearLessonSearch').setAttribute('aria-label', t('Clear search'));
       document.querySelector('#contactForm [name="name"]').placeholder = t('Name');
       document.querySelector('#contactForm [name="message"]').placeholder = t('How can we help?');
       if (document.getElementById('view-quiz').classList.contains('active')) {
@@ -1650,10 +1702,11 @@
           levelProgress: saved.levelProgress && typeof saved.levelProgress === 'object' ? saved.levelProgress : {},
           daily,
           username: typeof saved.username === 'string' ? saved.username.slice(0, 24) : '',
-          leaderboard: Array.isArray(saved.leaderboard) ? saved.leaderboard : []
+          leaderboard: Array.isArray(saved.leaderboard) ? saved.leaderboard : [],
+          leaderboardMigrated: saved.leaderboardMigrated === true
         };
       } catch (error) {
-        return { attempts: 0, correct: 0, possible: 0, best: 0, recent: [], levelProgress: {}, daily: emptyDailyProgress(), username: '', leaderboard: [] };
+        return { attempts: 0, correct: 0, possible: 0, best: 0, recent: [], levelProgress: {}, daily: emptyDailyProgress(), username: '', leaderboard: [], leaderboardMigrated: false };
       }
     }
     function saveProgress() { localStorage.setItem(storageKey, JSON.stringify(progress)); }
@@ -1736,6 +1789,68 @@
       row.correct = (Number(row.correct) || 0) + correct;
       row.possible = (Number(row.possible) || 0) + possible;
       row.best = Math.max(Number(row.best) || 0, percent);
+      void submitSharedLeaderboardResult(username, correct, possible, percent);
+    }
+    async function submitSharedLeaderboardResult(username, correct, possible, best) {
+      if (!supabaseClient) return;
+      const score = {
+        username: String(username || '').trim().slice(0, 24),
+        attempts: 1,
+        correct: Math.max(0, Math.floor(Number(correct) || 0)),
+        possible: Math.max(1, Math.floor(Number(possible) || 1)),
+        best: Math.min(100, Math.max(0, Math.floor(Number(best) || 0)))
+      };
+      const { error } = await supabaseClient.from('quiz_score_events').insert(score);
+      if (error) {
+        sharedLeaderboardState.writeFailed = true;
+        if (document.getElementById('view-progress').classList.contains('active')) renderSocialProgress();
+        return;
+      }
+      sharedLeaderboardState.writeFailed = false;
+      await loadSharedLeaderboard();
+    }
+    async function loadSharedLeaderboard() {
+      if (!supabaseClient) {
+        sharedLeaderboardState.status = 'unavailable';
+        return false;
+      }
+      sharedLeaderboardState.status = 'loading';
+      if (document.getElementById('view-progress').classList.contains('active')) renderSocialProgress();
+      const { data, error } = await supabaseClient.from('quiz_leaderboard')
+        .select('username,attempts,correct,possible,best');
+      if (error) {
+        sharedLeaderboardState.status = 'unavailable';
+        if (document.getElementById('view-progress').classList.contains('active')) renderSocialProgress();
+        return false;
+      }
+      sharedLeaderboardState.rows = Array.isArray(data) ? data : [];
+      sharedLeaderboardState.status = 'ready';
+      if (document.getElementById('view-progress').classList.contains('active')) renderSocialProgress();
+      return true;
+    }
+    async function migrateLocalLeaderboardOnce() {
+      if (progress.leaderboardMigrated) return;
+      const localRows = Array.isArray(progress.leaderboard) ? progress.leaderboard : [];
+      if (!localRows.length) {
+        progress.leaderboardMigrated = true;
+        saveProgress();
+        return;
+      }
+      const scores = localRows.map((row) => ({
+        username: String(row.username || featureCopy.en.defaultName).trim().slice(0, 24) || featureCopy.en.defaultName,
+        attempts: Math.max(1, Math.floor(Number(row.attempts) || 1)),
+        correct: Math.max(0, Math.floor(Number(row.correct) || 0)),
+        possible: Math.max(1, Math.floor(Number(row.possible) || 1)),
+        best: Math.min(100, Math.max(0, Math.floor(Number(row.best) || 0)))
+      })).filter((row) => row.correct <= row.possible * row.attempts);
+      const { error } = await supabaseClient.from('quiz_score_events').insert(scores);
+      if (error) {
+        sharedLeaderboardState.writeFailed = true;
+        return;
+      }
+      progress.leaderboardMigrated = true;
+      saveProgress();
+      sharedLeaderboardState.writeFailed = false;
     }
     function renderDailyQuestion() {
       const target = document.getElementById('dailyQuestionContent');
@@ -1848,7 +1963,9 @@
         const earned = daily.badges.includes(badge.id);
         return '<span class="badge-chip' + (earned ? '' : ' locked') + '">' + escapeHtml(badge.name) + ' · ' + escapeHtml(earned ? featureText('earned') : featureText('locked')) + '</span>';
       }).join('');
-      const rows = (Array.isArray(progress.leaderboard) ? progress.leaderboard : []).slice().sort((a, b) => {
+      const localRows = Array.isArray(progress.leaderboard) ? progress.leaderboard : [];
+      const leaderboardSource = sharedLeaderboardState.status === 'ready' ? sharedLeaderboardState.rows : localRows;
+      const rows = leaderboardSource.slice().sort((a, b) => {
         const aAccuracy = a.possible ? a.correct / a.possible : 0;
         const bAccuracy = b.possible ? b.correct / b.possible : 0;
         return bAccuracy - aAccuracy || (Number(b.best) || 0) - (Number(a.best) || 0) || (Number(b.attempts) || 0) - (Number(a.attempts) || 0);
@@ -1861,7 +1978,7 @@
         '<div class="result-details" style="justify-content:flex-start;flex-wrap:wrap;margin:12px 0"><div><strong>' + currentStreak + '</strong>' + escapeHtml(featureText('currentStreak')) + '</div><div><strong>' + (daily.bestStreak || 0) + '</strong>' + escapeHtml(featureText('bestStreak')) + '</div><div><strong>' + (daily.total || 0) + '</strong>' + escapeHtml(featureText('dailyAnswered')) + '</div></div>' +
         '<h3>' + escapeHtml(featureText('badges')) + '</h3><div class="badge-list">' + badges + '</div>' +
         '<hr style="border:0;border-top:1px solid var(--line);margin:19px 0">' +
-        '<div class="eyebrow">' + escapeHtml(featureText('leaderboardTitle')) + '</div><p class="leaderboard-note">' + escapeHtml(featureText('leaderboardLocal')) + '</p>' +
+        '<div class="eyebrow">' + escapeHtml(featureText('leaderboardTitle')) + '</div><p class="leaderboard-note">' + escapeHtml(featureText(sharedLeaderboardState.writeFailed ? 'leaderboardSaveFailed' : sharedLeaderboardState.status === 'loading' ? 'leaderboardLoading' : sharedLeaderboardState.status === 'unavailable' ? 'leaderboardUnavailable' : 'leaderboardShared')) + '</p>' +
         '<form class="username-form" id="usernameForm"><input id="usernameInput" maxlength="24" autocomplete="nickname" placeholder="' + escapeHtml(featureText('username')) + '" aria-label="' + escapeHtml(featureText('username')) + '" value="' + escapeHtml(progress.username || '') + '"><button class="button secondary" type="submit">' + escapeHtml(featureText('saveName')) + '</button></form>' +
         '<div class="leaderboard-list">' + leaderboardRows + '</div><div class="setup-actions"><button class="button secondary" id="shareProgressButton">' + escapeHtml(featureText('shareProgress')) + '</button><button class="button secondary" id="copyProgressStatus">' + escapeHtml(featureText('copyStatus')) + '</button></div>';
       document.getElementById('usernameForm').addEventListener('submit', (event) => {
@@ -1874,21 +1991,34 @@
       document.getElementById('shareProgressButton').addEventListener('click', () => shareViaWhatsApp('progress'));
       document.getElementById('copyProgressStatus').addEventListener('click', () => copyForWhatsAppStatus('progress'));
     }
-    function renderLessonIndex(searchTerm) {
+    let lessonVisibleLimit = 40;
+    let lastLessonSearch = '';
+    function normalizeLessonSearch(value) {
+      return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    }
+    function renderLessonIndex(searchTerm, showMore) {
       const titles = Array.isArray(window.grmVolumeTitles) ? window.grmVolumeTitles : [];
-      const query = (searchTerm || '').trim().toLocaleLowerCase();
-      const matches = titles.filter((item) => !query || String(item.number).includes(query) || item.title.toLocaleLowerCase().includes(query));
-      const visible = matches.slice(0, 40);
+      const normalizedQuery = normalizeLessonSearch(searchTerm);
+      if (showMore) lessonVisibleLimit += 40;
+      else if (normalizedQuery !== lastLessonSearch) lessonVisibleLimit = 40;
+      lastLessonSearch = normalizedQuery;
+      const tokens = normalizedQuery ? normalizedQuery.split(/\s+/) : [];
+      const matches = titles.filter((item) => {
+        const searchable = normalizeLessonSearch(String(item.number) + ' ' + item.title);
+        return tokens.every((token) => searchable.includes(token));
+      });
+      const visible = matches.slice(0, lessonVisibleLimit);
       document.getElementById('lessonSummary').textContent = !titles.length
         ? t('The contents index could not be loaded in this browser.')
         : activeLanguage === 'en'
-          ? 'Showing ' + visible.length + ' of ' + matches.length + (query ? ' matching titles' : ' indexed titles') + (matches.length > visible.length ? ' · refine your search to see more' : '')
+          ? 'Showing ' + visible.length + ' of ' + matches.length + (tokens.length ? ' matching titles' : ' indexed titles')
           : activeLanguage === 'sn'
-            ? 'Zviri kuratidzwa: ' + visible.length + ' pa' + matches.length + (query ? ' mazita anoenderana' : ' mazita ari murondedzero') + (matches.length > visible.length ? ' · wedzera mashoko ekutsvaga kuti uone mamwe' : '')
-            : 'Okutshengiswayo: ' + visible.length + ' ku' + matches.length + (query ? ' izihloko ezihambelanayo' : ' izihloko ezisohlwini') + (matches.length > visible.length ? ' · cacisa ukukhangela ukuze ubone okunye' : '');
-      document.getElementById('lessonResults').innerHTML = visible.map((item) =>
-        '<div class="lesson-row"><span class="lesson-number">' + item.number + '</span><span>' + escapeHtml(item.title) + '</span></div>'
-      ).join('');
+            ? 'Zviri kuratidzwa: ' + visible.length + ' pa' + matches.length + (tokens.length ? ' mazita anoenderana' : ' mazita ari murondedzero')
+            : 'Okutshengiswayo: ' + visible.length + ' ku' + matches.length + (tokens.length ? ' izihloko ezihambelanayo' : ' izihloko ezisohlwini');
+      document.getElementById('lessonResults').innerHTML = visible.length
+        ? visible.map((item) => '<div class="lesson-row"><span class="lesson-number">' + escapeHtml(item.number) + '</span><span>' + escapeHtml(item.title) + '</span></div>').join('')
+        : tokens.length ? '<p class="lesson-empty">' + escapeHtml(t('No teaching titles match your search. Try another word or teaching number.')) + '</p>' : '';
+      document.getElementById('lessonLoadMore').hidden = matches.length <= visible.length;
     }
     function shuffle(items) {
       const shuffled = items.slice();
@@ -2202,7 +2332,7 @@
     });
     document.querySelectorAll('[data-start]').forEach((button) => button.addEventListener('click', () => openQuizSetup(button.dataset.start)));
     document.getElementById('clearProgress').addEventListener('click', () => {
-      progress = { attempts: 0, correct: 0, possible: 0, best: 0, recent: [], levelProgress: {}, daily: emptyDailyProgress(), username: '', leaderboard: [] };
+      progress = { attempts: 0, correct: 0, possible: 0, best: 0, recent: [], levelProgress: {}, daily: emptyDailyProgress(), username: '', leaderboard: [], leaderboardMigrated: true };
       saveProgress();
       renderProgress();
       showToast(t('Your local quiz progress has been cleared.'));
@@ -2213,9 +2343,67 @@
       applyLanguage();
     });
     document.getElementById('lessonSearch').addEventListener('input', (event) => renderLessonIndex(event.currentTarget.value));
-    document.getElementById('contactForm').addEventListener('submit', (event) => {
+    document.getElementById('clearLessonSearch').addEventListener('click', () => {
+      const input = document.getElementById('lessonSearch');
+      input.value = '';
+      renderLessonIndex('');
+      input.focus();
+    });
+    document.getElementById('lessonLoadMore').addEventListener('click', () => renderLessonIndex(document.getElementById('lessonSearch').value, true));
+    document.getElementById('contactForm').addEventListener('submit', async (event) => {
       event.preventDefault();
-      document.getElementById('contactStatus').classList.add('show');
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      const name = form.elements.namedItem('name').value.trim();
+      const email = form.elements.namedItem('email').value.trim();
+      const message = form.elements.namedItem('message').value.trim();
+      const status = document.getElementById('contactStatus');
+      const submitButton = form.querySelector('button[type="submit"]');
+      status.className = 'contact-status show';
+      status.textContent = t('Sending query');
+      submitButton.disabled = true;
+      submitButton.textContent = t('Sending query');
+      try {
+        if (form.elements.namedItem('website').value) {
+          status.classList.add('success');
+          status.textContent = t('Your query was sent successfully. Thank you for contacting us.');
+          form.reset();
+          return;
+        }
+        if ([EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].some((value) => value.startsWith('YOUR_'))) {
+          throw new Error('EmailJS has not been configured yet');
+        }
+        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: EMAILJS_SERVICE_ID,
+            template_id: EMAILJS_TEMPLATE_ID,
+            user_id: EMAILJS_PUBLIC_KEY,
+            template_params: { name, email, message }
+          })
+        });
+        if (!response.ok) {
+          let detail = await response.text();
+          try {
+            const errorBody = JSON.parse(detail);
+            detail = errorBody.text || errorBody.message || errorBody.error || detail;
+          } catch (parseError) {
+            // Keep the service's plain-text error detail for troubleshooting.
+          }
+          throw new Error('EmailJS ' + response.status + ': ' + String(detail).slice(0, 180));
+        }
+        status.classList.add('success');
+        status.textContent = t('Your query was sent successfully. Thank you for contacting us.');
+        form.reset();
+      } catch (error) {
+        status.classList.add('error');
+        const detail = error instanceof Error ? error.message : String(error);
+        status.textContent = t('We could not send your query. Please try again in a moment.') + ' (' + detail.slice(0, 200) + ')';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = t('Send query');
+      }
     });
     window.setInterval(() => {
       if (document.getElementById('view-learner-home').classList.contains('active') && renderedDailyDate !== localDateKey()) renderDailyQuestion();
